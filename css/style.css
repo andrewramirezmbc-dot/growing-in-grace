@@ -677,7 +677,7 @@ main {
 }
 .module-cards {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 .module-card {
@@ -728,6 +728,18 @@ main {
   color: var(--text-secondary);
   line-height: 1.55;
   flex: 1;
+}
+.module-card--coming-soon {
+  opacity: 0.45;
+  cursor: default;
+}
+.module-card--coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border-light);
+}
+.module-card--coming-soon .module-card__weeks {
+  color: var(--brand-gray);
 }
 
 /* =============================================
