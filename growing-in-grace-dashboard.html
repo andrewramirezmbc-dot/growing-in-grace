@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Growing in Grace</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="/">Growing <i>in</i> Grace</a>
+        <button class="nav__hamburger" aria-label="Menu">&#9776;</button>
+        <ul class="nav__links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/curriculum">Curriculum</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/videos">Videos</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        <a
+          href="#"
+          onclick="
+            signOut();
+            return false;
+          "
+          class="nav__cta"
+          >Sign Out</a
+        >
+      </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dash-header">
+      <div class="container" style="max-width: 860px">
+        <p class="dash-header__greeting">
+          Welcome back, <strong id="welcomeName">Friend</strong>
+        </p>
+        <h1 class="dash-header__title">Growing in Grace</h1>
+        <p class="dash-header__sub">A Discipleship Manual for New Believers</p>
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+          <div class="progress-bar">
+            <div
+              class="progress-bar__fill"
+              id="progressFill"
+              style="width: 0%"
+            ></div>
+          </div>
+          <p class="progress-bar__text" id="progressText">
+            Loading progress...
+          </p>
+        </div>
+
+        <!-- Continue Button (hidden until JS populates it) -->
+        <a href="#" id="continueBtn" class="btn btn--lime" style="display: none"
+          >Continue Where You Left Off &rarr;</a
+        >
+      </div>
+    </section>
+
+    <main>
+      <section class="section" style="padding-top: 2.5rem">
+        <div class="container" style="max-width: 860px">
+          <!-- Section 1: Sin and Salvation -->
+          <div class="module is-open">
+            <div class="module__header">
+              <div class="module__number">1</div>
+              <div class="module__info">
+                <div class="module__title">Sin and Salvation</div>
+                <div class="module__subtitle">
+                  Lessons 1&ndash;4 &middot; The problem of sin and God's plan
+                  of salvation
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-01.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 1</span>
+                  <span class="lesson-item__title"
+                    >What Should Christian Life Look Like?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-02.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 2</span>
+                  <span class="lesson-item__title"
+                    >Sin: Origin, Reality, &amp; Consequences</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-03.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 3</span>
+                  <span class="lesson-item__title"
+                    >The Truth About What REALLY Saves You</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-04.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 4</span>
+                  <span class="lesson-item__title"
+                    >What Repentance ACTUALLY Means</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Eternal Security -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">2</div>
+              <div class="module__info">
+                <div class="module__title">Eternal Security</div>
+                <div class="module__subtitle">
+                  Lessons 5&ndash;7 &middot; The life-changing gift of eternal
+                  life
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-05.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 5</span>
+                  <span class="lesson-item__title"
+                    >The LIFE CHANGING Gift of Eternal Life</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-06.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 6</span>
+                  <span class="lesson-item__title"
+                    >Can You Lose Your Salvation?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-07.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 7</span>
+                  <span class="lesson-item__title"
+                    >Does Grace Give You a License to Sin?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: The Trinity -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">3</div>
+              <div class="module__info">
+                <div class="module__title">The Trinity</div>
+                <div class="module__subtitle">
+                  Lessons 8&ndash;9 &middot; How God can be one and three
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-08.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 8</span>
+                  <span class="lesson-item__title"
+                    >How Can God Be One&hellip; and Three?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-09.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 9</span>
+                  <span class="lesson-item__title"
+                    >The Unity and Distinction Within the Trinity</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Jesus Christ -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">4</div>
+              <div class="module__info">
+                <div class="module__title">Jesus Christ</div>
+                <div class="module__subtitle">
+                  Lessons 10&ndash;12 &middot; God in human form
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-10.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 10</span>
+                  <span class="lesson-item__title"
+                    >Jesus Explained: God in Human Form</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-11.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 11</span>
+                  <span class="lesson-item__title">Jesus Did This For You</span>
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-12.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 12</span>
+                  <span class="lesson-item__title"
+                    >3 Ways Your Life Should Change After Meeting Jesus</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: The Holy Spirit -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">5</div>
+              <div class="module__info">
+                <div class="module__title">The Holy Spirit</div>
+                <div class="module__subtitle">
+                  Lessons 13&ndash;15 &middot; The most misunderstood person of
+                  the Trinity
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-13.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 13</span>
+                  <span class="lesson-item__title"
+                    >Who Is the Holy Spirit? (Most Misunderstood Person of the
+                    Trinity)</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-14.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 14</span>
+                  <span class="lesson-item__title"
+                    >What Does the Holy Spirit Actually Do?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-15.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 15</span>
+                  <span class="lesson-item__title"
+                    >The Holy Spirit's Role in Your Spiritual Growth</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Baptism -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">6</div>
+              <div class="module__info">
+                <div class="module__title">Baptism</div>
+                <div class="module__subtitle">
+                  Lessons 16&ndash;17 &middot; The truth about baptism from
+                  Scripture
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-16.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 16</span>
+                  <span class="lesson-item__title"
+                    >Does Baptism Save You? The Truth from Scripture</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-17.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 17</span>
+                  <span class="lesson-item__title"
+                    >The Who, How, and Why of Baptism</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 7: The Importance of Scripture -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">7</div>
+              <div class="module__info">
+                <div class="module__title">The Importance of Scripture</div>
+                <div class="module__subtitle">
+                  Lesson 18 &middot; What the Bible actually does in your life
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-18.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 18</span>
+                  <span class="lesson-item__title"
+                    >What the Bible Actually Does in Your Life</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 8: Studying the Bible -->
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">8</div>
+              <div class="module__info">
+                <div class="module__title">Studying the Bible</div>
+                <div class="module__subtitle">
+                  Lessons 19&ndash;20 &middot; Practical tools for understanding
+                  Scripture
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="/lessons/lesson-19.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 19</span>
+                  <span class="lesson-item__title"
+                    >Doctrine, Reproof, Correction, Training&mdash;What It All
+                    Means</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="/lessons/lesson-20.html">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 20</span>
+                  <span class="lesson-item__title"
+                    >Learn to Study the Bible Like a Pro</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 9: The Necessity of Prayer (Coming Soon) -->
+          <div class="module module--coming-soon">
+            <div class="module__header">
+              <div class="module__number">9</div>
+              <div class="module__info">
+                <div class="module__title">The Necessity of Prayer</div>
+                <div class="module__subtitle">Coming Soon</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 10: Stewardship and Service (Coming Soon) -->
+          <div class="module module--coming-soon">
+            <div class="module__header">
+              <div class="module__number">10</div>
+              <div class="module__info">
+                <div class="module__title">Stewardship and Service</div>
+                <div class="module__subtitle">Coming Soon</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 11: Victory over Sin (Coming Soon) -->
+          <div class="module module--coming-soon">
+            <div class="module__header">
+              <div class="module__number">11</div>
+              <div class="module__info">
+                <div class="module__title">Victory over Sin</div>
+                <div class="module__subtitle">Coming Soon</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 12: Sharing the Faith (Coming Soon) -->
+          <div class="module module--coming-soon">
+            <div class="module__header">
+              <div class="module__number">12</div>
+              <div class="module__info">
+                <div class="module__title">Sharing the Faith</div>
+                <div class="module__subtitle">Coming Soon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Account Settings -->
+      <section class="section" style="padding-top: 0; padding-bottom: 2rem">
+        <div class="container" style="max-width: 860px">
+          <div
+            style="
+              border-top: 1px solid var(--border-light);
+              padding-top: 1.5rem;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 1rem;
+            "
+          >
+            <div>
+              <h3
+                style="
+                  font-size: 1.05rem;
+                  margin: 0 0 0.25rem 0;
+                  color: var(--brand-brown);
+                "
+              >
+                Account Settings
+              </h3>
+              <p
+                id="accountEmail"
+                style="font-size: 0.85rem; color: var(--brand-gray); margin: 0"
+              >
+                Signed in
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap">
+              <button
+                onclick="showChangePasswordModal()"
+                class="btn btn--outline"
+                style="font-size: 0.85rem; padding: 0.5rem 1.25rem"
+              >
+                Change Password
+              </button>
+              <button
+                onclick="signOut()"
+                class="btn btn--outline"
+                style="
+                  font-size: 0.85rem;
+                  padding: 0.5rem 1.25rem;
+                  color: #c0392b;
+                  border-color: #c0392b;
+                "
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__brand">Growing in Grace</div>
+      <div class="footer__tagline">
+        Discipleship resources for every believer.
+      </div>
+      <div class="footer__links">
+        <a href="/">Home</a>
+        <a href="/curriculum">Curriculum</a>
+        <a href="/articles">Articles</a>
+        <a href="/videos">Videos</a>
+        <a href="/about">About</a>
+      </div>
+      <div class="footer__copy">
+        &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
+      </div>
+    </footer>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      initDashboard();
+    </script>
+  </body>
+</html>

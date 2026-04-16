@@ -806,7 +806,10 @@ async function initDashboard() {
   if (progressBar) progressBar.style.width = percent + "%";
   if (progressText)
     progressText.textContent =
-      completed + " of " + TOTAL_LESSONS + " lessons complete";
+      completed +
+      " of " +
+      TOTAL_LESSONS +
+      " lessons complete \u00B7 7 coming soon";
 
   // Mark completed lessons
   const completedSlugs = new Set(
