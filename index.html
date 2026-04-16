@@ -3,89 +3,491 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Growing in Grace — Coming Soon</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        font-size: 16px;
-        -webkit-font-smoothing: antialiased;
-      }
-      body {
-        font-family: "Inter", system-ui, sans-serif;
-        background: #7ecbc3;
-        color: #2b2b2b;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 2rem;
-      }
-      .coming-soon {
-        max-width: 520px;
-      }
-      .coming-soon__title {
-        font-family: Georgia, Cambria, "Times New Roman", serif;
-        font-size: clamp(2rem, 5vw, 3rem);
-        font-weight: 700;
-        color: #0e5d5f;
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-      }
-      .coming-soon__title em {
-        font-style: italic;
-        font-weight: 400;
-      }
-      .coming-soon__verse {
-        font-family: Georgia, Cambria, "Times New Roman", serif;
-        font-style: italic;
-        font-size: 1.05rem;
-        color: #0e5d5f;
-        line-height: 1.6;
-        margin-bottom: 0.5rem;
-      }
-      .coming-soon__ref {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #0e5d5f;
-        opacity: 0.5;
-        letter-spacing: 0.05em;
-        margin-bottom: 2rem;
-      }
-      .coming-soon__status {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #0e5d5f;
-        opacity: 0.6;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-      }
-    </style>
+    <title>Growing in Grace — Discipleship Resources for Every Believer</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- TEMPORARY: This page will be replaced in Step 8 with the full
-       homepage matching gig-homepage-prototype.html. Do not build
-       permanent structure on this file. -->
-    <div class="coming-soon">
-      <h1 class="coming-soon__title">Growing <em>in</em> Grace</h1>
-      <p class="coming-soon__verse">
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav__inner">
+        <a href="/" class="nav__brand">Growing <i>in</i> Grace</a>
+        <button
+          class="nav__hamburger"
+          aria-label="Menu"
+          onclick="
+            document.querySelector('.nav__links').classList.toggle('is-open')
+          "
+        >
+          &#9776;
+        </button>
+        <ul class="nav__links">
+          <li><a href="/about.html">About</a></li>
+          <li>
+            <a
+              href="/growing-in-grace.html#signin"
+              class="nav__cta nav__cta--signin"
+              >Sign In</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav__cta nav__cta--dashboard"
+              href="/growing-in-grace-dashboard.html"
+              style="display: none"
+              >My Dashboard &rarr;</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- HERO — drop shadows on all text -->
+    <!-- TODO: Download this image to assets/hero-bg.jpg before launch to avoid Unsplash hotlink fragility -->
+    <section class="hero hero--home">
+      <div class="hero__inner">
+        <div class="hero__label">Discipleship Resources for Every Believer</div>
+        <h1 class="hero__title">Growing in <em>Grace</em></h1>
+        <p class="hero__sub">
+          Articles, video teaching, books, and a complete discipleship
+          curriculum — rooted in Scripture, built for real life.
+        </p>
+        <div class="hero__ctas">
+          <a href="#curriculum" class="btn btn--sky">Explore Resources</a>
+          <a href="/growing-in-grace.html" class="btn btn--ghost"
+            >Start the Curriculum</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- SCRIPTURE — compact -->
+    <section class="scripture">
+      <p class="scripture__text">
         "But grow in the grace and knowledge of our Lord and Savior Jesus
         Christ."
       </p>
-      <p class="coming-soon__ref">&mdash; 2 Peter 3:18</p>
-      <p class="coming-soon__status">Launching Soon</p>
-    </div>
+      <p class="scripture__ref">&mdash; 2 Peter 3:18</p>
+    </section>
+
+    <!-- FOUR PILLARS — tighter to scripture strip, big cards -->
+    <section class="section pillars-section">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__label">What We Offer</div>
+          <h2 class="section__title">Explore. Learn. Grow.</h2>
+          <hr class="divider" />
+          <p class="section__desc">
+            Everything you need for a life of discipleship — all in one place,
+            all completely free.
+          </p>
+        </div>
+        <div class="pillars">
+          <a href="#curriculum" class="pillar">
+            <div class="pillar__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <div class="pillar__title">Curriculum</div>
+            <div class="pillar__desc">
+              A structured 12-section manual with companion video lessons for
+              new believers.
+            </div>
+          </a>
+          <a href="#videos" class="pillar">
+            <div class="pillar__icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+            </div>
+            <div class="pillar__title">Videos</div>
+            <div class="pillar__desc">
+              Clear, accessible video teaching you can watch at your own pace.
+            </div>
+          </a>
+          <a href="#books" class="pillar">
+            <div class="pillar__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path
+                  d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                ></path>
+              </svg>
+            </div>
+            <div class="pillar__title">Books</div>
+            <div class="pillar__desc">
+              Published resources for deeper study and personal or group
+              discipleship.
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRICULUM — directly under the 4 cards -->
+    <section class="section--flagship" id="curriculum">
+      <div class="container">
+        <div class="curriculum-row">
+          <div>
+            <div class="curriculum-row__eyebrow">
+              &#9733; Our Flagship Curriculum
+            </div>
+            <h2 class="curriculum-row__title">
+              A complete discipleship manual for new believers.
+            </h2>
+            <p class="curriculum-row__desc">
+              From salvation and the Trinity to baptism, prayer, and sharing the
+              faith — everything a new Christian needs to grow, all in one
+              place.
+            </p>
+
+            <!-- Stats strip — bigger, pushed right -->
+            <div
+              style="
+                display: flex;
+                gap: 3rem;
+                margin-bottom: 2.25rem;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                padding-left: 0.5rem;
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-size: 2.8rem;
+                    font-weight: 700;
+                    color: var(--brand-cream);
+                    line-height: 1;
+                  "
+                >
+                  12
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--brand-sky);
+                    opacity: 0.6;
+                    margin-top: 0.3rem;
+                  "
+                >
+                  Sections
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-size: 2.8rem;
+                    font-weight: 700;
+                    color: var(--brand-cream);
+                    line-height: 1;
+                  "
+                >
+                  27
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--brand-sky);
+                    opacity: 0.6;
+                    margin-top: 0.3rem;
+                  "
+                >
+                  Video Lessons
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-family: var(--font-heading);
+                    font-size: 2.8rem;
+                    font-weight: 700;
+                    color: var(--brand-cream);
+                    line-height: 1;
+                  "
+                >
+                  Free
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--brand-sky);
+                    opacity: 0.6;
+                    margin-top: 0.3rem;
+                  "
+                >
+                  Always
+                </div>
+              </div>
+            </div>
+
+            <!-- Value bullets -->
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+                margin-bottom: 2.25rem;
+                font-size: 0.88rem;
+                color: var(--brand-cream);
+                opacity: 0.8;
+                line-height: 1.5;
+              "
+            >
+              <div style="display: flex; align-items: baseline; gap: 0.5rem">
+                <span style="color: var(--brand-lime); font-weight: 700"
+                  >&#10003;</span
+                >
+                Watch video lessons at your own pace
+              </div>
+              <div style="display: flex; align-items: baseline; gap: 0.5rem">
+                <span style="color: var(--brand-lime); font-weight: 700"
+                  >&#10003;</span
+                >
+                Companion workbook for each section
+              </div>
+              <div style="display: flex; align-items: baseline; gap: 0.5rem">
+                <span style="color: var(--brand-lime); font-weight: 700"
+                  >&#10003;</span
+                >
+                Track your progress with a free account
+              </div>
+              <div style="display: flex; align-items: baseline; gap: 0.5rem">
+                <span style="color: var(--brand-lime); font-weight: 700"
+                  >&#10003;</span
+                >
+                No seminary background required
+              </div>
+            </div>
+
+            <div class="curriculum-row__ctas">
+              <a href="/growing-in-grace.html" class="btn btn--lime"
+                >Start the Curriculum &rarr;</a
+              >
+              <!-- TODO: Replace # with real Amazon affiliate link for the Growing in Grace workbook -->
+              <a href="#" class="btn btn--ghost">Get the Workbook</a>
+            </div>
+          </div>
+          <div class="section-list">
+            <div class="section-list__heading">12 Sections</div>
+            <div class="section-list__items">
+              <div>
+                <span class="section-list__num">1.</span> Sin and Salvation
+              </div>
+              <div>
+                <span class="section-list__num">2.</span> Eternal Security
+              </div>
+              <div><span class="section-list__num">3.</span> The Trinity</div>
+              <div><span class="section-list__num">4.</span> Jesus Christ</div>
+              <div>
+                <span class="section-list__num">5.</span> The Holy Spirit
+              </div>
+              <div><span class="section-list__num">6.</span> Baptism</div>
+              <div>
+                <span class="section-list__num">7.</span> The Importance of
+                Scripture
+              </div>
+              <div>
+                <span class="section-list__num">8.</span> Studying the Bible
+              </div>
+              <div class="section-list__item--soon">
+                <span class="section-list__num">9.</span> The Necessity of
+                Prayer
+              </div>
+              <div class="section-list__item--soon">
+                <span class="section-list__num">10.</span> Stewardship and
+                Service
+              </div>
+              <div class="section-list__item--soon">
+                <span class="section-list__num">11.</span> Victory over Sin
+              </div>
+              <div class="section-list__item--soon">
+                <span class="section-list__num">12.</span> Sharing the Faith
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LATEST VIDEO — sky-wash tint -->
+    <section class="section section--sky-wash on-cream" id="videos">
+      <div class="container">
+        <div class="content-row">
+          <a
+            href="https://www.youtube.com/watch?v=YktB6zDnTH4"
+            target="_blank"
+            rel="noopener"
+            class="media-card"
+            style="display: block; text-decoration: none"
+          >
+            <img
+              src="https://img.youtube.com/vi/YktB6zDnTH4/maxresdefault.jpg"
+              alt="Latest video lesson"
+            />
+            <div class="media-card__play">
+              <svg viewBox="0 0 24 24">
+                <polygon points="8,5 19,12 8,19"></polygon>
+              </svg>
+            </div>
+          </a>
+          <div>
+            <div class="content-row__eyebrow">
+              Latest Video &middot; Lesson 20
+            </div>
+            <h2 class="content-row__title">
+              Learn to Study the Bible Like a Pro
+            </h2>
+            <p class="content-row__desc">
+              The final lesson in the video series equips believers to approach
+              Scripture with confidence. All 20 lessons are free — watch at your
+              own pace.
+            </p>
+            <!-- TODO: Replace # with real YouTube channel or playlist URL when available -->
+            <a href="#" target="_blank" rel="noopener" class="content-row__link"
+              >Watch all videos &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LATEST RESOURCE — Discipleship Today -->
+    <section class="section on-cream" id="books">
+      <div class="container">
+        <div class="content-row content-row--reverse">
+          <div>
+            <div class="book-feature">
+              <!-- TODO: Replace with real book cover URL or local asset path -->
+              <img
+                class="book-feature__cover"
+                src="https://m.media-amazon.com/images/I/51QfG0mk6DL._SY466_.jpg"
+                alt="Discipleship Today by Andrew T. Burggraff"
+              />
+              <div class="book-feature__title">Discipleship Today</div>
+              <div class="book-feature__author">Andrew T. Burggraff</div>
+            </div>
+          </div>
+          <div>
+            <div class="content-row__eyebrow">Latest Resource</div>
+            <h2 class="content-row__title">
+              Discipleship Today: Applying Biblical Discipleship in Today's
+              Context
+            </h2>
+            <p class="content-row__desc">
+              Dr. Burggraff's latest work explores how the timeless principles
+              of biblical discipleship apply to the challenges of modern life
+              and ministry. A practical resource for pastors, small group
+              leaders, and every believer.
+            </p>
+            <!-- TODO: Replace with real Amazon affiliate link for Discipleship Today -->
+            <a href="#" class="content-row__link">Get it on Amazon &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT — sky-wash tint -->
+    <section class="section section--sky-wash" id="about">
+      <div class="container">
+        <div class="about__inner">
+          <!-- TODO: Replace ATB initials placeholder with Dr. Burggraff's headshot -->
+          <div class="about__photo">ATB</div>
+          <div>
+            <div class="about__eyebrow">About the Teacher</div>
+            <div class="about__name">Dr. Andrew T. Burggraff</div>
+            <p class="about__bio">
+              Pastor, professor, and author. Dr. Burggraff serves at Shepherds
+              Theological Seminary and is the author of
+              <em>Growing in Grace</em> and <em>Discipleship Today</em>. His
+              teaching is grounded in sound doctrine and designed for everyday
+              Christians.
+            </p>
+            <a href="/about.html" class="about__link">Learn more &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta__inner">
+        <h2 class="cta__title">Ready to grow?</h2>
+        <p class="cta__desc">
+          Create a free account to track your progress, save articles, and pick
+          up where you left off.
+        </p>
+        <a href="/growing-in-grace.html" class="btn btn--outline"
+          >Create Free Account &rarr;</a
+        >
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">Growing in Grace</div>
+          <div class="footer__tagline">
+            Discipleship resources for every believer.
+          </div>
+          <div class="footer__copy">
+            &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Resources</div>
+          <ul class="footer__links">
+            <li><a href="#curriculum">Curriculum</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#books">Books</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Platform</div>
+          <ul class="footer__links">
+            <li><a href="/growing-in-grace.html#signin">Sign In</a></li>
+            <li><a href="/growing-in-grace.html">Create Account</a></li>
+            <li><a href="/growing-in-grace-dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Connect</div>
+          <ul class="footer__links">
+            <!-- TODO: Replace # with real YouTube channel URL when available -->
+            <li><a href="#">YouTube</a></li>
+            <li>
+              <a href="https://shepherds.edu" target="_blank" rel="noopener"
+                >Shepherds Seminary</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Auth-aware nav CTA swap (public pages): hide Sign In if already logged in -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      (async () => {
+        const user = await getCurrentUser();
+        _updateNavAuth(user, null);
+      })();
+    </script>
   </body>
 </html>

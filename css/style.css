@@ -1769,3 +1769,631 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* =============================================
+   PUBLIC HOMEPAGE COMPONENTS
+   Ported from gig-homepage-prototype.html.
+   Used on: index.html, about.html, curriculum.html,
+   workbook.html, videos.html.
+   DO NOT use on authenticated pages (dashboard, lessons)
+   unless the class is explicitly opted-in.
+   ============================================= */
+
+/* --- Hero variant: homepage (image bg + overlay + drop shadows) --- */
+.hero--home {
+  background-color: var(--brand-teal-deep);
+  background-image: url("https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=1600&q=80");
+  background-size: cover;
+  background-position: center 40%;
+  padding: 7rem var(--space-xl) 6rem;
+  text-align: center;
+  color: var(--brand-cream);
+  position: relative;
+  overflow: hidden;
+}
+.hero--home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 93, 95, 0.72) 0%,
+    rgba(14, 93, 95, 0.75) 40%,
+    rgba(14, 93, 95, 0.8) 100%
+  );
+  pointer-events: none;
+}
+.hero--home .hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero--home .hero__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--brand-sky);
+  margin-bottom: 1.75rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+.hero--home .hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--brand-cream);
+  margin-bottom: 1.5rem;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.5),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.hero--home .hero__title em {
+  font-style: italic;
+  color: var(--brand-sky);
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.5),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.hero--home .hero__sub {
+  font-size: 1.05rem;
+  color: var(--brand-sky);
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+.hero--home .hero__ctas {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- Scripture strip (homepage, not the lesson-page scripture tags) --- */
+.scripture {
+  background: var(--brand-sky);
+  padding: 1.75rem var(--space-xl);
+  text-align: center;
+}
+.scripture__text {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--brand-teal-deep);
+  max-width: 500px;
+  margin: 0 auto 0.3rem;
+  line-height: 1.5;
+}
+.scripture__ref {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--brand-teal-deep);
+  opacity: 0.45;
+  letter-spacing: 0.05em;
+}
+
+/* --- Centered section header (label / title / divider / desc) --- */
+.section__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brand-teal-deep);
+  opacity: 0.6;
+  margin-bottom: 0.75rem;
+}
+.section__title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--brand-charcoal);
+  margin-bottom: 0.75rem;
+}
+.section__desc {
+  font-size: 0.95rem;
+  color: var(--brand-gray);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+/* Scoped override: smaller divider inside centered section headers
+   (base .divider is 80px; prototype uses 60px here). */
+.section__header .divider {
+  width: 60px;
+  margin: 1rem auto;
+}
+
+/* --- Very subtle sky tint for alternating cream sections --- */
+.section--sky-wash {
+  background: rgba(126, 203, 195, 0.08);
+}
+
+/* --- Four pillars strip --- */
+.pillars-section {
+  padding-top: 3rem;
+  padding-bottom: var(--space-4xl);
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.pillar {
+  background: var(--brand-white);
+  border-radius: 12px;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(14, 93, 95, 0.06);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.pillar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(14, 93, 95, 0.1);
+  color: inherit;
+}
+.pillar__icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: var(--brand-sky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pillar__icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--brand-teal-deep);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pillar__title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--brand-teal-deep);
+  margin-bottom: 0.6rem;
+}
+.pillar__desc {
+  font-size: 0.9rem;
+  color: var(--brand-gray);
+  line-height: 1.6;
+}
+
+/* --- Content row (image/card + text pair) --- */
+.content-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.content-row--reverse {
+  direction: rtl;
+}
+.content-row--reverse > * {
+  direction: ltr;
+}
+.content-row__eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.6rem;
+}
+.content-row__title {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.content-row__desc {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  opacity: 0.8;
+}
+.content-row__link {
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: gap 0.2s;
+  text-decoration: none;
+}
+.content-row__link:hover {
+  gap: 0.7rem;
+}
+.on-cream .content-row__eyebrow {
+  color: var(--brand-teal-deep);
+  opacity: 0.6;
+}
+.on-cream .content-row__title {
+  color: var(--brand-charcoal);
+}
+.on-cream .content-row__desc {
+  color: var(--brand-gray);
+}
+.on-cream .content-row__link {
+  color: var(--brand-teal-deep);
+}
+.section--dark .content-row__eyebrow,
+.section--teal-deep .content-row__eyebrow {
+  color: var(--brand-sky);
+  opacity: 0.5;
+}
+.section--dark .content-row__title,
+.section--teal-deep .content-row__title {
+  color: var(--brand-cream);
+}
+.section--dark .content-row__desc,
+.section--teal-deep .content-row__desc {
+  color: var(--brand-cream);
+  opacity: 0.7;
+}
+.section--dark .content-row__link,
+.section--teal-deep .content-row__link {
+  color: var(--brand-lime);
+}
+
+/* --- Media card (YouTube thumbnail with play button) --- */
+.media-card {
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  position: relative;
+  background: var(--brand-teal-deep);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+.media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  background: rgba(250, 252, 252, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+.media-card__play svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--brand-teal-deep);
+  margin-left: 2px;
+}
+
+/* --- Book feature card (Discipleship Today cover) --- */
+.book-feature {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--brand-white);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(14, 93, 95, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.book-feature__cover {
+  width: 180px;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  margin-bottom: 1.25rem;
+}
+.book-feature__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--brand-charcoal);
+  margin-bottom: 0.25rem;
+}
+.book-feature__author {
+  font-size: 0.8rem;
+  color: var(--brand-gray);
+}
+
+/* --- Flagship curriculum section (teal-deep with radial glow) --- */
+.section--flagship {
+  background: var(--brand-teal-deep);
+  color: var(--brand-cream);
+  padding: 6rem 0;
+  border-top: 3px solid var(--brand-sky);
+  border-bottom: 3px solid var(--brand-sky);
+  position: relative;
+  overflow: hidden;
+}
+.section--flagship::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(126, 203, 195, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.section--flagship .container {
+  position: relative;
+  z-index: 1;
+}
+.curriculum-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: start;
+}
+.curriculum-row__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--brand-lime);
+  margin-bottom: 0.75rem;
+}
+.curriculum-row__title {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--brand-cream);
+  margin-bottom: 1.25rem;
+}
+.curriculum-row__desc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--brand-cream);
+  opacity: 0.75;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+.curriculum-row__ctas {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* --- Section list (12 curriculum sections, glow-bordered) --- */
+.section-list {
+  background: rgba(126, 203, 195, 0.06);
+  border: 1px solid rgba(126, 203, 195, 0.18);
+  border-radius: 14px;
+  padding: 2.5rem 2.25rem;
+  box-shadow:
+    0 0 40px rgba(126, 203, 195, 0.08),
+    inset 0 1px 0 rgba(250, 252, 252, 0.05);
+}
+.section-list__heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--brand-lime);
+  margin-bottom: 1.25rem;
+}
+.section-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+  color: var(--brand-cream);
+}
+.section-list__num {
+  font-weight: 700;
+  margin-right: 0.6rem;
+  color: var(--brand-sky);
+  font-size: 1.1rem;
+}
+.section-list__item--soon {
+  opacity: 0.3;
+}
+
+/* --- Compact about strip (homepage, not the /about page) --- */
+.about__inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: var(--max-width-narrow);
+  margin: 0 auto;
+}
+.about__photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--brand-teal-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--brand-cream);
+  font-weight: 700;
+  border: 3px solid var(--brand-sky);
+  flex-shrink: 0;
+}
+.about__eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brand-teal-deep);
+  opacity: 0.6;
+  margin-bottom: 0.4rem;
+}
+.about__name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand-charcoal);
+  margin-bottom: 0.5rem;
+}
+.about__bio {
+  font-size: 0.9rem;
+  color: var(--brand-gray);
+  line-height: 1.7;
+  max-width: 460px;
+  margin-bottom: 0.75rem;
+}
+.about__link {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--brand-teal-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+}
+.about__link:hover {
+  gap: 0.65rem;
+}
+
+/* --- Standalone CTA section (different from .cta-band) --- */
+.cta {
+  background: var(--brand-sky);
+  padding: 4rem var(--space-xl);
+  text-align: center;
+}
+.cta__inner {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.cta__title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-teal-deep);
+  margin-bottom: 0.6rem;
+}
+.cta__desc {
+  font-size: 0.9rem;
+  color: var(--brand-teal-deep);
+  opacity: 0.65;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
+
+/* --- Footer 4-col grid variant (public marketing pages only) ---
+   Authenticated pages keep the existing centered footer by NOT
+   wrapping their content in .footer__inner. */
+.footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2rem;
+  text-align: left;
+}
+.footer__inner .footer__brand {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.footer__inner .footer__tagline {
+  color: var(--brand-gray);
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+.footer__inner .footer__copy {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+.footer__col-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.85rem;
+  opacity: 0.45;
+}
+.footer__inner .footer__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.footer__inner .footer__links a {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  color: var(--brand-cream);
+  transition:
+    opacity 0.2s,
+    color 0.2s;
+}
+.footer__inner .footer__links a:hover {
+  opacity: 1;
+  color: var(--brand-sky);
+}
+
+/* --- Public pages responsive overrides --- */
+@media (max-width: 768px) {
+  .pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .content-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .content-row--reverse {
+    direction: ltr;
+  }
+  .curriculum-row {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .curriculum-row__title {
+    font-size: 1.8rem;
+  }
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero--home {
+    padding: 5rem var(--space-md) 4rem;
+  }
+}
+@media (max-width: 480px) {
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+  .footer__inner {
+    grid-template-columns: 1fr;
+  }
+}

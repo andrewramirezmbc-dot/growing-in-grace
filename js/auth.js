@@ -809,7 +809,7 @@ async function initDashboard() {
       completed +
       " of " +
       TOTAL_LESSONS +
-      " lessons complete \u00B7 7 coming soon";
+      " lessons complete \u00B7 More coming soon";
 
   // Mark completed lessons
   const completedSlugs = new Set(
