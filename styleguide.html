@@ -1,0 +1,947 @@
+<!-- =============================================
+     DEVELOPER REFERENCE ONLY
+     This page is for verifying CSS tokens and component
+     styles during development. Do not link from the
+     production site or include in navigation.
+     ============================================= -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growing in Grace — Styleguide</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Styleguide-only annotations */
+      .sg-label {
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--brand-brown);
+        margin-bottom: 0.5rem;
+        padding: 0.3rem 0.6rem;
+        background: rgba(101, 82, 39, 0.08);
+        border-radius: 4px;
+        display: inline-block;
+      }
+      .sg-block {
+        margin-bottom: 3rem;
+      }
+      .sg-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .sg-separator {
+        width: 100%;
+        height: 1px;
+        background: var(--border-light);
+        margin: 2rem 0;
+      }
+      /* Override body flex for this page */
+      body {
+        display: block;
+        background: var(--brand-cream);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================
+       NAV
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">Nav (dark teal, sticky)</div>
+    <nav class="nav">
+      <div class="nav__inner">
+        <a href="#" class="nav__brand">Growing <i>in</i> Grace</a>
+        <button
+          class="nav__hamburger"
+          aria-label="Menu"
+          onclick="
+            document.querySelector('.nav__links').classList.toggle('is-open')
+          "
+        >
+          &#9776;
+        </button>
+        <ul class="nav__links">
+          <li><a href="#">Curriculum</a></li>
+          <li><a href="#">Articles</a></li>
+          <li><a href="#" class="is-active">Videos</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#" class="nav__cta--signin">Sign In</a></li>
+          <li>
+            <a href="#" class="nav__cta--dashboard" style="display: none"
+              >Dashboard &rarr;</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ============================================
+       ANNOUNCEMENT BAR
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem 1rem 0">Announcement Bar</div>
+    <div class="announcement-bar">
+      Free discipleship resources for every believer.
+      <strong>Start learning today.</strong>
+    </div>
+
+    <!-- ============================================
+       HERO WORDMARK
+       ============================================ -->
+    <section class="section--sky" style="padding: 4rem 0">
+      <div class="container" style="text-align: center">
+        <div class="sg-label">Hero Wordmark Component</div>
+        <h1 class="hero-wordmark" style="font-size: 4rem">
+          Growing<br />
+          <span class="hero-wordmark__in">in </span
+          ><span class="hero-wordmark__grace">Grace</span>
+        </h1>
+        <p
+          style="
+            margin-top: 1rem;
+            color: var(--brand-teal-deep);
+            font-style: italic;
+          "
+        >
+          A Discipleship Manual for New Believers
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+       TYPOGRAPHY SCALE
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block">
+          <div class="sg-label">
+            Typography Scale (Georgia headings + Inter body)
+          </div>
+          <h1>H1 — Growing in faith, rooted in Scripture</h1>
+          <h2>H2 — A complete discipleship manual</h2>
+          <h3>H3 — Sin and Salvation</h3>
+          <h4>H4 — Key Terms for This Lesson</h4>
+          <h5>H5 — Discussion Questions</h5>
+          <p>
+            Body text (Inter) — In 2 Peter 3:18, we are given a clear and
+            powerful command: grow in the grace and knowledge of our Lord and
+            Savior Jesus Christ. This manual is designed to help you grow in
+            your spiritual life.
+          </p>
+          <p class="text-muted">
+            Muted text — Secondary information and descriptions.
+          </p>
+          <span class="label-accent">Label Accent — Lesson 1</span>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Scripture Callout</div>
+          <p class="scripture-callout">
+            "But grow in the grace and knowledge of our Lord and Savior Jesus
+            Christ."
+          </p>
+          <p class="scripture-ref">&mdash; 2 Peter 3:18</p>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Text Highlights</div>
+          <p>
+            <span class="text-highlight">Bold highlight</span> ·
+            <span class="text-highlight--teal">Teal highlight</span> ·
+            <span class="text-highlight--underline">Underline highlight</span> ·
+            <span class="text-underline">Text underline</span>
+          </p>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Divider</div>
+          <hr class="divider" />
+          <hr class="divider divider--center" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       SECTION VARIANTS
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">
+      Section Color Variants (5 options)
+    </div>
+
+    <section class="section--sky" style="padding: 2.5rem 0">
+      <div class="container">
+        <div class="sg-label" style="background: rgba(14, 93, 95, 0.12)">
+          section--sky (#7ECBC3) — PRIMARY, dominant background
+        </div>
+        <h2>Sky Section Headline</h2>
+        <p>
+          This is the dominant section color. Dr. Burggraff: "I like a lot of
+          color on the page." Sky sections should appear frequently.
+        </p>
+      </div>
+    </section>
+
+    <section class="section--teal-deep" style="padding: 2.5rem 0">
+      <div class="container">
+        <div
+          class="sg-label"
+          style="color: var(--brand-sky); background: rgba(126, 203, 195, 0.12)"
+        >
+          section--teal-deep (#0E5D5F) — dark sections
+        </div>
+        <h2>Deep Teal Section Headline</h2>
+        <p>
+          Used for hero, nav, footer, and alternating dark sections. Replaces
+          BIBLE 101's charcoal.
+        </p>
+      </div>
+    </section>
+
+    <section class="section--brown" style="padding: 2.5rem 0">
+      <div class="container">
+        <div
+          class="sg-label"
+          style="color: var(--brand-sky); background: rgba(126, 203, 195, 0.12)"
+        >
+          section--brown (#655227) — warm dark alternate
+        </div>
+        <h2>Brown Section Headline</h2>
+        <p>
+          Secondary dark section for variety. Headlines in cream on dark
+          backgrounds.
+        </p>
+      </div>
+    </section>
+
+    <section class="section--cream" style="padding: 2.5rem 0">
+      <div class="container">
+        <div class="sg-label">
+          section--cream (#FAFCFC) — content panels ONLY
+        </div>
+        <h2>Cream Section Headline</h2>
+        <p>
+          For content panels inside colored sections. NOT for full-page
+          backgrounds. If a page feels white, it's wrong.
+        </p>
+      </div>
+    </section>
+
+    <section class="section--lime" style="padding: 2.5rem 0">
+      <div class="container">
+        <div class="sg-label" style="background: rgba(14, 93, 95, 0.12)">
+          section--lime (#A2CE52) — CTA highlight strips
+        </div>
+        <h2>Lime Section Headline</h2>
+        <p>For high-visibility CTA bands. Lime is the primary CTA color.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+       BUTTONS
+       ============================================ -->
+    <section class="section--sky" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block">
+          <div class="sg-label">Buttons — Light Background</div>
+          <div class="sg-row">
+            <a href="#" class="btn btn--primary">Primary (Lime) &rarr;</a>
+            <a href="#" class="btn btn--outline">Outline</a>
+            <a href="#" class="btn btn--outline-teal">Outline Teal</a>
+            <a href="#" class="btn btn--dark">Dark</a>
+            <a href="#" class="btn btn--sm btn--primary">Small</a>
+            <a href="#" class="btn btn--lg btn--primary">Large</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--teal-deep" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block" style="margin-bottom: 0">
+          <div
+            class="sg-label"
+            style="
+              color: var(--brand-sky);
+              background: rgba(126, 203, 195, 0.12);
+            "
+          >
+            Buttons — Dark Background
+          </div>
+          <div class="sg-row">
+            <a href="#" class="btn btn--lime">Lime &rarr;</a>
+            <a href="#" class="btn btn--sky">Sky</a>
+            <a href="#" class="btn btn--ghost">Ghost</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       NAV CTAs (both states)
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block">
+          <div class="sg-label">
+            Nav CTA Variants (shown inline for comparison)
+          </div>
+          <div
+            class="sg-row"
+            style="
+              background: var(--brand-teal-deep);
+              padding: 1rem;
+              border-radius: 8px;
+              align-items: center;
+            "
+          >
+            <a href="#" class="nav__cta--signin">Sign In</a>
+            <a href="#" class="nav__cta--dashboard">Dashboard &rarr;</a>
+            <a href="#" class="nav__cta">Generic CTA</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       HERO (dark course page hero)
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">Hero (course landing page)</div>
+    <section class="hero hero--landing">
+      <span class="label-accent">A Discipleship Platform</span>
+      <h1>Growing in Grace</h1>
+      <p class="hero__subtitle">
+        A complete discipleship manual for new believers — 12 sections, 27 video
+        lessons, completely free.
+      </p>
+      <div
+        style="
+          display: flex;
+          gap: 0.75rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          position: relative;
+        "
+      >
+        <a href="#" class="btn btn--lime">Start the Curriculum &rarr;</a>
+        <a href="#" class="btn btn--ghost">Get the Workbook</a>
+      </div>
+    </section>
+
+    <!-- ============================================
+       CTA BAND
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">CTA Band</div>
+    <div class="cta-band">
+      <h3>Ready to grow?</h3>
+      <p>
+        Create a free account to track your progress and pick up where you left
+        off.
+      </p>
+      <a href="#" class="btn btn--outline">Create Free Account &rarr;</a>
+    </div>
+
+    <!-- ============================================
+       COURSE HEADER
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">
+      Course Header (auth landing page)
+    </div>
+    <section class="course-header">
+      <div class="container">
+        <span class="label-accent">Free Online Course</span>
+        <h1>Growing in Grace</h1>
+        <p class="course-header__sub">
+          A Discipleship Manual for New Believers — 12 sections covering the
+          foundations of the Christian faith.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+       DASHBOARD HEADER + PROGRESS BAR
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">
+      Dashboard Header + Progress Bar
+    </div>
+    <section class="dash-header">
+      <div class="container" style="max-width: 860px">
+        <p class="dash-header__greeting">
+          Welcome back, <strong>Andrew</strong>
+        </p>
+        <h1 class="dash-header__title">Growing in Grace</h1>
+        <p class="dash-header__sub">A Discipleship Manual for New Believers</p>
+        <div class="progress-wrapper">
+          <div class="progress-bar">
+            <div class="progress-bar__fill" style="width: 45%"></div>
+          </div>
+          <p class="progress-bar__text">9 of 20 lessons complete</p>
+        </div>
+        <a href="#" class="btn btn--lime">Continue Where You Left Off &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ============================================
+       MODULE ACCORDION
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container" style="max-width: 860px">
+        <div class="sg-block">
+          <div class="sg-label">Module Accordion — Open State (is-open)</div>
+          <div class="module is-open">
+            <div class="module__header">
+              <div class="module__number">1</div>
+              <div class="module__info">
+                <div class="module__title">Sin and Salvation</div>
+                <div class="module__subtitle">
+                  Lessons 1–4 &middot; The problem of sin and God's plan of
+                  salvation
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item is-completed" href="#">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 1</span>
+                  <span class="lesson-item__title"
+                    >What Should Christian Life Look Like?</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item is-started" href="#">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 2</span>
+                  <span class="lesson-item__title"
+                    >Sin: Origin, Reality, &amp; Consequences</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="#">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 3</span>
+                  <span class="lesson-item__title"
+                    >The Truth About What REALLY Saves You</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+                <a class="lesson-item" href="#">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 4</span>
+                  <span class="lesson-item__title"
+                    >What Repentance ACTUALLY Means</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Module Accordion — Collapsed State</div>
+          <div class="module">
+            <div class="module__header">
+              <div class="module__number">2</div>
+              <div class="module__info">
+                <div class="module__title">Eternal Security</div>
+                <div class="module__subtitle">
+                  Lessons 5–7 &middot; The life-changing gift of eternal life
+                </div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+            <div class="module__lessons">
+              <div class="module__lesson-list">
+                <a class="lesson-item" href="#">
+                  <span class="lesson-item__check"></span>
+                  <span class="lesson-item__week">Lesson 5</span>
+                  <span class="lesson-item__title"
+                    >The LIFE CHANGING Gift of Eternal Life</span
+                  >
+                  <span class="lesson-item__arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">
+            Module Accordion — Coming Soon (sections 9-12)
+          </div>
+          <div class="module module--coming-soon">
+            <div class="module__header">
+              <div class="module__number">9</div>
+              <div class="module__info">
+                <div class="module__title">The Necessity of Prayer</div>
+                <div class="module__subtitle">Coming Soon</div>
+              </div>
+              <span class="module__toggle">&#9660;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       LESSON ITEM STATES (enlarged for clarity)
+       ============================================ -->
+    <section class="section--sky" style="padding: 3rem 0">
+      <div class="container" style="max-width: 860px">
+        <div class="sg-block">
+          <div class="sg-label" style="background: rgba(14, 93, 95, 0.12)">
+            Lesson Item States
+          </div>
+          <a class="lesson-item" href="#">
+            <span class="lesson-item__check"></span>
+            <span class="lesson-item__week">Lesson 8</span>
+            <span class="lesson-item__title"
+              >Default — How Can God Be One… and Three?</span
+            >
+            <span class="lesson-item__arrow">&rarr;</span>
+          </a>
+          <a class="lesson-item is-started" href="#">
+            <span class="lesson-item__check"></span>
+            <span class="lesson-item__week">Lesson 9</span>
+            <span class="lesson-item__title"
+              >Started — The Unity and Distinction Within the Trinity</span
+            >
+            <span class="lesson-item__arrow">&rarr;</span>
+          </a>
+          <a class="lesson-item is-completed" href="#">
+            <span class="lesson-item__check"></span>
+            <span class="lesson-item__week">Lesson 10</span>
+            <span class="lesson-item__title"
+              >Completed — Jesus Explained: God in Human Form</span
+            >
+            <span class="lesson-item__arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       LESSON COMPLETE BUTTON
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container" style="max-width: 860px">
+        <div class="sg-block">
+          <div class="sg-label">
+            Lesson Complete Button (default vs completed)
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 1.5rem;
+              flex-wrap: wrap;
+              justify-content: center;
+            "
+          >
+            <button class="btn btn--primary lesson-complete__btn">
+              Mark Lesson as Complete
+            </button>
+            <button class="btn btn--primary lesson-complete__btn is-completed">
+              &#10003; Lesson Complete
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       CARDS
+       ============================================ -->
+    <section class="section--sky" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block">
+          <div class="sg-label" style="background: rgba(14, 93, 95, 0.12)">
+            Card Component
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 1.5rem;
+            "
+          >
+            <div class="card">
+              <div class="card__tag">Article</div>
+              <h3 class="card__title">What Is Discipleship?</h3>
+              <p class="card__desc">
+                A thoughtful exploration of what it means to follow Christ in
+                everyday life.
+              </p>
+              <a href="#" class="btn btn--sm btn--outline">Read More &rarr;</a>
+            </div>
+            <div class="card">
+              <div class="card__tag">Curriculum</div>
+              <h3 class="card__title">Sin and Salvation</h3>
+              <p class="card__desc">
+                The first section of Growing in Grace covers the problem of sin
+                and God's plan of salvation.
+              </p>
+              <a href="#" class="btn btn--sm btn--primary"
+                >Start Section &rarr;</a
+              >
+            </div>
+            <div class="card">
+              <div class="card__tag">Resource</div>
+              <h3 class="card__title">The Workbook</h3>
+              <p class="card__desc">
+                Get the companion workbook for deeper study and personal
+                reflection.
+              </p>
+              <a href="#" class="btn btn--sm btn--outline-teal"
+                >Get on Amazon &rarr;</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       VALUE CARDS
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block">
+          <div class="sg-label">Value Cards</div>
+          <div class="value-grid">
+            <div class="value-card">
+              <div class="value-card__icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+              </div>
+              <h4 class="value-card__title">Curriculum</h4>
+              <p class="value-card__desc">
+                A structured 12-section manual with companion video lessons.
+              </p>
+            </div>
+            <div class="value-card">
+              <div class="value-card__icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 20h9"></path>
+                  <path
+                    d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                  ></path>
+                </svg>
+              </div>
+              <h4 class="value-card__title">Articles</h4>
+              <p class="value-card__desc">
+                Thoughtful writing on theology and practical discipleship.
+              </p>
+            </div>
+            <div class="value-card">
+              <div class="value-card__icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                </svg>
+              </div>
+              <h4 class="value-card__title">Videos</h4>
+              <p class="value-card__desc">
+                Clear, accessible video teaching at your own pace.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       SIGNUP FORM
+       ============================================ -->
+    <section class="course-signup">
+      <div class="container">
+        <div class="sg-label" style="margin-bottom: 1rem">
+          Signup Form (auth card)
+        </div>
+        <div class="signup-card">
+          <h2>Create Your Free Account</h2>
+          <p>
+            Track your progress, save your place, and grow at your own pace.
+          </p>
+          <form class="signup-form" onsubmit="return false;">
+            <div class="signup-form__group">
+              <label for="sg-name">First Name</label>
+              <input type="text" id="sg-name" placeholder="Andrew" />
+            </div>
+            <div class="signup-form__group">
+              <label for="sg-email">Email</label>
+              <input
+                type="email"
+                id="sg-email"
+                placeholder="andrew@example.com"
+              />
+            </div>
+            <div class="signup-form__group">
+              <label for="sg-password">Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="sg-password"
+                  placeholder="Min. 6 characters"
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  aria-label="Toggle password"
+                >
+                  &#128065;
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--primary signup-form__btn">
+              Create Account &rarr;
+            </button>
+            <p class="signup-form__note">
+              Already have an account?
+              <a href="#" class="signup-form__forgot">Sign in</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       AUTH MESSAGES
+       ============================================ -->
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container" style="max-width: 640px">
+        <div class="sg-block">
+          <div class="sg-label">Auth Messages</div>
+          <div class="auth-message auth-message--error">
+            Error: That email is already registered. Try signing in instead.
+          </div>
+          <div class="auth-message auth-message--info">
+            Check your email for a confirmation link to complete signup.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       LESSON PAGE COMPONENTS
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">Lesson Header</div>
+    <header class="lesson-header">
+      <div class="container container--narrow">
+        <nav class="breadcrumb">
+          <a href="#">Growing in Grace</a>
+          <span class="breadcrumb__sep">/</span>
+          <a href="#">Section 1: Sin and Salvation</a>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__current">Lesson 1</span>
+        </nav>
+        <span class="label-accent">Lesson 1</span>
+        <h1>What Should Christian Life Look Like?</h1>
+        <p
+          style="
+            color: var(--brand-sky);
+            margin-top: var(--space-md);
+            font-size: 1.05rem;
+            max-width: 640px;
+          "
+        >
+          Every time you open the Bible, you are beginning a journey of growth.
+          This lesson sets the stage for what the Christian life is meant to
+          look like.
+        </p>
+      </div>
+    </header>
+
+    <div class="sg-label" style="margin: 1rem">Lesson Top Nav</div>
+    <div class="lesson-top-nav">
+      <div class="container container--narrow">
+        <a class="lesson-top-nav__link" href="#">&larr; Course Overview</a>
+      </div>
+    </div>
+
+    <section class="section--cream" style="padding: 3rem 0">
+      <div class="container container--narrow">
+        <div class="sg-block">
+          <div class="sg-label">Lesson Section Title + List</div>
+          <h3 class="lesson-section__title">Key Terms</h3>
+          <div class="term">
+            <span class="term__name">Discipleship</span> —
+            <span class="term__def"
+              >The process of becoming more like Christ through intentional
+              spiritual growth.</span
+            >
+          </div>
+          <div class="term">
+            <span class="term__name">Sanctification</span> —
+            <span class="term__def"
+              >The ongoing work of the Holy Spirit in making believers more
+              holy.</span
+            >
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Scripture Tags</div>
+          <div class="scripture-list">
+            <span class="scripture-tag">2 Peter 3:18</span>
+            <span class="scripture-tag">Philippians 3:8-11</span>
+            <span class="scripture-tag">Romans 12:1-2</span>
+            <span class="scripture-tag">Matthew 28:19-20</span>
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Lesson Section — Bullet List</div>
+          <h3 class="lesson-section__title">Discussion Questions</h3>
+          <div class="lesson-section">
+            <ul>
+              <li>What does it mean to "grow in grace"?</li>
+              <li>
+                How would you describe the Christian life to someone who has
+                never heard the gospel?
+              </li>
+              <li>
+                What are some ways you can pursue spiritual growth this week?
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <div class="sg-label">Lesson Nav (prev / next)</div>
+          <div class="lesson-nav">
+            <a href="#" class="lesson-nav__link lesson-nav__link--prev">
+              <span class="lesson-nav__label">&larr; Previous</span>
+              <span class="lesson-nav__title">Introduction</span>
+            </a>
+            <a href="#" class="lesson-nav__link lesson-nav__link--next">
+              <span class="lesson-nav__label">Next &rarr;</span>
+              <span class="lesson-nav__title"
+                >Sin: Origin, Reality, &amp; Consequences</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       EMBED BLOCK (YouTube placeholder)
+       ============================================ -->
+    <section class="section--sky" style="padding: 3rem 0">
+      <div class="container container--narrow">
+        <div class="sg-block">
+          <div class="sg-label" style="background: rgba(14, 93, 95, 0.12)">
+            Embed Block (YouTube)
+          </div>
+          <div class="embed-block">
+            <div class="embed-block__label">
+              <span class="embed-block__icon">&#9654;</span>
+              <div>
+                <span class="embed-block__title"
+                  >Growing in Grace &mdash; Watch</span
+                >
+                <span class="embed-block__subtitle"
+                  >Clear, accessible teaching at your own pace</span
+                >
+              </div>
+            </div>
+            <div class="embed-container">
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--brand-sky);
+                  font-size: 0.9rem;
+                  opacity: 0.5;
+                "
+              >
+                YouTube embed placeholder
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       BENEFITS
+       ============================================ -->
+    <section class="section--teal-deep" style="padding: 3rem 0">
+      <div class="container">
+        <div class="sg-block" style="margin-bottom: 0">
+          <div
+            class="sg-label"
+            style="
+              color: var(--brand-sky);
+              background: rgba(126, 203, 195, 0.12);
+            "
+          >
+            Benefits Grid
+          </div>
+          <div class="benefits-grid benefits-grid--3col">
+            <div class="benefit">
+              <div class="benefit__icon">&#128214;</div>
+              <h4 class="benefit__title" style="color: var(--brand-cream)">
+                12 Sections
+              </h4>
+              <p class="benefit__desc" style="color: var(--brand-sky)">
+                Comprehensive coverage of foundational Christian doctrine.
+              </p>
+            </div>
+            <div class="benefit">
+              <div class="benefit__icon">&#127909;</div>
+              <h4 class="benefit__title" style="color: var(--brand-cream)">
+                27 Video Lessons
+              </h4>
+              <p class="benefit__desc" style="color: var(--brand-sky)">
+                Watch at your own pace with clear, accessible teaching.
+              </p>
+            </div>
+            <div class="benefit">
+              <div class="benefit__icon">&#128203;</div>
+              <h4 class="benefit__title" style="color: var(--brand-cream)">
+                Companion Workbook
+              </h4>
+              <p class="benefit__desc" style="color: var(--brand-sky)">
+                Fill-in-the-blank manual for personal or group study.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       FOOTER
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">Footer</div>
+    <footer class="footer">
+      <div class="container">
+        <p class="footer__brand">Growing in Grace</p>
+        <p class="footer__tagline">
+          Discipleship resources for every believer.
+        </p>
+        <div class="footer__links">
+          <a href="#">Curriculum</a>
+          <a href="#">Articles</a>
+          <a href="#">Videos</a>
+          <a href="#">About</a>
+          <a href="#">Sign In</a>
+        </div>
+        <p class="footer__copy">
+          &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

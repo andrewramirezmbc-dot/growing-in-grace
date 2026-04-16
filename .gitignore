@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment / credentials
+.env
+.env.local
+.env.production
+
+# Supabase config with real credentials
+# (initial commit has safe placeholders; local edits stay local)
+js/supabase-config.js
+
+# Accidental npm artifacts
+node_modules/
+package-lock.json
