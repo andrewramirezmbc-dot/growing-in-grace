@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Admin — Growing in Grace</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -17,16 +18,18 @@
           <li><a href="/growing-in-grace-dashboard.html">Dashboard</a></li>
           <li><a href="/curriculum.html">Curriculum</a></li>
           <li><a href="/about.html">About</a></li>
+          <li>
+            <a
+              href="#"
+              onclick="
+                signOut();
+                return false;
+              "
+              class="nav__cta"
+              >Sign Out</a
+            >
+          </li>
         </ul>
-        <a
-          href="#"
-          onclick="
-            signOut();
-            return false;
-          "
-          class="nav__cta"
-          >Sign Out</a
-        >
       </div>
     </nav>
 

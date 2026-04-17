@@ -131,7 +131,6 @@ function checkPasswordRecovery() {
         resolved = true;
         // Strategy 2: Fallback — if event didn't fire but URL has recovery type,
         // show the reset form anyway (Supabase may have already processed tokens)
-        console.log("Growing in Grace: Recovery timeout — using fallback");
         _showResetPasswordForm();
         setTimeout(() => {
           const card = document.querySelector(".signup-card");

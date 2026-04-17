@@ -1,0 +1,17 @@
+# Growing in Grace — Robots policy
+# Public pages: crawlable. Auth-gated pages and admin: disallow.
+
+User-agent: *
+Allow: /
+Allow: /curriculum.html
+Allow: /about.html
+Allow: /growing-in-grace.html
+
+# Auth-gated — no public content behind these URLs worth indexing
+Disallow: /growing-in-grace-dashboard.html
+Disallow: /lessons/
+Disallow: /admin.html
+Disallow: /styleguide.html
+
+# TODO: Update the Sitemap URL with the real domain once DNS is set.
+Sitemap: https://growingingrace.org/sitemap.xml

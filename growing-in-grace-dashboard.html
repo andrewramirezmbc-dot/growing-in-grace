@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard — Growing in Grace</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -19,16 +21,18 @@
           <li id="adminNavLink" style="display: none">
             <a href="/admin.html">Admin</a>
           </li>
+          <li>
+            <a
+              href="#"
+              onclick="
+                signOut();
+                return false;
+              "
+              class="nav__cta"
+              >Sign Out</a
+            >
+          </li>
         </ul>
-        <a
-          href="#"
-          onclick="
-            signOut();
-            return false;
-          "
-          class="nav__cta"
-          >Sign Out</a
-        >
       </div>
     </nav>
 
