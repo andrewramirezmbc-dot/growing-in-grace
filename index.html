@@ -44,15 +44,11 @@
     <nav class="nav">
       <div class="nav__inner">
         <a href="/" class="nav__brand">Growing <i>in</i> Grace</a>
-        <button
-          class="nav__hamburger"
-          aria-label="Menu"
-          onclick="
-            document.querySelector('.nav__links').classList.toggle('is-open')
-          "
-        >
-          &#9776;
-        </button>
+        <!-- IMPORTANT: Do NOT add an inline onclick handler. The
+             click handler is registered by initMobileNav() in
+             auth.js. Adding inline onclick creates a double-toggle
+             bug that cancels itself out. -->
+        <button class="nav__hamburger" aria-label="Menu">&#9776;</button>
         <ul class="nav__links">
           <li><a href="/curriculum.html">Curriculum</a></li>
           <li><a href="/about.html">About</a></li>
