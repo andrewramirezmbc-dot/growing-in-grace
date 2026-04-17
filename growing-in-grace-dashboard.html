@@ -15,6 +15,10 @@
         <ul class="nav__links">
           <li><a href="/curriculum.html">Curriculum</a></li>
           <li><a href="/about.html">About</a></li>
+          <!-- Admin link: hidden by default. initDashboard() reveals it only if profile.is_admin === true. RLS also enforces admin access at the DB layer. -->
+          <li id="adminNavLink" style="display: none">
+            <a href="/admin.html">Admin</a>
+          </li>
         </ul>
         <a
           href="#"

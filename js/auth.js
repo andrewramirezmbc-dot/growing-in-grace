@@ -391,13 +391,19 @@ async function getProgress() {
 }
 
 /**
- * Get the user's profile (first_name, last_lesson, enrolled_at).
+ * Get the user's profile (first_name, last_lesson, enrolled_at, is_admin).
+ * is_admin defaults to false in demo mode.
  */
 async function getProfile() {
   const sb = getSupabase();
   if (!sb) {
     const demoName = localStorage.getItem("gig_name") || "Friend";
-    return { first_name: demoName, last_lesson: null, enrolled_at: null };
+    return {
+      first_name: demoName,
+      last_lesson: null,
+      enrolled_at: null,
+      is_admin: false,
+    };
   }
 
   const user = await getCurrentUser();
@@ -405,7 +411,7 @@ async function getProfile() {
 
   const { data, error } = await sb
     .from("profiles")
-    .select("first_name, last_lesson, enrolled_at")
+    .select("first_name, last_lesson, enrolled_at, is_admin")
     .eq("id", user.id)
     .single();
 
@@ -787,6 +793,25 @@ async function initDashboard() {
   const profile = await getProfile();
   const progress = await getProgress();
 
+  // Update last_active_at on dashboard load so the admin "Last active"
+  // column captures dashboard visits too, not just lesson starts.
+  const sb = getSupabase();
+  if (sb && user) {
+    sb.from("profiles")
+      .update({ last_active_at: new Date().toISOString() })
+      .eq("id", user.id)
+      .then(() => {});
+  }
+
+  // Reveal the Admin link in the nav only if the user is an admin.
+  // Security note: this is UI discoverability only. RLS policies enforce
+  // actual admin access at the database layer. Non-admins never see the
+  // link even briefly because the HTML ships with style="display:none".
+  if (profile && profile.is_admin) {
+    const adminLink = document.getElementById("adminNavLink");
+    if (adminLink) adminLink.style.display = "";
+  }
+
   // Set welcome name
   const welcomeEl = document.getElementById("welcomeName");
   if (welcomeEl && profile) {
@@ -919,9 +944,17 @@ function _updateNavAuth(user, profile) {
     return;
   }
 
-  // Single CTA (lesson pages, dashboard)
+  // Single CTA (lesson pages): update to "Dashboard →".
+  // The dashboard page itself has a static "Sign Out" CTA — never overwrite it.
+  // Guard 1: URL check. Guard 2: text check (belt-and-suspenders in case of
+  // future path changes or unexpected callers).
+  const path = window.location.pathname;
+  if (path.includes("growing-in-grace-dashboard")) return;
+
   const navCta = document.querySelector(".nav__cta");
   if (navCta && user) {
+    const currentText = (navCta.textContent || "").trim();
+    if (currentText === "Sign Out") return;
     navCta.textContent = "Dashboard →";
     navCta.href = basePath + "growing-in-grace-dashboard.html";
   }

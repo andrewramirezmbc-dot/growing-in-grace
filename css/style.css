@@ -2498,3 +2498,209 @@ main {
     gap: var(--space-md);
   }
 }
+
+/* =============================================
+   ADMIN PAGE COMPONENTS
+   Used on: admin.html. Gated by profiles.is_admin
+   on both the client (initAdmin) and the database
+   (RLS policies).
+   ============================================= */
+
+/* Admin header — brown variant to visually distinguish
+   from the student dashboard's teal-deep header */
+.admin-header {
+  background: var(--brand-brown);
+  color: var(--brand-cream);
+  padding: 2.75rem 0 2.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--brand-sky);
+}
+.admin-header__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-sky);
+  opacity: 0.8;
+  margin-bottom: var(--space-sm);
+}
+.admin-header__title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--brand-cream);
+  margin-bottom: 0.25rem;
+}
+.admin-header__sub {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--brand-sky);
+  opacity: 0.85;
+}
+
+/* Demo-mode banner */
+.admin-demo-banner {
+  background: var(--brand-lime);
+  color: var(--brand-charcoal);
+  padding: 0.85rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: var(--space-xl) 0;
+}
+.admin-demo-banner code {
+  background: rgba(14, 93, 95, 0.12);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* Admin section wrapper */
+.admin-section {
+  margin: var(--space-2xl) 0 var(--space-3xl);
+}
+.admin-section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--brand-sky);
+}
+.admin-section__title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-brown);
+  margin: 0;
+}
+.admin-section__meta {
+  font-size: 0.85rem;
+  color: var(--brand-gray);
+  margin: 0;
+}
+.admin-section__meta strong {
+  color: var(--brand-teal-deep);
+}
+
+/* Admin table */
+.admin-table-wrap {
+  overflow-x: auto;
+  background: var(--brand-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.admin-table thead th {
+  background: var(--brand-teal-deep);
+  color: var(--brand-sky);
+  text-align: left;
+  padding: 0.7rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.admin-table tbody td {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--border-light);
+  color: var(--brand-charcoal);
+  vertical-align: middle;
+}
+.admin-table tbody tr:hover {
+  background: rgba(126, 203, 195, 0.08);
+}
+.admin-table tbody tr:first-child td {
+  border-top: none;
+}
+.admin-empty {
+  text-align: center;
+  color: var(--brand-gray);
+  font-style: italic;
+  padding: 1.5rem !important;
+}
+
+.admin-lesson-title {
+  max-width: 320px;
+}
+
+.admin-badge {
+  display: inline-block;
+  background: var(--brand-lime);
+  color: var(--brand-charcoal);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 10px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Completion % inline bar */
+.admin-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 140px;
+}
+.admin-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(14, 93, 95, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.admin-bar__fill {
+  height: 100%;
+  background: var(--brand-lime);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+.admin-bar__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--brand-teal-deep);
+  min-width: 42px;
+  text-align: right;
+}
+
+.admin-footnote {
+  font-size: 0.8rem;
+  color: var(--brand-gray);
+  margin-top: var(--space-md);
+  line-height: 1.6;
+}
+.admin-footnote code {
+  background: rgba(14, 93, 95, 0.08);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  color: var(--brand-teal-deep);
+}
+
+@media (max-width: 640px) {
+  .admin-header__title {
+    font-size: 1.75rem;
+  }
+  .admin-table {
+    font-size: 0.82rem;
+  }
+  .admin-table thead th,
+  .admin-table tbody td {
+    padding: 0.6rem 0.75rem;
+  }
+  .admin-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin — Growing in Grace</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="/">Growing <i>in</i> Grace</a>
+        <button class="nav__hamburger" aria-label="Menu">&#9776;</button>
+        <ul class="nav__links">
+          <li><a href="/growing-in-grace-dashboard.html">Dashboard</a></li>
+          <li><a href="/curriculum.html">Curriculum</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+        <a
+          href="#"
+          onclick="
+            signOut();
+            return false;
+          "
+          class="nav__cta"
+          >Sign Out</a
+        >
+      </div>
+    </nav>
+
+    <!-- Admin Header (brown variant to distinguish from student dashboard) -->
+    <section class="admin-header">
+      <div class="container" style="max-width: 960px">
+        <p class="admin-header__eyebrow">Admin</p>
+        <h1 class="admin-header__title">Growing in Grace &mdash; Admin</h1>
+        <p class="admin-header__sub">
+          User activity and lesson completion stats
+        </p>
+      </div>
+    </section>
+
+    <main>
+      <div class="container" style="max-width: 960px">
+        <!-- Demo Mode Banner (shown only when Supabase is not configured) -->
+        <div
+          id="adminDemoBanner"
+          class="admin-demo-banner"
+          style="display: none"
+        >
+          &#9888;&#65039; Admin page requires a real Supabase connection.
+          Currently running in demo mode &mdash; data will appear once you
+          configure <code>js/supabase-config.js</code>.
+        </div>
+
+        <!-- Section 1: User List -->
+        <section class="admin-section">
+          <div class="admin-section__header">
+            <h2 class="admin-section__title">Users</h2>
+            <p class="admin-section__meta">
+              <strong id="adminUserCount">&mdash;</strong> total
+            </p>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>First Name</th>
+                  <th>Signed up</th>
+                  <th>Last active</th>
+                  <th>Lessons complete</th>
+                </tr>
+              </thead>
+              <tbody id="adminUserTableBody">
+                <tr>
+                  <td colspan="5" class="admin-empty">Loading users&hellip;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="admin-footnote">
+            To toggle admin status for a user, open Supabase Studio &rarr; Table
+            Editor &rarr; <code>profiles</code> and set <code>is_admin</code> to
+            <code>true</code>.
+          </p>
+        </section>
+
+        <!-- Section 2: Lesson Completion Stats -->
+        <section class="admin-section">
+          <div class="admin-section__header">
+            <h2 class="admin-section__title">Lesson completion</h2>
+            <p class="admin-section__meta">
+              <strong id="adminLessonCount">&mdash;</strong> published lessons
+            </p>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Slug</th>
+                  <th>Title</th>
+                  <th>Completions</th>
+                  <th>Completion %</th>
+                </tr>
+              </thead>
+              <tbody id="adminLessonTableBody">
+                <tr>
+                  <td colspan="4" class="admin-empty">
+                    Loading lesson stats&hellip;
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__brand">Growing in Grace</div>
+      <div class="footer__tagline">
+        Discipleship resources for every believer.
+      </div>
+      <div class="footer__links">
+        <a href="/">Home</a>
+        <a href="/growing-in-grace-dashboard.html">Dashboard</a>
+        <a href="/about.html">About</a>
+      </div>
+      <div class="footer__copy">
+        &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
+      </div>
+    </footer>
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+      initAdmin();
+    </script>
+  </body>
+</html>
