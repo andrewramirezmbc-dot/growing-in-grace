@@ -47,47 +47,41 @@ Track of every remaining TODO before public launch. Items are grouped by owner. 
   - Author of _Discipleship Today_
 - [ ] **Teaching philosophy quote** — the italic pull-quote in the teal section of `/about.html`. One-sentence quote that captures your approach to discipleship.
 
-### 🟡 Blocking for each lesson launched
+### ✅ Per-lesson content — shipped with manual-derived descriptions
 
-Every lesson at `/lessons/lesson-XX.html` currently ships with placeholder content flagged by a visible lime warning banner:
+All 20 published lessons now ship with real content drawn from Dr. Burggraff's manual:
 
-> ⚠️ Placeholder content — final lesson materials will be provided by Dr. Burggraff
+- [x] ~~**Placeholder warning banners removed** — no lesson page shows the "Placeholder content" banner anymore.~~
+- [x] ~~**Per-lesson description** — each lesson has a 2-4 sentence intro drawn from the corresponding manual subsection.~~
+- [x] ~~**Per-lesson Scripture Focus** — each lesson lists 2-5 key verses tied to its specific subtopic (not generic section-level placeholders).~~
+- [x] ~~**Key Terms section removed** — was a placeholder structure; dropped per simplification.~~
+- [x] ~~**Discussion Questions section removed** — was a placeholder structure; dropped per simplification.~~
+- [x] ~~**Resources/Handout section removed** — the `alert('Handout coming soon')` stub was deleted.~~
 
-For each of the 20 lessons, provide:
+### 🟢 Nice-to-have (Dr. Burggraff content refinements)
 
-- [ ] **Lesson 1** — What Should Christian Life Look Like?
-- [ ] **Lesson 2** — Sin: Origin, Reality, & Consequences
-- [ ] **Lesson 3** — The Truth About What REALLY Saves You
-- [ ] **Lesson 4** — What Repentance ACTUALLY Means
-- [ ] **Lesson 5** — The LIFE CHANGING Gift of Eternal Life
-- [ ] **Lesson 6** — Can You Lose Your Salvation?
-- [ ] **Lesson 7** — Does Grace Give You a License to Sin?
-- [ ] **Lesson 8** — How Can God Be One… and Three?
-- [ ] **Lesson 9** — The Unity and Distinction Within the Trinity
-- [ ] **Lesson 10** — Jesus Explained: God in Human Form
-- [ ] **Lesson 11** — Jesus Did This For You
-- [ ] **Lesson 12** — 3 Ways Your Life Should Change After Meeting Jesus
-- [ ] **Lesson 13** — Who Is the Holy Spirit?
-- [ ] **Lesson 14** — What Does the Holy Spirit Actually Do?
-- [ ] **Lesson 15** — The Holy Spirit's Role in Your Spiritual Growth
-- [ ] **Lesson 16** — Does Baptism Save You?
-- [ ] **Lesson 17** — The Who, How, and Why of Baptism
-- [ ] **Lesson 18** — What the Bible Actually Does in Your Life
-- [ ] **Lesson 19** — Doctrine, Reproof, Correction, Training
-- [ ] **Lesson 20** — Learn to Study the Bible Like a Pro
+Dr. Burggraff can refine any per-lesson content by editing `/lessons/lesson-XX.html` directly, or by sending revisions to apply. Areas a content pass could polish:
 
-For each lesson, four content blocks are needed:
+- [ ] **Tightened descriptions** — if any of the 20 lesson descriptions read awkwardly, Dr. Burggraff can provide a rewritten version.
+- [ ] **Additional verse references** — some lessons list 2-3 verses, others 4-5. Dr. Burggraff can add or swap verses if he prefers different passages for a given lesson.
+- [ ] **Lesson 19 note** — lesson 19's content ("Doctrine, Reproof, Correction, Training") technically lives in Section 7 of the manual (_How is Scripture Beneficial_), but the video is grouped under Section 8 in the curriculum. If Dr. Burggraff wants the dashboard/curriculum to relocate it to Section 7, that's a `gig-lessons.json` change.
 
-- **Intro paragraph** — 2-3 sentences below the H1 (currently a generic placeholder)
-- **Key Terms** — 3-5 term/definition pairs
-- **Scripture Focus** — 3-5 scripture references (tags like "2 Peter 3:18", "John 3:16")
-- **Discussion Questions** — 3-5 questions for group or individual study
+### 📋 Pattern for future lessons (Sections 9–12)
 
-Can be rolled out incrementally — strip the placeholder banner from each lesson as content is finalized.
+When Dr. Burggraff records videos for the remaining sections (_Necessity of Prayer, Stewardship and Service, Victory over Sin, Sharing the Faith_), follow the same pattern:
 
-### 🟢 Nice-to-have
+1. Identify which **manual subsection** the video covers.
+2. Write a **2-4 sentence description** summarizing the subsection's key points (in the lesson's voice, not a direct quote from the manual).
+3. Select **3-5 key verses** referenced in that specific subsection.
+4. Update `gig-lessons.json` with the lesson object (`lesson_number`, `slug`, `title`, `youtube_video_id`, `youtube_url`).
+5. Update `TOTAL_LESSONS` in `js/auth.js` to match the new count.
+6. Update the `LESSON_TITLES` map in `js/admin.js`.
+7. Add a new module block on `growing-in-grace-dashboard.html` (or expand an existing one).
+8. Update the `section-card` block on `curriculum.html` to un-dim the now-published section.
 
-- [ ] **PDF handouts** — 20 lesson PDFs that the "Download Lesson Handout (PDF)" button could link to. Currently stubbed with `alert('Handout coming soon.')`.
+### 🟢 Nice-to-have (non-content polish)
+
+- [ ] **PDF handouts** — 20 lesson PDFs that could be linked below each lesson. Currently no handout section — was removed along with the `alert` stub. If handouts become available, re-add a download block.
 - [ ] **Endorsement quote for workbook** — italic pull-quote on workbook section (if workbook page is ever reinstated).
 
 ---
@@ -96,12 +90,17 @@ Can be rolled out incrementally — strip the placeholder banner from each lesso
 
 ### 🔴 Blocking
 
-- [ ] **Amazon affiliate URL — Growing in Grace workbook** — 3 stubs in codebase (`#` href): homepage flagship section, about page, curriculum page. Swap all to real URL.
+- [x] ~~**Amazon URL — Growing in Grace workbook** — 3 locations (homepage flagship, about, curriculum) now wired to `https://www.amazon.com/dp/1959454110`.~~
 - [ ] **YouTube channel URL** — 4 footer stubs across the site. Swap to real channel URL.
 
 ### 🟡 Nice-to-have
 
-- [ ] **Amazon affiliate URL — _Discipleship Today_ book** — 1 stub on homepage "Latest Resource" section.
+- [x] ~~**Amazon URL — _Discipleship Today_ book** — homepage "Latest Resource" section now wired to `https://www.amazon.com/dp/195945403X`.~~
+- [ ] **Amazon Associates affiliate tag** — URLs are currently canonical Amazon links WITHOUT affiliate tracking. Once an Amazon Associates account is set up, append `?tag=yourname-20` to all 4 occurrences:
+  - `index.html` line ~315 (workbook)
+  - `index.html` line ~437 (Discipleship Today)
+  - `about.html` (workbook)
+  - `curriculum.html` (workbook)
 - [ ] **YouTube playlist ID** — referenced in `gig-lessons.json` meta. Not currently embedded anywhere since the `/videos` page was deleted, but if reinstated, swap placeholder into the playlist iframe.
 - [ ] **Book cover image for _Discipleship Today_** — currently hotlinks to Amazon (`m.media-amazon.com`). Download to `/assets/discipleship-today-cover.jpg` for stability.
 
