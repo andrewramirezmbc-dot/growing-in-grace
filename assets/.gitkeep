@@ -1,0 +1,8 @@
+# Growing in Grace — Static Assets
+#
+# Images and other binary assets referenced from HTML.
+# Keep paths absolute (e.g., /assets/discipleship-today-cover.jpg).
+#
+# This file exists to ensure the directory is tracked in git even
+# when no image files are present yet. Safe to delete once the
+# directory contains real assets.

@@ -20,6 +20,7 @@ Track of every remaining TODO before public launch. Items are grouped by owner. 
 
 - [ ] **OG image** — create `/assets/og-image.jpg` (1200×630). Branded hero with "Growing in Grace" wordmark. Linked from all 4 public pages' `<meta property="og:image">`. Without it, link previews on Slack/Twitter/iMessage will fail to render.
 - [ ] **Hero image download** — replace Unsplash hotlink on homepage. Download the photo currently at `https://images.unsplash.com/photo-1510797215324-95aa89f43c33` and save to `/assets/hero-bg.jpg`. Then update the CSS `.hero--home { background-image: url() }` rule in `css/style.css`. Hotlinking Unsplash in production is fragile.
+- [x] ~~**_Discipleship Today_ cover image** — placed at `/assets/discipleship-today-cover.jpg`, referenced from homepage "Latest Resource" section.~~
 - [ ] **Raster favicons** — SVG favicon works in modern browsers. Create `/favicon.ico` (16×16/32×32 multi-size) and `/apple-touch-icon.png` (180×180) for older browsers and iOS home-screen icons. Can generate from `favicon.svg` using a converter like RealFaviconGenerator.
 
 ### 🟢 Nice-to-have
@@ -102,7 +103,6 @@ When Dr. Burggraff records videos for the remaining sections (_Necessity of Pray
   - `about.html` (workbook)
   - `curriculum.html` (workbook)
 - [ ] **YouTube playlist ID** — referenced in `gig-lessons.json` meta. Not currently embedded anywhere since the `/videos` page was deleted, but if reinstated, swap placeholder into the playlist iframe.
-- [ ] **Book cover image for _Discipleship Today_** — currently hotlinks to Amazon (`m.media-amazon.com`). Download to `/assets/discipleship-today-cover.jpg` for stability.
 
 ---
 
