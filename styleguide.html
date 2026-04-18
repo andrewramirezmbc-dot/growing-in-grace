@@ -241,6 +241,133 @@
     </section>
 
     <!-- ============================================
+       BLUE ACCENT TOKENS (added April 2026)
+       ============================================ -->
+    <div class="sg-label" style="margin: 1rem">
+      Blue Accent Tokens — light / dark background variants
+    </div>
+    <section class="section--cream" style="padding: 2.5rem 0">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem">
+          <!-- --brand-blue swatch (light-bg variant) -->
+          <div
+            style="
+              background: var(--brand-cream);
+              border: 1px solid var(--border-light);
+              border-radius: 8px;
+              overflow: hidden;
+            "
+          >
+            <div style="background: var(--brand-blue); height: 90px"></div>
+            <div style="padding: 1rem 1.25rem">
+              <div
+                style="
+                  font-family: var(--font-body);
+                  font-size: 0.75rem;
+                  font-weight: 700;
+                  letter-spacing: 0.12em;
+                  text-transform: uppercase;
+                  color: var(--brand-charcoal);
+                "
+              >
+                --brand-blue
+              </div>
+              <div
+                style="
+                  font-family: var(--font-body);
+                  font-size: 0.85rem;
+                  color: var(--brand-gray);
+                  margin-top: 0.25rem;
+                "
+              >
+                #2B5CAF
+              </div>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  font-size: 0.85rem;
+                  color: var(--brand-charcoal);
+                  line-height: 1.5;
+                "
+              >
+                Use on <strong>light backgrounds</strong> (cream, white).
+                Sample:
+                <em style="color: var(--brand-blue); font-weight: 600"
+                  >italic blue emphasis</em
+                >.
+              </p>
+            </div>
+          </div>
+          <!-- --brand-blue-light swatch (dark-bg variant) -->
+          <div
+            style="
+              background: var(--brand-teal-deep);
+              border-radius: 8px;
+              overflow: hidden;
+            "
+          >
+            <div
+              style="background: var(--brand-blue-light); height: 90px"
+            ></div>
+            <div style="padding: 1rem 1.25rem">
+              <div
+                style="
+                  font-family: var(--font-body);
+                  font-size: 0.75rem;
+                  font-weight: 700;
+                  letter-spacing: 0.12em;
+                  text-transform: uppercase;
+                  color: var(--brand-cream);
+                "
+              >
+                --brand-blue-light
+              </div>
+              <div
+                style="
+                  font-family: var(--font-body);
+                  font-size: 0.85rem;
+                  color: var(--brand-sky);
+                  margin-top: 0.25rem;
+                "
+              >
+                #6A94D8
+              </div>
+              <p
+                style="
+                  margin-top: 0.75rem;
+                  font-size: 0.85rem;
+                  color: var(--brand-cream);
+                  line-height: 1.5;
+                "
+              >
+                Use on <strong>dark backgrounds</strong> (teal-deep, brown)
+                where full-saturation blue would be unreadable. Sample:
+                <em style="color: var(--brand-blue-light); font-weight: 600"
+                  >italic blue-light emphasis</em
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+        <p
+          style="
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--brand-gray);
+            line-height: 1.6;
+          "
+        >
+          <strong>Usage:</strong> use <code>--brand-blue</code> on light
+          backgrounds (cream, white); use <code>--brand-blue-light</code> on
+          dark backgrounds (teal-deep, brown) for readability. Apply via
+          targeted em rules (e.g., <code>.section__title em</code>) so italic
+          blue emphasis lands only where intended — not on every italic element
+          in the site.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
        BUTTONS
        ============================================ -->
     <section class="section--sky" style="padding: 3rem 0">
@@ -249,12 +376,27 @@
           <div class="sg-label">Buttons — Light Background</div>
           <div class="sg-row">
             <a href="#" class="btn btn--primary">Primary (Lime) &rarr;</a>
-            <a href="#" class="btn btn--outline">Outline</a>
+            <a href="#" class="btn btn--outline">Outline (Blue)</a>
+            <a href="#" class="btn btn--ghost">Ghost (Blue)</a>
             <a href="#" class="btn btn--outline-teal">Outline Teal</a>
             <a href="#" class="btn btn--dark">Dark</a>
             <a href="#" class="btn btn--sm btn--primary">Small</a>
             <a href="#" class="btn btn--lg btn--primary">Large</a>
           </div>
+          <p
+            style="
+              margin-top: 0.75rem;
+              font-size: 0.8rem;
+              color: var(--brand-gray);
+              line-height: 1.55;
+            "
+          >
+            <code>.btn--outline</code> and <code>.btn--ghost</code> use
+            <code>--brand-blue</code> on light backgrounds. On dark backgrounds
+            they fall back to cream borders / cream text via scoped overrides
+            (<code>.hero .btn--ghost</code>, <code>.cta .btn--outline</code>,
+            <code>.section--flagship .btn--ghost</code>).
+          </p>
         </div>
       </div>
     </section>

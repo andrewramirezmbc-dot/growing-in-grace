@@ -19,6 +19,12 @@
   --brand-brown-dark: #4a3c1c;
   --brand-lime: #a2ce52;
   --brand-lime-dark: #8fb838;
+  /* Blue accent family — added April 2026 to break up the green-heavy palette.
+     --brand-blue: saturated, use on LIGHT backgrounds (cream, white).
+     --brand-blue-light: softer, use on DARK backgrounds (teal-deep, brown)
+     where full-saturation blue would be unreadable. */
+  --brand-blue: #2b5caf;
+  --brand-blue-light: #6a94d8;
   --brand-cream: #fafcfc;
   --brand-charcoal: #2b2b2b;
   --brand-gray: #6b6b6b;
@@ -494,14 +500,17 @@ main {
   background: var(--brand-lime-dark);
   border-color: var(--brand-lime-dark);
 }
+/* Outline + ghost buttons default to blue on light backgrounds.
+   Dark-background overrides (.hero, .cta) appear further down. */
 .btn--outline {
   background-color: transparent;
-  border-color: var(--brand-teal-deep);
-  color: var(--brand-teal-deep);
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
 }
 .btn--outline:hover {
-  background-color: var(--brand-teal-deep);
+  background-color: var(--brand-blue);
   color: var(--brand-cream);
+  border-color: var(--brand-blue);
 }
 .btn--outline-teal {
   background-color: transparent;
@@ -521,10 +530,38 @@ main {
 }
 .btn--ghost {
   background: transparent;
-  color: var(--brand-cream);
-  border-color: rgba(250, 252, 252, 0.25);
+  color: var(--brand-blue);
+  border-color: var(--brand-blue);
 }
 .btn--ghost:hover {
+  background: var(--brand-blue);
+  color: var(--brand-cream);
+  border-color: var(--brand-blue);
+}
+/* Hero override: on the teal-deep hero, blue-on-dark would be too low
+   contrast for the button label, so keep the label cream but use blue
+   for the border accent. */
+.hero .btn--ghost {
+  color: var(--brand-cream);
+  border-color: var(--brand-blue);
+  background: transparent;
+}
+.hero .btn--ghost:hover {
+  background: var(--brand-blue);
+  color: var(--brand-cream);
+  border-color: var(--brand-blue);
+}
+/* Flagship override: the "Get the Workbook" ghost button inside the
+   flagship section retains its original subtle-cream look (no blue
+   treatment) per brand direction. */
+.section--flagship .btn--ghost {
+  color: var(--brand-cream);
+  border-color: rgba(250, 252, 252, 0.25);
+  background: transparent;
+}
+.section--flagship .btn--ghost:hover {
+  background: transparent;
+  color: var(--brand-cream);
   border-color: var(--brand-cream);
 }
 .btn--lg {
@@ -1817,7 +1854,7 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--brand-sky);
+  color: var(--brand-blue-light);
   margin-bottom: 1.75rem;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
@@ -1834,7 +1871,7 @@ main {
 }
 .hero--home .hero__title em {
   font-style: italic;
-  color: var(--brand-sky);
+  color: var(--brand-blue-light);
   text-shadow:
     0 2px 20px rgba(0, 0, 0, 0.5),
     0 1px 4px rgba(0, 0, 0, 0.3);
@@ -1855,9 +1892,10 @@ main {
   flex-wrap: wrap;
 }
 
-/* --- Scripture strip (homepage, not the lesson-page scripture tags) --- */
+/* --- Scripture strip (homepage, not the lesson-page scripture tags).
+       Brown background introduced April 2026 to break up green. --- */
 .scripture {
-  background: var(--brand-sky);
+  background: var(--brand-brown);
   padding: 1.75rem var(--space-xl);
   text-align: center;
 }
@@ -1865,16 +1903,21 @@ main {
   font-family: var(--font-heading);
   font-size: 1rem;
   font-style: italic;
-  color: var(--brand-teal-deep);
+  color: var(--brand-cream);
   max-width: 500px;
   margin: 0 auto 0.3rem;
   line-height: 1.5;
 }
+.scripture__text em {
+  color: var(--brand-blue-light);
+  font-style: italic;
+  font-weight: 600;
+}
 .scripture__ref {
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--brand-teal-deep);
-  opacity: 0.45;
+  color: var(--brand-sky);
+  opacity: 0.85;
   letter-spacing: 0.05em;
 }
 
@@ -1898,6 +1941,12 @@ main {
   font-weight: 700;
   color: var(--brand-charcoal);
   margin-bottom: 0.75rem;
+}
+/* Blue italic emphasis inside centered section titles on light backgrounds
+   (e.g., "Explore. Learn. <em>Grow.</em>" on the pillars section). */
+.section__title em {
+  color: var(--brand-blue);
+  font-style: italic;
 }
 .section__desc {
   font-size: 0.95rem;
@@ -2173,6 +2222,12 @@ main {
   color: var(--brand-cream);
   margin-bottom: 1.25rem;
 }
+/* Blue-light italic emphasis inside the flagship section title on the
+   teal-deep dark background (e.g., "manual for <em>new believers.</em>"). */
+.curriculum-row__title em {
+  color: var(--brand-blue-light);
+  font-style: italic;
+}
 .curriculum-row__desc {
   font-size: 1.05rem;
   line-height: 1.75;
@@ -2282,9 +2337,10 @@ main {
   gap: 0.65rem;
 }
 
-/* --- Standalone CTA section (different from .cta-band) --- */
+/* --- Standalone CTA section (different from .cta-band).
+       Brown background introduced April 2026 to break up green. --- */
 .cta {
-  background: var(--brand-sky);
+  background: var(--brand-brown);
   padding: 4rem var(--space-xl);
   text-align: center;
 }
@@ -2296,15 +2352,31 @@ main {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--brand-teal-deep);
+  color: var(--brand-cream);
   margin-bottom: 0.6rem;
+}
+.cta__title em {
+  color: var(--brand-blue-light);
+  font-style: italic;
 }
 .cta__desc {
   font-size: 0.9rem;
-  color: var(--brand-teal-deep);
-  opacity: 0.65;
+  color: var(--brand-cream);
+  opacity: 0.85;
   margin-bottom: 1.5rem;
   line-height: 1.65;
+}
+/* Outline button inside .cta: stays cream-bordered/cream-texted for contrast
+   on the brown background. Blue treatment would be unreadable here. */
+.cta .btn--outline {
+  color: var(--brand-cream);
+  border-color: var(--brand-cream);
+  background: transparent;
+}
+.cta .btn--outline:hover {
+  background: var(--brand-cream);
+  color: var(--brand-brown);
+  border-color: var(--brand-cream);
 }
 
 /* --- Footer 4-col grid variant (public marketing pages only) ---
