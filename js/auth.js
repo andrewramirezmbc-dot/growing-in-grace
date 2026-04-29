@@ -417,6 +417,36 @@ async function getProfile() {
   return error ? null : data;
 }
 
+async function _ensureProfile(user) {
+  const sb = getSupabase();
+  if (!sb || !user) return;
+
+  const { data: existing, error: selectError } = await sb
+    .from("profiles")
+    .select("id")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  _throwSupabaseError("Profile lookup failed", selectError);
+  if (existing) return;
+
+  const firstName =
+    (user.user_metadata && user.user_metadata.first_name) || "Friend";
+  const { error: insertError } = await sb.from("profiles").insert({
+    id: user.id,
+    email: user.email || "",
+    first_name: firstName,
+  });
+
+  _throwSupabaseError("Profile creation failed", insertError);
+}
+
+function _throwSupabaseError(context, error) {
+  if (!error) return;
+  const message = error.message || error.details || JSON.stringify(error);
+  throw new Error(context + ": " + message);
+}
+
 /**
  * Record that a lesson was started (opened).
  * If already started, does nothing (UPSERT on conflict).
@@ -428,22 +458,33 @@ async function recordLessonStart(lessonSlug) {
   const user = await getCurrentUser();
   if (!user) return;
 
-  // Upsert — insert if new, do nothing if exists
-  await sb.from("lesson_progress").upsert(
-    {
-      user_id: user.id,
-      lesson_slug: lessonSlug,
-      started_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id,lesson_slug", ignoreDuplicates: true },
-  );
+  const startedAt = new Date().toISOString();
+  const { error: insertError } = await sb.from("lesson_progress").insert({
+    user_id: user.id,
+    lesson_slug: lessonSlug,
+    started_at: startedAt,
+  });
+
+  if (insertError && insertError.code !== "23505") {
+    _throwSupabaseError("Lesson progress start insert failed", insertError);
+  }
+
+  if (insertError && insertError.code === "23505") {
+    const { error: updateError } = await sb
+      .from("lesson_progress")
+      .update({ started_at: startedAt })
+      .eq("user_id", user.id)
+      .eq("lesson_slug", lessonSlug);
+
+    _throwSupabaseError("Lesson progress start update failed", updateError);
+  }
 
   // Update last_lesson and last_active_at in profile
   await sb
     .from("profiles")
     .update({
       last_lesson: lessonSlug,
-      last_active_at: new Date().toISOString(),
+      last_active_at: startedAt,
     })
     .eq("id", user.id);
 }
@@ -458,15 +499,35 @@ async function markLessonComplete(lessonSlug) {
   const user = await getCurrentUser();
   if (!user) return;
 
-  await sb.from("lesson_progress").upsert(
-    {
-      user_id: user.id,
-      lesson_slug: lessonSlug,
-      started_at: new Date().toISOString(),
-      completed_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id,lesson_slug" },
-  );
+  const completedAt = new Date().toISOString();
+  const { error: insertError } = await sb.from("lesson_progress").insert({
+    user_id: user.id,
+    lesson_slug: lessonSlug,
+    started_at: completedAt,
+    completed_at: completedAt,
+  });
+
+  if (insertError && insertError.code !== "23505") {
+    _throwSupabaseError("Lesson completion insert failed", insertError);
+  }
+
+  if (insertError && insertError.code === "23505") {
+    const { error: updateError } = await sb
+      .from("lesson_progress")
+      .update({ completed_at: completedAt })
+      .eq("user_id", user.id)
+      .eq("lesson_slug", lessonSlug);
+
+    _throwSupabaseError("Lesson completion update failed", updateError);
+  }
+
+  await sb
+    .from("profiles")
+    .update({
+      last_lesson: lessonSlug,
+      last_active_at: completedAt,
+    })
+    .eq("id", user.id);
 }
 
 /**
@@ -676,11 +737,19 @@ function initAuthForm() {
 function _showAuthError(message, isInfo) {
   const el = document.getElementById("authError");
   if (!el) return;
-  el.textContent = message;
+  el.textContent = _friendlyAuthMessage(message);
   el.style.display = "block";
   el.className = isInfo
     ? "auth-message auth-message--info"
     : "auth-message auth-message--error";
+}
+
+function _friendlyAuthMessage(message) {
+  if (!message) return "Something went wrong. Please try again.";
+  if (/failed to fetch|networkerror|load failed/i.test(message)) {
+    return "Could not reach the authentication server. Check that js/supabase-config.js has the current Supabase Project URL and anon key.";
+  }
+  return message;
 }
 
 /**
@@ -827,7 +896,9 @@ async function initDashboard() {
   // Render progress bar
   const progressBar = document.getElementById("progressFill");
   const progressText = document.getElementById("progressText");
+  const progressPercent = document.getElementById("progressPercent");
   if (progressBar) progressBar.style.width = percent + "%";
+  if (progressPercent) progressPercent.textContent = percent + "%";
   if (progressText)
     progressText.textContent =
       completed +
@@ -853,8 +924,11 @@ async function initDashboard() {
 
   // Continue where you left off
   const continueBtn = document.getElementById("continueBtn");
-  if (continueBtn && profile && profile.last_lesson) {
-    const href = _hrefFromSlug(profile.last_lesson);
+  if (continueBtn) {
+    const href =
+      profile && profile.last_lesson
+        ? _hrefFromSlug(profile.last_lesson)
+        : "lessons/lesson-01.html";
     continueBtn.href = href;
     continueBtn.style.display = "inline-flex";
   }
@@ -873,13 +947,23 @@ async function initDashboard() {
  * Initialize a lesson page — record start, show completion state.
  */
 async function initLessonPage(lessonSlug) {
+  _enhanceLessonPageV2(lessonSlug);
+
   const user = await requireAuth();
   if (!user) return;
 
   // Record lesson start
   const sb = getSupabase();
   if (sb) {
-    await recordLessonStart(lessonSlug);
+    try {
+      await recordLessonStart(lessonSlug);
+    } catch (e) {
+      console.warn(
+        e && e.message
+          ? "Growing in Grace: unable to record lesson start - " + e.message
+          : "Growing in Grace: unable to record lesson start",
+      );
+    }
   } else {
     _saveDemoProgress(lessonSlug, false);
   }
@@ -887,32 +971,275 @@ async function initLessonPage(lessonSlug) {
   // Check if already completed
   const completed = await isLessonComplete(lessonSlug);
   const completeBtn = document.getElementById("markCompleteBtn");
+  const proxyBtn = document.querySelector(".lesson-complete-proxy");
+
+  const setCompleteState = (isCompleted) => {
+    if (completeBtn) {
+      completeBtn.textContent = isCompleted
+        ? "Completed"
+        : "Mark Lesson as Complete";
+      completeBtn.classList.toggle("is-completed", isCompleted);
+      completeBtn.disabled = isCompleted;
+    }
+    _syncLessonCompleteProxy(isCompleted);
+  };
+
+  const completeLesson = async () => {
+    if (completeBtn) {
+      completeBtn.textContent = "Saving...";
+      completeBtn.disabled = true;
+    }
+    if (proxyBtn) {
+      _setLessonCompleteProxyLabel(proxyBtn, "Saving...", false);
+      proxyBtn.disabled = true;
+    }
+
+    try {
+      if (sb) {
+        await markLessonComplete(lessonSlug);
+      } else {
+        _saveDemoProgress(lessonSlug, true);
+      }
+
+      setCompleteState(true);
+    } catch (e) {
+      setCompleteState(false);
+      console.error(
+        e && e.message
+          ? "Growing in Grace: unable to mark lesson complete - " + e.message
+          : "Growing in Grace: unable to mark lesson complete",
+      );
+    }
+  };
 
   if (completeBtn) {
     if (completed) {
-      completeBtn.textContent = "✓ Completed";
-      completeBtn.classList.add("is-completed");
-      completeBtn.disabled = true;
+      setCompleteState(true);
     } else {
-      completeBtn.addEventListener("click", async () => {
-        completeBtn.textContent = "Saving...";
-        completeBtn.disabled = true;
-
-        if (sb) {
-          await markLessonComplete(lessonSlug);
-        } else {
-          _saveDemoProgress(lessonSlug, true);
-        }
-
-        completeBtn.textContent = "✓ Completed";
-        completeBtn.classList.add("is-completed");
-      });
+      setCompleteState(false);
     }
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest(
+      "#markCompleteBtn, .lesson-complete-proxy",
+    );
+    if (!target || target.disabled) return;
+    event.preventDefault();
+    completeLesson();
+  });
+
+  if (proxyBtn && completed) {
+    _syncLessonCompleteProxy(true);
   }
 
   // Update nav for logged-in state
   const profile = await getProfile();
   _updateNavAuth(user, profile);
+}
+
+/**
+ * Add V2 lesson presentation blocks without replacing the real lesson content,
+ * video embed, progress state, or completion behavior already present in HTML.
+ */
+function _enhanceLessonPageV2(lessonSlug) {
+  document.body.classList.add("lesson-page-v2");
+
+  const header = document.querySelector(".lesson-header");
+  const title = header ? header.querySelector("h1") : null;
+  const intro = header ? header.querySelector("p") : null;
+  const lessonNumber = (lessonSlug || "").replace("lesson-", "");
+  const formattedLesson = lessonNumber ? "Lesson " + lessonNumber : "Lesson";
+
+  if (intro) intro.classList.add("lesson-hero__intro");
+  if (title && title.textContent.includes("Look Like?") && !title.querySelector("em")) {
+    title.innerHTML = title.innerHTML.replace("Look Like?", "<em>Look Like?</em>");
+  }
+
+  if (header && !header.querySelector(".lesson-progress-nav")) {
+    const progressNav = document.createElement("nav");
+    progressNav.className = "lesson-progress-nav";
+    progressNav.setAttribute("aria-label", "Lesson sections");
+    progressNav.innerHTML =
+      '<a href="#watch">Watch</a>' +
+      '<a href="#watch">Listen</a>' +
+      '<a href="#scripture-focus">Read</a>' +
+      '<a href="#complete">Complete</a>';
+    const container = header.querySelector(".container");
+    if (container) container.appendChild(progressNav);
+  }
+
+  const embed = document.querySelector(".embed-block");
+  if (embed) embed.id = "watch";
+
+  const scriptureSection = document.querySelector(".lesson-section");
+  if (scriptureSection) scriptureSection.classList.add("lesson-section--source");
+
+  const complete = document.querySelector(".lesson-complete");
+  if (complete) complete.classList.add("lesson-complete--source");
+
+  if (!scriptureSection || document.querySelector(".lesson-v2-generated")) {
+    _labelNextLessonCard();
+    return;
+  }
+
+  const introText = intro ? intro.textContent.trim() : "";
+  const scriptureRefs = Array.from(document.querySelectorAll(".scripture-tag"))
+    .map((tag) => tag.textContent.trim())
+    .filter(Boolean);
+  const conceptSentences = _splitSentences(introText);
+  const nextLink = document.querySelector(".lesson-nav__link--next");
+  const nextHref = nextLink ? nextLink.getAttribute("href") || "#" : "#";
+  const nextTitleEl = nextLink ? nextLink.querySelector(".lesson-nav__title") : null;
+  const nextTitle = nextTitleEl
+    ? nextTitleEl.textContent.trim()
+    : "Continue to the next lesson";
+  const lessonNavOverview = document.querySelector(".lesson-nav__overview");
+  const lessonNav = document.querySelector(".lesson-nav");
+
+  if (lessonNavOverview) lessonNavOverview.classList.add("lesson-nav__overview--source");
+  if (lessonNav) lessonNav.classList.add("lesson-nav--source");
+
+  const generated = document.createElement("div");
+  generated.className = "lesson-v2-generated";
+  generated.innerHTML =
+    '<section class="lesson-section lesson-section--concepts">' +
+    _lessonEditorialHeading("Section 01", "Key", "Concepts") +
+    '<div class="key-concept-list">' +
+    _conceptRow("01", "Key Idea", "Central Truth", conceptSentences[0] || (title ? title.textContent.trim() : "The main teaching of this lesson.")) +
+    _conceptRow("02", "Key Insight", "Scripture Lens", scriptureRefs.length ? "Read the lesson through " + scriptureRefs.join(", ") + "." : "Read the lesson through the passages listed above.") +
+    _conceptRow("03", "Key Takeaway", "Discipleship Response", conceptSentences[1] || "Consider how this doctrine shapes worship, obedience, and steady growth in Christ.") +
+    "</div>" +
+    "</section>" +
+    '<section class="lesson-section lesson-section--scripture-repeat" id="scripture-focus">' +
+    _lessonEditorialHeading("Section 02", "Scripture", "Focus") +
+    '<p class="lesson-section__lead">Anchor passages for this lesson — read these closely.</p>' +
+    '<div class="scripture-list scripture-list--large">' +
+    scriptureRefs.map((ref) => '<span class="scripture-tag">' + _escapeInlineHtml(ref) + "</span>").join("") +
+    "</div></section>" +
+    '<section class="lesson-section lesson-section--outcomes" id="takeaways">' +
+    _lessonEditorialHeading("Section 03", "By the End,", "You Will...") +
+    '<div class="outcome-grid">' +
+    _outcomeCard("A", "Understand", "Name the primary biblical truth taught in " + formattedLesson + ".") +
+    _outcomeCard("B", "Connect", "Connect the Scripture focus to everyday discipleship.") +
+    _outcomeCard("C", "Respond", "Identify one faithful next step for growth in grace and knowledge.") +
+    "</div>" +
+    "</section>" +
+    '<section class="lesson-section lesson-section--resource">' +
+    _lessonEditorialHeading("Section 04", "Take It", "With You") +
+    '<div class="resource-download-card">' +
+    '<div class="resource-download-card__icon" aria-hidden="true">PDF</div>' +
+    '<div><h3>Lesson Handout (PDF)</h3>' +
+    '<p>Key terms, concepts, and review prompts for offline study.</p></div>' +
+    '<a class="resource-download-card__link" href="/curriculum.html">Download &rarr;</a>' +
+    "</div>" +
+    "</section>" +
+    '<section class="lesson-bottom-complete" id="complete">' +
+    '<h2>Complete this lesson<br><em>and continue growing.</em></h2>' +
+    "<p>You've watched, you've listened, you've read. Click complete and keep moving through the course.</p>" +
+    '<button type="button" class="lesson-complete-proxy"><span class="lesson-complete-proxy__indicator" aria-hidden="true"></span><span>Mark Lesson Complete</span></button>' +
+    "</section>" +
+    '<a class="lesson-bottom-next" href="' +
+    _escapeInlineHtml(nextHref) +
+    '">' +
+    '<span>Up Next</span><h2>' +
+    _escapeInlineHtml(nextTitle) +
+    '</h2><strong>Start Lesson &rarr;</strong></a>';
+
+  if (lessonNav) {
+    lessonNav.insertAdjacentElement("afterend", generated);
+  } else {
+    scriptureSection.insertAdjacentElement("afterend", generated);
+  }
+  _labelNextLessonCard();
+}
+
+function _syncLessonCompleteProxy(completed) {
+  const proxy = document.querySelector(".lesson-complete-proxy");
+  if (!proxy) return;
+  _setLessonCompleteProxyLabel(
+    proxy,
+    completed ? "Completed" : "Mark Lesson Complete",
+    completed,
+  );
+  proxy.classList.toggle("is-completed", completed);
+  proxy.disabled = completed;
+}
+
+function _setLessonCompleteProxyLabel(proxy, label, completed) {
+  proxy.innerHTML =
+    '<span class="lesson-complete-proxy__indicator" aria-hidden="true"></span><span>' +
+    _escapeInlineHtml(label) +
+    "</span>";
+  proxy.classList.toggle("is-completed", !!completed);
+}
+
+function _splitSentences(text) {
+  if (!text) return [];
+  return text
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
+function _lessonEditorialHeading(section, first, accent) {
+  return (
+    '<div class="lesson-editorial-heading"><span>' +
+    _escapeInlineHtml(section) +
+    '</span><i></i></div><h2 class="lesson-section__heading">' +
+    _escapeInlineHtml(first) +
+    " <em>" +
+    _escapeInlineHtml(accent) +
+    "</em></h2>"
+  );
+}
+
+function _conceptRow(number, label, title, text) {
+  return (
+    '<article class="key-concept">' +
+    '<div class="key-concept__marker"><span class="key-concept__number">' +
+    number +
+    '</span><span class="key-concept__label">' +
+    _escapeInlineHtml(label) +
+    "</span></div>" +
+    '<div><h3>' +
+    _escapeInlineHtml(title) +
+    "</h3><p>" +
+    _escapeInlineHtml(text) +
+    "</p></div></article>"
+  );
+}
+
+function _outcomeCard(letter, title, text) {
+  return (
+    '<article class="outcome-card"><span>' +
+    _escapeInlineHtml(letter) +
+    "</span><p><strong>" +
+    _escapeInlineHtml(title) +
+    "</strong> — " +
+    _escapeInlineHtml(text) +
+    "</p></article>"
+  );
+}
+
+function _escapeInlineHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function _labelNextLessonCard() {
+  const next = document.querySelector(".lesson-nav__link--next");
+  if (next && !next.querySelector(".lesson-nav__eyebrow")) {
+    const eyebrow = document.createElement("span");
+    eyebrow.className = "lesson-nav__eyebrow";
+    eyebrow.textContent = "Up Next";
+    next.insertBefore(eyebrow, next.firstChild);
+  }
 }
 
 /**

@@ -65,22 +65,8 @@
     </nav>
 
     <main>
-      <!-- Compact Course Header -->
-      <section class="course-header">
-        <div class="container">
-          <span class="label-accent"
-            >Growing in Grace &middot; 27 Lessons &middot; Completely Free</span
-          >
-          <h1>A Discipleship Manual for New Believers</h1>
-          <p class="course-header__sub">
-            From salvation and the Trinity to baptism, prayer, and sharing the
-            faith — everything a new Christian needs to grow, all in one place.
-          </p>
-        </div>
-      </section>
-
       <!-- 12 Section Cards -->
-      <section class="course-modules">
+      <section class="course-modules course-modules--overview">
         <div class="container">
           <div class="module-cards">
             <div class="module-card">
@@ -200,34 +186,59 @@
               </p>
             </div>
           </div>
+          <div class="signup-benefits" aria-label="Course benefits">
+            <div>
+              <strong>Free Curriculum</strong>
+              <span>Start any lesson free and grow at your pace.</span>
+            </div>
+            <div>
+              <strong>Track Your Progress</strong>
+              <span>See how God is working as you grow each day.</span>
+            </div>
+            <div>
+              <strong>Lessons + Resources</strong>
+              <span>Video teaching, Scripture focus, and study tools.</span>
+            </div>
+          </div>
+          <blockquote class="signup-scripture">
+            "But grow in the grace and knowledge of our Lord and Savior Jesus
+            Christ."
+            <cite>2 Peter 3:18</cite>
+          </blockquote>
         </div>
       </section>
 
       <!-- Auth Form — Sign Up / Sign In -->
-      <section class="course-signup" id="signup">
-        <div class="container container--narrow">
-          <div class="signup-card">
-            <!-- Error / Info Messages -->
-            <div
-              id="authError"
-              class="auth-message"
-              style="display: none"
-            ></div>
+      <section class="course-signup course-signup--v2" id="signup">
+        <div class="container">
+          <div class="signup-shell">
+            <aside class="signup-visual" aria-label="Growing in Grace">
+              <div class="signup-visual__image" aria-hidden="true"></div>
+            </aside>
+
+            <div class="signup-card signup-card--v2">
+              <!-- Error / Info Messages -->
+              <div
+                id="authError"
+                class="auth-message"
+                style="display: none"
+              ></div>
 
             <!-- SIGN UP FORM (default) -->
             <form id="signupForm" class="signup-form">
-              <h2>Your first step in discipleship</h2>
+              <div class="signup-form__mark" aria-hidden="true">✦</div>
+              <h2>Create Your <em>Free</em> Account</h2>
               <p class="signup-form__intro">
-                Create your free account to access the full video curriculum and
-                track your progress. Pick up where you left off anytime.
+                Begin your discipleship journey with free access to the
+                curriculum, tools, and resources.
               </p>
 
               <div class="signup-form__group">
-                <label for="signupName">First Name</label>
+                <label for="signupName">Full Name</label>
                 <input
                   type="text"
                   id="signupName"
-                  placeholder="Your first name"
+                  placeholder="Enter your full name"
                   required
                 />
               </div>
@@ -241,11 +252,11 @@
                 />
               </div>
               <div class="signup-form__group">
-                <label for="signupPassword">Create a Password</label>
+                <label for="signupPassword">Password</label>
                 <input
                   type="password"
                   id="signupPassword"
-                  placeholder="At least 6 characters"
+                  placeholder="Create a password"
                   minlength="6"
                   required
                 />
@@ -254,7 +265,7 @@
                 type="submit"
                 class="btn btn--primary btn--lg signup-form__btn"
               >
-                Start Learning &rarr;
+                Create Free Account &rarr;
               </button>
               <p class="signup-form__note">
                 Already have an account?
@@ -301,6 +312,12 @@
                 <a href="#" id="toggleToSignup">Create one free</a>
               </p>
             </form>
+              <div class="signup-trust-row" aria-label="Course benefits">
+                <span>Free access</span>
+                <span>Progress saved</span>
+                <span>20 lessons</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -324,7 +341,7 @@
     <!-- Supabase JS SDK (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/supabase-config.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/auth.js?v=20260429-elegant-complete"></script>
     <script>
       (async () => {
         initMobileNav();

@@ -19,9 +19,9 @@
 const LESSON_TITLES = {
   "lesson-01": "What Should Christian Life Look Like?",
   "lesson-02": "Sin: Origin, Reality, & Consequences",
-  "lesson-03": "The Truth About What REALLY Saves You",
-  "lesson-04": "What Repentance ACTUALLY Means",
-  "lesson-05": "The LIFE CHANGING Gift of Eternal Life",
+  "lesson-03": "The Truth About What Really Saves You",
+  "lesson-04": "What Repentance Actually Means",
+  "lesson-05": "The Life-Changing Gift of Eternal Life",
   "lesson-06": "Can You Lose Your Salvation?",
   "lesson-07": "Does Grace Give You a License to Sin?",
   "lesson-08": "How Can God Be One… and Three?",

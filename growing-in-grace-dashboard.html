@@ -37,38 +37,63 @@
     </nav>
 
     <!-- Dashboard Header -->
-    <section class="dash-header">
-      <div class="container" style="max-width: 860px">
-        <p class="dash-header__greeting">
-          Welcome back, <strong id="welcomeName">Friend</strong>
-        </p>
-        <h1 class="dash-header__title">Growing in Grace</h1>
-        <p class="dash-header__sub">A Discipleship Manual for New Believers</p>
-
-        <!-- Progress Bar -->
-        <div class="progress-wrapper">
-          <div class="progress-bar">
-            <div
-              class="progress-bar__fill"
-              id="progressFill"
-              style="width: 0%"
-            ></div>
-          </div>
-          <p class="progress-bar__text" id="progressText">
-            Loading progress...
+    <section class="dash-header dash-header--v2">
+      <div class="container dash-header__grid">
+        <div class="dash-header__copy">
+          <p class="dash-header__greeting">Welcome back,</p>
+          <h1 class="dash-header__title">
+            <span id="welcomeName">Friend</span> &mdash; let's keep growing.
+          </h1>
+          <p class="dash-header__sub">
+            You are moving through a Scripture-rooted discipleship path at your
+            own pace.
           </p>
         </div>
 
-        <!-- Continue Button (hidden until JS populates it) -->
-        <a href="#" id="continueBtn" class="btn btn--lime" style="display: none"
-          >Continue Where You Left Off &rarr;</a
-        >
+        <aside class="dashboard-progress-card" aria-label="Course progress">
+          <div class="dashboard-progress-card__ring">
+            <span id="progressPercent">0%</span>
+            <small>Complete</small>
+          </div>
+          <div class="dashboard-progress-card__body">
+            <div class="dashboard-progress-card__label">
+              Up Next &middot; Lesson 01
+            </div>
+            <h2>What Should Christian Life Look Like?</h2>
+            <p>Video lesson and progress tracking included.</p>
+          <div class="progress-wrapper">
+            <div class="progress-bar">
+              <div
+                class="progress-bar__fill"
+                id="progressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <p class="progress-bar__text" id="progressText">
+              Loading progress...
+            </p>
+          </div>
+
+          <!-- Continue Button (hidden until JS populates it) -->
+          <a
+            href="#"
+            id="continueBtn"
+            class="btn btn--primary"
+            style="display: none"
+            >Continue Where You Left Off &rarr;</a
+          >
+          </div>
+        </aside>
       </div>
     </section>
 
     <main>
-      <section class="section" style="padding-top: 2.5rem">
-        <div class="container" style="max-width: 860px">
+      <section class="dashboard-curriculum section">
+        <div class="container dashboard-curriculum__inner">
+          <div class="section-heading">
+            <span class="section-heading__eyebrow">Curriculum Overview</span>
+            <h2>Your Curriculum</h2>
+          </div>
           <!-- Section 1: Sin and Salvation -->
           <div class="module is-open">
             <div class="module__header">
@@ -104,7 +129,7 @@
                   <span class="lesson-item__check"></span>
                   <span class="lesson-item__week">Lesson 3</span>
                   <span class="lesson-item__title"
-                    >The Truth About What REALLY Saves You</span
+                    >The Truth About What Really Saves You</span
                   >
                   <span class="lesson-item__arrow">&rarr;</span>
                 </a>
@@ -112,7 +137,7 @@
                   <span class="lesson-item__check"></span>
                   <span class="lesson-item__week">Lesson 4</span>
                   <span class="lesson-item__title"
-                    >What Repentance ACTUALLY Means</span
+                    >What Repentance Actually Means</span
                   >
                   <span class="lesson-item__arrow">&rarr;</span>
                 </a>
@@ -139,7 +164,7 @@
                   <span class="lesson-item__check"></span>
                   <span class="lesson-item__week">Lesson 5</span>
                   <span class="lesson-item__title"
-                    >The LIFE CHANGING Gift of Eternal Life</span
+                    >The Life-Changing Gift of Eternal Life</span
                   >
                   <span class="lesson-item__arrow">&rarr;</span>
                 </a>
@@ -425,53 +450,27 @@
       </section>
 
       <!-- Account Settings -->
-      <section class="section" style="padding-top: 0; padding-bottom: 2rem">
-        <div class="container" style="max-width: 860px">
-          <div
-            style="
-              border-top: 1px solid var(--border-light);
-              padding-top: 1.5rem;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              flex-wrap: wrap;
-              gap: 1rem;
-            "
-          >
+      <section class="dashboard-account">
+        <div class="container dashboard-curriculum__inner">
+          <div class="dashboard-account__card">
             <div>
-              <h3
-                style="
-                  font-size: 1.05rem;
-                  margin: 0 0 0.25rem 0;
-                  color: var(--brand-brown);
-                "
-              >
-                Account Settings
-              </h3>
+              <h3>Account Settings</h3>
               <p
                 id="accountEmail"
-                style="font-size: 0.85rem; color: var(--brand-gray); margin: 0"
               >
                 Signed in
               </p>
             </div>
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap">
+            <div class="dashboard-account__actions">
               <button
                 onclick="showChangePasswordModal()"
                 class="btn btn--outline"
-                style="font-size: 0.85rem; padding: 0.5rem 1.25rem"
               >
                 Change Password
               </button>
               <button
                 onclick="signOut()"
-                class="btn btn--outline"
-                style="
-                  font-size: 0.85rem;
-                  padding: 0.5rem 1.25rem;
-                  color: #c0392b;
-                  border-color: #c0392b;
-                "
+                class="btn btn--outline dashboard-account__signout"
               >
                 Sign Out
               </button>
@@ -499,7 +498,7 @@
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/supabase-config.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/auth.js?v=20260429-elegant-complete"></script>
     <script>
       initDashboard();
     </script>

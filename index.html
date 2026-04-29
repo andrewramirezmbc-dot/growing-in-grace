@@ -173,135 +173,30 @@
               place.
             </p>
 
-            <!-- Stats strip — bigger, pushed right -->
-            <div
-              style="
-                display: flex;
-                gap: 3rem;
-                margin-bottom: 2.25rem;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                padding-left: 0.5rem;
-              "
-            >
-              <div>
-                <div
-                  style="
-                    font-family: var(--font-heading);
-                    font-size: 2.8rem;
-                    font-weight: 700;
-                    color: var(--brand-cream);
-                    line-height: 1;
-                  "
-                >
-                  12
-                </div>
-                <div
-                  style="
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--brand-sky);
-                    opacity: 0.6;
-                    margin-top: 0.3rem;
-                  "
-                >
-                  Sections
-                </div>
+            <div class="curriculum-stats" aria-label="Curriculum facts">
+              <div class="curriculum-stat">
+                <span class="curriculum-stat__icon">□</span>
+                <strong>12</strong>
+                <span>Sections</span>
               </div>
-              <div>
-                <div
-                  style="
-                    font-family: var(--font-heading);
-                    font-size: 2.8rem;
-                    font-weight: 700;
-                    color: var(--brand-cream);
-                    line-height: 1;
-                  "
-                >
-                  27
-                </div>
-                <div
-                  style="
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--brand-sky);
-                    opacity: 0.6;
-                    margin-top: 0.3rem;
-                  "
-                >
-                  Video Lessons
-                </div>
+              <div class="curriculum-stat">
+                <span class="curriculum-stat__icon">▷</span>
+                <strong>27</strong>
+                <span>Video Lessons</span>
               </div>
-              <div>
-                <div
-                  style="
-                    font-family: var(--font-heading);
-                    font-size: 2.8rem;
-                    font-weight: 700;
-                    color: var(--brand-cream);
-                    line-height: 1;
-                  "
-                >
-                  Free
-                </div>
-                <div
-                  style="
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: var(--brand-sky);
-                    opacity: 0.6;
-                    margin-top: 0.3rem;
-                  "
-                >
-                  Always
-                </div>
+              <div class="curriculum-stat">
+                <span class="curriculum-stat__icon">✦</span>
+                <strong>Free</strong>
+                <span>Always</span>
               </div>
             </div>
 
-            <!-- Value bullets -->
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 0.6rem;
-                margin-bottom: 2.25rem;
-                font-size: 0.88rem;
-                color: var(--brand-cream);
-                opacity: 0.8;
-                line-height: 1.5;
-              "
-            >
-              <div style="display: flex; align-items: baseline; gap: 0.5rem">
-                <span style="color: var(--brand-lime); font-weight: 700"
-                  >&#10003;</span
-                >
-                Watch video lessons at your own pace
-              </div>
-              <div style="display: flex; align-items: baseline; gap: 0.5rem">
-                <span style="color: var(--brand-lime); font-weight: 700"
-                  >&#10003;</span
-                >
-                Companion workbook for each section
-              </div>
-              <div style="display: flex; align-items: baseline; gap: 0.5rem">
-                <span style="color: var(--brand-lime); font-weight: 700"
-                  >&#10003;</span
-                >
-                Track your progress with a free account
-              </div>
-              <div style="display: flex; align-items: baseline; gap: 0.5rem">
-                <span style="color: var(--brand-lime); font-weight: 700"
-                  >&#10003;</span
-                >
-                No seminary background required
-              </div>
-            </div>
+            <ul class="curriculum-benefits">
+              <li>Watch video lessons at your own pace</li>
+              <li>Companion workbook for each section</li>
+              <li>Track your progress with a free account</li>
+              <li>No seminary background required</li>
+            </ul>
 
             <div class="curriculum-row__ctas">
               <a href="/growing-in-grace.html" class="btn btn--lime"
@@ -524,7 +419,7 @@
     <!-- Auth-aware nav CTA swap (public pages): hide Sign In if already logged in -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/supabase-config.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/auth.js?v=20260429-elegant-complete"></script>
     <script>
       (async () => {
         const user = await getCurrentUser();
