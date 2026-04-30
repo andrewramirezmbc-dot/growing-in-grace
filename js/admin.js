@@ -149,20 +149,20 @@ function _renderUserList(profiles, progress) {
 
       return (
         "<tr>" +
-        "<td>" +
+        '<td data-label="Email">' +
         email +
         adminBadge +
         "</td>" +
-        "<td>" +
+        '<td data-label="First Name">' +
         firstName +
         "</td>" +
-        "<td>" +
+        '<td data-label="Signed Up">' +
         signedUp +
         "</td>" +
-        "<td>" +
+        '<td data-label="Last Active">' +
         lastActive +
         "</td>" +
-        "<td><strong>" +
+        '<td data-label="Lessons Complete"><strong>' +
         completed +
         "</strong> / " +
         PUBLISHED_LESSON_SLUGS.length +
@@ -209,16 +209,16 @@ function _renderCompletionStats(profiles, progress) {
 
     return (
       "<tr>" +
-      "<td><strong>" +
+      '<td data-label="Slug"><strong>' +
       _escapeHtml(slug) +
       "</strong></td>" +
-      '<td class="admin-lesson-title">' +
+      '<td class="admin-lesson-title" data-label="Title">' +
       title +
       "</td>" +
-      "<td>" +
+      '<td data-label="Completions">' +
       completions +
       "</td>" +
-      '<td><div class="admin-bar-wrap"><div class="admin-bar"><div class="admin-bar__fill" style="width: ' +
+      '<td data-label="Completion %"><div class="admin-bar-wrap"><div class="admin-bar"><div class="admin-bar__fill" style="width: ' +
       percent +
       '%"></div></div><span class="admin-bar__label">' +
       percent +

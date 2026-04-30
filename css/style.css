@@ -3056,6 +3056,93 @@ main {
   .dashboard-curriculum {
     padding: 2.5rem 0;
   }
+  .dash-header--v2 {
+    padding: 2.4rem 0 1.2rem;
+  }
+  .dash-header__greeting {
+    letter-spacing: 0.12em;
+  }
+  .dash-header__title {
+    font-size: clamp(2rem, 11vw, 2.75rem);
+    line-height: 1.08;
+  }
+  .dash-header__sub {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .dashboard-progress-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .dashboard-progress-card__ring {
+    width: 88px;
+    height: 88px;
+  }
+  .dashboard-progress-card__body,
+  .dashboard-progress-card .progress-wrapper,
+  .dashboard-progress-card .btn {
+    width: 100%;
+    min-width: 0;
+  }
+  .dashboard-progress-card h2 {
+    max-width: 15rem;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  .dashboard-progress-card p,
+  .dashboard-progress-card .progress-bar__text {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+  .dashboard-progress-card .btn {
+    justify-content: center;
+    white-space: normal;
+    line-height: 1.25;
+  }
+  .dashboard-curriculum .section-heading {
+    display: block;
+  }
+  .dashboard-curriculum .section-heading__eyebrow {
+    margin-bottom: 0.8rem;
+  }
+  .dashboard-curriculum .section-heading h2 {
+    font-size: 1.75rem;
+  }
+  .dashboard-curriculum .module__header {
+    grid-template-columns: 48px 1fr auto;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+  .dashboard-curriculum .module__title {
+    font-size: 1.15rem;
+    line-height: 1.15;
+  }
+  .dashboard-curriculum .module__subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .dashboard-curriculum .module__lesson-list {
+    padding: 0 1rem 1rem;
+  }
+  .dashboard-curriculum .lesson-item {
+    grid-template-columns: 24px 1fr;
+    align-items: start;
+    padding: 1rem;
+  }
+  .dashboard-curriculum .lesson-item__week,
+  .dashboard-curriculum .lesson-item__title {
+    grid-column: 2;
+  }
+  .dashboard-curriculum .lesson-item__arrow {
+    grid-column: 2;
+    justify-self: start;
+  }
   .signup-visual {
     min-height: 360px;
   }
@@ -4537,12 +4624,60 @@ main {
   .admin-header__title {
     font-size: 1.75rem;
   }
+  .admin-table-wrap {
+    overflow-x: visible;
+    border: 0;
+    background: transparent;
+  }
   .admin-table {
+    display: block;
     font-size: 0.82rem;
   }
-  .admin-table thead th,
+  .admin-table thead {
+    display: none;
+  }
+  .admin-table tbody,
+  .admin-table tr,
+  .admin-table td {
+    display: block;
+    width: 100%;
+  }
+  .admin-table tbody tr {
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    background: var(--brand-white);
+    overflow: hidden;
+  }
   .admin-table tbody td {
-    padding: 0.6rem 0.75rem;
+    display: grid;
+    grid-template-columns: minmax(7.25rem, 42%) 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    padding: 0.72rem 0.85rem;
+    border-top: 1px solid var(--border-light);
+    word-break: break-word;
+  }
+  .admin-table tbody td:first-child {
+    border-top: 0;
+  }
+  .admin-table tbody td::before {
+    content: attr(data-label);
+    color: var(--brand-teal-deep);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .admin-table tbody td.admin-empty {
+    display: block;
+    text-align: center;
+  }
+  .admin-table tbody td.admin-empty::before {
+    content: none;
+  }
+  .admin-bar-wrap {
+    min-width: 0;
   }
   .admin-section__header {
     flex-direction: column;
