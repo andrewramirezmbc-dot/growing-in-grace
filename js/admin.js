@@ -38,6 +38,12 @@ const LESSON_TITLES = {
   "lesson-18": "What the Bible Actually Does in Your Life",
   "lesson-19": "Doctrine, Reproof, Correction, Training—What It All Means",
   "lesson-20": "Learn to Study the Bible Like a Pro",
+  "lesson-21": "Stop Just Reading the Bible, Study It This Way Instead",
+  "lesson-22": "Your Lifeline to God",
+  "lesson-23": "Faithful Stewardship: God Owns Everything",
+  "lesson-24": "Every Believer Has a Role to Play",
+  "lesson-25": "How You Can Have Victory Over Sin",
+  "lesson-26": "Practical Steps to Beat Temptation",
 };
 
 const PUBLISHED_LESSON_SLUGS = Object.keys(LESSON_TITLES);
