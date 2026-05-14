@@ -3736,6 +3736,471 @@ main {
   gap: 0.65rem;
 }
 
+/* =============================================
+   ANDY BURGGRAFF ABOUT PAGE
+   ============================================= */
+.teacher-page {
+  background:
+    radial-gradient(circle at 12% 4%, rgba(126, 203, 195, 0.18), transparent 30rem),
+    linear-gradient(180deg, #fbfcfa 0%, #f6fbf9 42%, #fbfcfa 100%);
+}
+.teacher-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  background:
+    linear-gradient(90deg, rgba(3, 43, 45, 0.94), rgba(6, 67, 69, 0.78)),
+    url("/public/images/growing-in-grace/home/home-hero-background-8k.webp") center / cover;
+  color: var(--brand-cream);
+  border-bottom: 3px solid var(--brand-gold);
+}
+.teacher-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -35% 36%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(126, 203, 195, 0.34), transparent 60%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+.teacher-hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.7fr);
+  gap: clamp(1.75rem, 5vw, 4rem);
+  align-items: center;
+}
+.teacher-kicker,
+.teacher-section-label {
+  color: var(--brand-gold);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.teacher-hero h1 {
+  max-width: 660px;
+  margin: 0.7rem 0 1.1rem;
+  color: var(--brand-cream);
+  font-size: clamp(2.45rem, 5.5vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.teacher-hero h1 em {
+  color: var(--brand-blue-light);
+}
+.teacher-hero p {
+  max-width: 600px;
+  color: rgba(250, 252, 252, 0.82);
+  font-size: clamp(0.96rem, 1.5vw, 1.08rem);
+  line-height: 1.68;
+}
+.teacher-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.65rem;
+}
+.teacher-portrait {
+  justify-self: end;
+  width: min(100%, 310px);
+  padding: 1rem;
+  border: 1px solid rgba(126, 203, 195, 0.34);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(250, 252, 252, 0.09), rgba(250, 252, 252, 0.03)),
+    rgba(3, 43, 45, 0.44);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.28);
+}
+.teacher-portrait__ring {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(126, 203, 195, 0.28), transparent 38%),
+    linear-gradient(135deg, #022e31, #0e5d5f 52%, #022e31);
+  border: 1px solid rgba(250, 252, 252, 0.16);
+}
+.teacher-portrait__ring span {
+  display: grid;
+  place-items: center;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 999px;
+  border: 2px solid var(--brand-sky);
+  outline: 1px solid rgba(250, 252, 252, 0.34);
+  outline-offset: 8px;
+  color: var(--brand-cream);
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+.teacher-portrait__caption {
+  display: grid;
+  gap: 0.15rem;
+  padding: 1rem 0.35rem 0.2rem;
+  color: var(--brand-cream);
+}
+.teacher-portrait__caption span {
+  color: rgba(250, 252, 252, 0.68);
+  font-size: 0.84rem;
+}
+.teacher-intro,
+.teacher-teaching,
+.teacher-books,
+.teacher-cta {
+  padding: clamp(3.25rem, 6vw, 5rem) 0;
+}
+.teacher-intro__grid {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.teacher-intro h2,
+.teacher-section-header h2,
+.teacher-cta h2 {
+  margin-top: 0.55rem;
+  color: var(--brand-teal-ink);
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  line-height: 1.08;
+}
+.teacher-intro__body {
+  display: grid;
+  gap: 1.25rem;
+  color: var(--brand-gray);
+  font-size: 0.98rem;
+  line-height: 1.78;
+}
+.teacher-intro__body em {
+  color: var(--brand-teal-ink);
+  font-family: var(--font-heading);
+}
+.teacher-teaching {
+  background: linear-gradient(180deg, rgba(223, 243, 239, 0.6), rgba(250, 252, 252, 0.98));
+}
+.teacher-section-header {
+  max-width: 620px;
+  margin-bottom: 1.7rem;
+}
+.teacher-section-header--light h2 {
+  color: var(--brand-teal-ink);
+}
+.teaching-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+.teaching-card {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(126, 203, 195, 0.2), transparent 44%),
+    linear-gradient(135deg, #032b2d, #021f21);
+  color: var(--brand-cream);
+  box-shadow: 0 14px 34px rgba(7, 63, 65, 0.14);
+  isolation: isolate;
+}
+.teaching-card--featured {
+  grid-column: span 2;
+}
+.teaching-card--text-only {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(126, 203, 195, 0.28), transparent 24%),
+    linear-gradient(135deg, #042f31, #074b4d 48%, #021f21);
+}
+.teaching-card--text-only::before {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid rgba(194, 164, 111, 0.32);
+  border-radius: 8px;
+  opacity: 0.8;
+}
+.teaching-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  opacity: 0.92;
+  transition: transform 0.45s ease;
+}
+.teaching-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 70% 18%, rgba(126, 203, 195, 0.28), transparent 30%),
+    linear-gradient(180deg, rgba(2, 36, 38, 0.34) 0%, rgba(2, 36, 38, 0.2) 38%, rgba(2, 36, 38, 0.94) 100%),
+    linear-gradient(90deg, rgba(2, 36, 38, 0.72), transparent 62%);
+}
+.teaching-card:hover {
+  color: var(--brand-cream);
+}
+.teaching-card:hover img {
+  transform: scale(1.025);
+}
+.teaching-card__play {
+  position: absolute;
+  z-index: 2;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  background: rgba(250, 252, 252, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.teaching-card__play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 0.48rem solid transparent;
+  border-bottom: 0.48rem solid transparent;
+  border-left: 0.72rem solid var(--brand-teal-deep);
+}
+.teaching-card__body {
+  position: absolute;
+  z-index: 2;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.95rem;
+}
+.teaching-card--text-only .teaching-card__body {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  padding-right: 2.5rem;
+}
+.teaching-card__body span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--brand-gold);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.teaching-card__body h3 {
+  color: var(--brand-cream);
+  font-size: clamp(1.05rem, 1.55vw, 1.38rem);
+  line-height: 1.08;
+}
+.teacher-books {
+  overflow: hidden;
+  background: linear-gradient(180deg, #fbfcfa 0%, #f3f8f6 100%);
+  border-top: 1px solid rgba(14, 93, 95, 0.1);
+  border-bottom: 1px solid rgba(14, 93, 95, 0.1);
+}
+.book-cinema {
+  position: relative;
+  margin-inline: 0;
+  padding: 2rem 0;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(126, 203, 195, 0.2), transparent 24rem),
+    linear-gradient(135deg, #032b2d, #074648 48%, #021f21);
+  border-radius: 16px;
+}
+.book-cinema::before,
+.book-cinema::after {
+  display: none;
+}
+.book-cinema__track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: auto;
+  padding: 0 2rem;
+}
+.book-slide {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  min-height: 220px;
+  padding: 1rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(250, 252, 252, 0.96), rgba(246, 251, 249, 0.91)),
+    var(--brand-cream);
+  border: 1px solid rgba(250, 252, 252, 0.38);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  color: var(--brand-teal-ink);
+}
+.book-slide:hover {
+  color: var(--brand-teal-ink);
+}
+.book-slide img,
+.book-slide__cover {
+  width: 118px;
+  aspect-ratio: 0.68;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
+}
+.book-slide__cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0.85rem;
+  background:
+    linear-gradient(180deg, rgba(194, 164, 111, 0.18), transparent 42%),
+    linear-gradient(145deg, #063f42, #0e5d5f);
+  color: var(--brand-cream);
+  font-family: var(--font-heading);
+}
+.book-slide--manual .book-slide__cover {
+  background:
+    linear-gradient(180deg, rgba(106, 148, 216, 0.28), transparent 44%),
+    linear-gradient(145deg, #073f41, #102d46);
+}
+.book-slide__cover span {
+  color: var(--brand-gold);
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.book-slide__cover strong {
+  font-size: 1.38rem;
+  line-height: 1;
+}
+.book-slide__cover small {
+  color: rgba(250, 252, 252, 0.72);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+}
+.book-slide span {
+  display: block;
+  color: var(--brand-gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.book-slide h3 {
+  margin: 0.35rem 0 0.55rem;
+  color: var(--brand-teal-ink);
+  font-size: 1.42rem;
+  line-height: 1.08;
+}
+.book-slide p {
+  margin-bottom: 0.8rem;
+  color: var(--brand-gray);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.book-slide strong {
+  color: var(--brand-blue);
+  font-size: 0.86rem;
+}
+.teacher-cta {
+  background: linear-gradient(180deg, #fbfcfa, #eef8f5);
+}
+.teacher-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid rgba(14, 93, 95, 0.12);
+  border-bottom: 1px solid rgba(14, 93, 95, 0.12);
+  background: transparent;
+  box-shadow: none;
+}
+
+.teacher-cta h2 {
+  font-size: clamp(1.55rem, 2.6vw, 2.3rem);
+}
+@media (max-width: 900px) {
+  .teacher-hero__grid,
+  .teacher-intro__grid {
+    grid-template-columns: 1fr;
+  }
+  .teacher-portrait {
+    justify-self: start;
+    width: min(100%, 320px);
+  }
+  .teaching-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .teaching-card--featured {
+    grid-column: span 2;
+  }
+  .book-cinema__track {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .teacher-hero {
+    padding: 4rem 0;
+  }
+  .teacher-hero__actions,
+  .teacher-cta__inner {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .teacher-cta__inner {
+    padding: 1.35rem 1rem;
+  }
+  .teacher-hero__actions .btn,
+  .teacher-cta__inner .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .teacher-portrait {
+    display: none;
+  }
+  .teaching-grid {
+    grid-template-columns: 1fr;
+  }
+  .teaching-card--featured {
+    grid-column: auto;
+  }
+  .book-cinema {
+    margin-inline: 0;
+    padding: 1rem;
+  }
+  .book-cinema__track {
+    padding: 0;
+  }
+  .book-slide {
+    grid-template-columns: 92px minmax(0, 1fr);
+    width: 100%;
+    min-height: 220px;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .book-slide img,
+  .book-slide__cover {
+    width: 88px;
+  }
+  .book-slide span {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    line-height: 1.45;
+  }
+  .book-slide__cover strong {
+    font-size: 1.15rem;
+  }
+  .book-slide h3 {
+    font-size: 1.28rem;
+  }
+  .book-slide p {
+    font-size: 0.82rem;
+  }
+}
+
 /* --- Standalone CTA section (different from .cta-band).
        Brown background introduced April 2026 to break up green. --- */
 .cta {
