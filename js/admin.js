@@ -44,6 +44,8 @@ const LESSON_TITLES = {
   "lesson-24": "Every Believer Has a Role to Play",
   "lesson-25": "How You Can Have Victory Over Sin",
   "lesson-26": "Practical Steps to Beat Temptation",
+  "lesson-27": "Why Every Christian Is Called to Evangelize",
+  "lesson-28": "How to Share the Gospel Clearly and Kindly",
 };
 
 const PUBLISHED_LESSON_SLUGS = Object.keys(LESSON_TITLES);

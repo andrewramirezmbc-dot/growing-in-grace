@@ -889,7 +889,7 @@ async function initDashboard() {
   // TOTAL_LESSONS: must match the count of published lessons in
   // gig-lessons.json. Update both files together when adding new
   // lessons. V2 could derive this programmatically.
-  const TOTAL_LESSONS = 26;
+  const TOTAL_LESSONS = 28;
   const completed = progress.filter((p) => p.completed_at).length;
   const percent = Math.round((completed / TOTAL_LESSONS) * 100);
 
@@ -904,7 +904,7 @@ async function initDashboard() {
       completed +
       " of " +
       TOTAL_LESSONS +
-      " lessons complete \u00B7 Section 12 coming soon";
+      " lessons complete";
 
   // Mark completed lessons
   const completedSlugs = new Set(
