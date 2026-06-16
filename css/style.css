@@ -2435,6 +2435,26 @@ main {
   justify-content: space-between;
   gap: 1.25rem;
 }
+.lesson-handout-link {
+  display: inline-flex;
+  width: fit-content;
+  margin: -0.35rem 0 0.85rem 3.7rem;
+  padding: 0.32rem 0.72rem;
+  border: 1px solid rgba(126, 203, 195, 0.28);
+  border-radius: 999px;
+  color: var(--brand-teal-ink);
+  background: rgba(238, 248, 245, 0.72);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.lesson-handout-link:hover,
+.lesson-handout-link:focus-visible {
+  color: var(--brand-teal-deep);
+  background: var(--brand-mint);
+  outline: none;
+}
 .lesson-page-v2 .lesson-complete {
   position: relative;
   overflow: hidden;

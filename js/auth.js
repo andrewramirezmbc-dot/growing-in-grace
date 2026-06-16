@@ -922,6 +922,8 @@ async function initDashboard() {
     }
   });
 
+  _addDashboardHandoutLinks();
+
   // Continue where you left off
   const continueBtn = document.getElementById("continueBtn");
   if (continueBtn) {
@@ -941,6 +943,26 @@ async function initDashboard() {
 
   // Update nav for logged-in state
   _updateNavAuth(user, profile);
+}
+
+function _addDashboardHandoutLinks() {
+  document.querySelectorAll(".lesson-item").forEach((item) => {
+    if (item.nextElementSibling && item.nextElementSibling.classList.contains("lesson-handout-link")) {
+      return;
+    }
+
+    const slug = _slugFromHref(item.getAttribute("href") || "");
+    const match = slug.match(/^lesson-(\d{2})$/);
+    if (!match) return;
+
+    const link = document.createElement("a");
+    link.className = "lesson-handout-link";
+    link.href = "/handouts/growing-in-grace/" + slug + "-handout.pdf";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Handout PDF";
+    item.insertAdjacentElement("afterend", link);
+  });
 }
 
 /**
@@ -1096,6 +1118,9 @@ function _enhanceLessonPageV2(lessonSlug) {
     : "Continue to the next lesson";
   const lessonNavOverview = document.querySelector(".lesson-nav__overview");
   const lessonNav = document.querySelector(".lesson-nav");
+  const handoutHref = lessonNumber
+    ? "/handouts/growing-in-grace/lesson-" + lessonNumber + "-handout.pdf"
+    : "/handouts/growing-in-grace/";
 
   if (lessonNavOverview) lessonNavOverview.classList.add("lesson-nav__overview--source");
   if (lessonNav) lessonNav.classList.add("lesson-nav--source");
@@ -1131,7 +1156,7 @@ function _enhanceLessonPageV2(lessonSlug) {
     '<div class="resource-download-card__icon" aria-hidden="true">PDF</div>' +
     '<div><h3>Lesson Handout (PDF)</h3>' +
     '<p>Key terms, concepts, and review prompts for offline study.</p></div>' +
-    '<a class="resource-download-card__link" href="/curriculum.html">Download &rarr;</a>' +
+    '<a class="resource-download-card__link" href="' + handoutHref + '" target="_blank" rel="noopener">Download &rarr;</a>' +
     "</div>" +
     "</section>" +
     '<section class="lesson-bottom-complete" id="complete">' +
