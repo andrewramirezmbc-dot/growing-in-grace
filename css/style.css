@@ -3241,7 +3241,7 @@ main {
 /* --- Hero variant: homepage (image bg + overlay + drop shadows) --- */
 .hero--home {
   background-color: var(--brand-teal-deep);
-  background-image: url("https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=1600&q=80");
+  background-image: url("/public/images/growing-in-grace/home/home-hero-background-8k.webp");
   background-size: cover;
   background-position: center 40%;
   padding: 7rem var(--space-xl) 6rem;
@@ -3821,6 +3821,15 @@ main {
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-top: 1.65rem;
+}
+.teacher-hero__actions .btn--ghost {
+  color: var(--brand-cream);
+  border-color: var(--brand-sky);
+}
+.teacher-hero__actions .btn--ghost:hover {
+  color: var(--brand-teal-deep);
+  background: var(--brand-sky);
+  border-color: var(--brand-sky);
 }
 .teacher-portrait {
   justify-self: end;

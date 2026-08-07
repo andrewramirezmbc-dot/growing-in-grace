@@ -14,9 +14,8 @@ Thumbs.db
 .env.local
 .env.production
 
-# Supabase config with real credentials
-# (initial commit has safe placeholders; local edits stay local)
-js/supabase-config.js
+# The browser-safe Supabase anon key is versioned so Netlify can deploy auth.
+# Keep service-role keys and other secrets in ignored environment files.
 
 # Accidental npm artifacts
 node_modules/

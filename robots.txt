@@ -13,5 +13,4 @@ Disallow: /lessons/
 Disallow: /admin.html
 Disallow: /styleguide.html
 
-# TODO: Update the Sitemap URL with the real domain once DNS is set.
-Sitemap: https://growingingrace.org/sitemap.xml
+Sitemap: https://growing-in-grace.netlify.app/sitemap.xml

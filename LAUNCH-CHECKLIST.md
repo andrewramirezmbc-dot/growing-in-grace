@@ -8,20 +8,21 @@ Track of every remaining TODO before public launch. Items are grouped by owner. 
 
 ### 🔴 Blocking — must complete before launch
 
-- [ ] **Supabase credentials** — swap placeholders in `js/supabase-config.js` with real `SUPABASE_URL` and `SUPABASE_ANON_KEY` from your Supabase project Settings → API. Without this, auth falls back to localStorage demo mode.
+- [x] ~~**Supabase credentials included in deploys** — `js/supabase-config.js` now ships with the browser-safe anon key.~~
+- [ ] **Restore or replace the Supabase project** — `knxiaqztwpcyatlzwdon.supabase.co` currently returns DNS `NXDOMAIN`. Auth and progress tracking cannot work until that project is reachable or the config is updated to a new project.
 - [ ] **Run migration** — paste `supabase/migrations/001_initial_schema.sql` into Supabase Studio SQL Editor and execute. Verify both `profiles` and `lesson_progress` tables exist with RLS enabled.
 - [ ] **Set yourself as admin** — after your first signup, open Supabase Studio → Table Editor → `profiles` → your row → set `is_admin = true`. This is how you access `/admin.html`.
-- [ ] **Netlify site setup** — create a new Netlify site connected to this GitHub repo. Set build to auto-deploy from `main`. No build command needed (publish dir = root).
+- [x] ~~**Netlify site setup** — connected to `main` and live at `https://growing-in-grace.netlify.app`.~~
 - [ ] **Netlify environment variables** — if you prefer to inject Supabase credentials via env instead of committing them, adjust `js/supabase-config.js` to read from `window.ENV` and add a Netlify build plugin or snippet injection. _(V2 improvement — for v1, committing the anon key is acceptable since RLS is the real security layer.)_
-- [ ] **Domain decision** — pick between `growingingrace.app` vs `growingingrace.org`, register, point DNS to Netlify. Current deploy URL: TBD.
-- [ ] **Update sitemap.xml + robots.txt domain** — replace `https://growingingrace.org` placeholder URLs in `sitemap.xml` and the `Sitemap:` line in `robots.txt` with your real domain.
+- [ ] **Custom domain decision** — the Netlify URL is launch-ready; update canonical URLs, sitemap, and robots again if a custom domain is connected.
+- [x] ~~**Update sitemap.xml + robots.txt domain** — both now point to the live Netlify URL.~~
 
 ### 🟡 Blocking for polished launch
 
-- [ ] **OG image** — create `/assets/og-image.jpg` (1200×630). Branded hero with "Growing in Grace" wordmark. Linked from all 4 public pages' `<meta property="og:image">`. Without it, link previews on Slack/Twitter/iMessage will fail to render.
-- [ ] **Hero image download** — replace Unsplash hotlink on homepage. Download the photo currently at `https://images.unsplash.com/photo-1510797215324-95aa89f43c33` and save to `/assets/hero-bg.jpg`. Then update the CSS `.hero--home { background-image: url() }` rule in `css/style.css`. Hotlinking Unsplash in production is fragile.
+- [x] ~~**OG image** — `/assets/og-image.jpg` is 1200×630 and linked with absolute URLs from all 4 public pages.~~
+- [x] ~~**Local hero image** — the homepage uses the production Growing in Grace hero asset; no remote hero dependency remains on the live page.~~
 - [x] ~~**_Discipleship Today_ cover image** — placed at `/assets/discipleship-today-cover.jpg`, referenced from homepage "Latest Resource" section.~~
-- [ ] **Raster favicons** — SVG favicon works in modern browsers. Create `/favicon.ico` (16×16/32×32 multi-size) and `/apple-touch-icon.png` (180×180) for older browsers and iOS home-screen icons. Can generate from `favicon.svg` using a converter like RealFaviconGenerator.
+- [x] ~~**Raster favicons** — `/favicon.ico` and `/apple-touch-icon.png` are included.~~
 
 ### 🟢 Nice-to-have
 
@@ -50,7 +51,7 @@ Track of every remaining TODO before public launch. Items are grouped by owner. 
 
 ### ✅ Per-lesson content — shipped with manual-derived descriptions
 
-All 20 published lessons now ship with real content drawn from Dr. Burggraff's manual:
+All 28 published lessons now ship with real content drawn from Dr. Burggraff's curriculum:
 
 - [x] ~~**Placeholder warning banners removed** — no lesson page shows the "Placeholder content" banner anymore.~~
 - [x] ~~**Per-lesson description** — each lesson has a 2-4 sentence intro drawn from the corresponding manual subsection.~~
@@ -82,7 +83,7 @@ When Dr. Burggraff records videos for the remaining sections (_Necessity of Pray
 
 ### 🟢 Nice-to-have (non-content polish)
 
-- [ ] **PDF handouts** — 20 lesson PDFs that could be linked below each lesson. Currently no handout section — was removed along with the `alert` stub. If handouts become available, re-add a download block.
+- [x] ~~**PDF handouts** — all 28 lessons include a downloadable two-page handout on both the lesson page and dashboard.~~
 - [ ] **Endorsement quote for workbook** — italic pull-quote on workbook section (if workbook page is ever reinstated).
 
 ---
@@ -92,7 +93,7 @@ When Dr. Burggraff records videos for the remaining sections (_Necessity of Pray
 ### 🔴 Blocking
 
 - [x] ~~**Amazon URL — Growing in Grace workbook** — 3 locations (homepage flagship, about, curriculum) now wired to `https://www.amazon.com/dp/1959454110`.~~
-- [ ] **YouTube channel URL** — 4 footer stubs across the site. Swap to real channel URL.
+- [x] ~~**YouTube channel URL** — footer links point to Shepherds Theological Seminary, and the homepage video CTA points to the Growing in Grace playlist.~~
 
 ### 🟡 Nice-to-have
 
@@ -110,17 +111,17 @@ When Dr. Burggraff records videos for the remaining sections (_Necessity of Pray
 
 Final verification once all blocking items are complete:
 
-- [ ] All 20 lessons have real content and no placeholder warning banners
+- [x] All 28 lessons have real content and no placeholder warning banners
 - [ ] About page has real bio, headshot, credentials, quote
-- [ ] Homepage shows real hero image (not Unsplash hotlink)
-- [ ] Favicons render correctly on desktop Chrome, Safari, iOS home screen
-- [ ] OG image renders correctly when a homepage/curriculum URL is shared in Slack or iMessage
+- [x] Homepage shows the local production hero image
+- [x] Raster and SVG favicon assets resolve
+- [x] OG image exists and public page metadata points to its absolute URL
 - [ ] Sign up flow works end-to-end on the real domain
 - [ ] Admin dashboard loads for admin users, redirects non-admins
 - [ ] Mobile nav (all 26 pages) — hamburger opens, all links tappable, Sign In / Sign Out / Dashboard CTAs visible inside menu
 - [ ] Lesson completion persists across sessions
 - [ ] 404 page renders for invalid URLs (Netlify's `[[redirects]]` rule is configured)
-- [ ] robots.txt and sitemap.xml point at the real domain (not the `growingingrace.org` placeholder)
+- [x] robots.txt and sitemap.xml point at the live Netlify URL
 - [ ] Google Search Console verification added (not covered in codebase — do this after DNS is live)
 
 ---
