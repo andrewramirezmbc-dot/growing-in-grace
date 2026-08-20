@@ -1223,6 +1223,29 @@ main {
   font-weight: 500;
 }
 
+/* ESV Cross-Reference Tool */
+a.esv-crossref-link {
+  color: var(--brand-blue) !important;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a.esv-crossref-link:hover,
+a.esv-crossref-link:focus-visible {
+  color: var(--brand-teal-ink) !important;
+  text-decoration-style: solid;
+}
+.scripture-tag a.esv-crossref-link {
+  color: inherit !important;
+  text-decoration: none;
+}
+.scripture-tag a.esv-crossref-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--brand-mint);
+  outline-offset: 3px;
+}
+
 /* Lesson Nav */
 .lesson-top-nav {
   background: var(--brand-sky);

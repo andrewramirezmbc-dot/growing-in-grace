@@ -1555,8 +1555,47 @@ function initModuleAccordions() {
   });
 }
 
+/**
+ * Add ESV passage previews to Scripture references across the course area.
+ * The official tool scans the completed page and linkifies recognized refs.
+ */
+function initEsvCrossReferences() {
+  const path = window.location.pathname;
+  const isCoursePage =
+    path.includes("growing-in-grace-dashboard") || path.includes("/lessons/");
+
+  if (!isCoursePage || document.getElementById("esv-crossref-script")) return;
+
+  window.ESV_CROSSREF_OPTIONS = {
+    border_color: "BFD8D4",
+    border_radius: 8,
+    header_font_color: "FFF9EE",
+    body_font_color: "123F40",
+    footer_font_color: "617375",
+    header_background_color: "084B4D",
+    body_background_color: "FFFDF8",
+    footer_background_color: "EFF7F5",
+    header_font_size: 16,
+    body_font_size: 15,
+    footer_font_size: 12,
+    header_font_family: "Georgia",
+    body_font_family: "Arial",
+    footer_font_family: "Arial",
+  };
+
+  const script = document.createElement("script");
+  script.id = "esv-crossref-script";
+  script.src = "https://static.esvmedia.org/crossref/crossref.min.js";
+  script.async = true;
+  script.onload = () => {
+    window.dispatchEvent(new Event("esv-crossref.trigger-linkify"));
+  };
+  document.body.appendChild(script);
+}
+
 // Auto-init common features when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initModuleAccordions();
+  initEsvCrossReferences();
 });
