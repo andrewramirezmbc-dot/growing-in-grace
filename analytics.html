@@ -119,6 +119,31 @@
 
         <section class="admin-section">
           <div class="admin-section__header">
+            <h2 class="admin-section__title">Recent accounts</h2>
+            <p class="admin-section__meta">
+              <strong id="analyticsAccountCount">&mdash;</strong> total accounts
+            </p>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Signed up</th>
+                  <th>Last active</th>
+                  <th>Lessons complete</th>
+                </tr>
+              </thead>
+              <tbody id="analyticsAccounts">
+                <tr><td colspan="5" class="admin-empty">Loading accounts&hellip;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section">
+          <div class="admin-section__header">
             <h2 class="admin-section__title">Lesson engagement</h2>
             <p class="admin-section__meta">Views and handout downloads</p>
           </div>
@@ -156,7 +181,7 @@
     <script src="js/supabase-config.js?v=20260807-launch"></script>
     <script src="js/auth.js?v=20260820-analytics"></script>
     <script src="js/admin.js?v=20260820-analytics"></script>
-    <script src="js/analytics.js?v=20260820-analytics"></script>
+    <script src="js/analytics.js?v=20260820-analytics-accounts"></script>
     <script>initAnalytics();</script>
   </body>
 </html>

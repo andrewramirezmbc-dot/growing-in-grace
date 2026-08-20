@@ -32,34 +32,55 @@ async function _loadAnalytics(sb, days) {
   _showAnalyticsNotice("");
 
   const since = new Date(Date.now() - days * 86400000).toISOString();
-  const { data, error } = await sb
-    .from("analytics_events")
-    .select("event_name,page_path,lesson_slug,session_id,referrer_host,created_at")
-    .gte("created_at", since)
-    .order("created_at", { ascending: true })
-    .limit(10000);
+  const [eventsResult, profilesResult, progressResult] = await Promise.all([
+    sb
+      .from("analytics_events")
+      .select("event_name,page_path,lesson_slug,session_id,referrer_host,created_at")
+      .gte("created_at", since)
+      .order("created_at", { ascending: true })
+      .limit(10000),
+    sb
+      .from("profiles")
+      .select("id,email,first_name,enrolled_at,last_active_at,is_admin")
+      .order("enrolled_at", { ascending: false }),
+    sb
+      .from("lesson_progress")
+      .select("user_id,completed_at"),
+  ]);
 
   refresh.disabled = false;
   refresh.textContent = "Refresh";
 
-  if (error) {
+  if (eventsResult.error) {
     _showAnalyticsNotice(
-      error.code === "42P01"
+      eventsResult.error.code === "42P01"
         ? "Analytics storage is not installed yet. Run Supabase migration 003_admin_analytics.sql."
         : "Analytics could not be loaded. Please refresh or check Supabase.",
     );
-    _renderAnalytics([] , days);
+    _renderAnalytics([], days, profilesResult.data || [], progressResult.data || []);
     return;
   }
 
-  _renderAnalytics(data || [], days);
+  if (profilesResult.error || progressResult.error) {
+    _showAnalyticsNotice("Account information could not be loaded. Please refresh or check Supabase.");
+  }
+
+  _renderAnalytics(
+    eventsResult.data || [],
+    days,
+    profilesResult.data || [],
+    progressResult.data || [],
+  );
 }
 
-function _renderAnalytics(events, days) {
+function _renderAnalytics(events, days, profiles, progress) {
   const count = (name) => events.filter((event) => event.event_name === name).length;
   const sessions = new Set(events.map((event) => event.session_id).filter(Boolean));
   const pageViews = count("page_view");
-  const signups = count("signup_complete");
+  const cutoff = Date.now() - days * 86400000;
+  const signups = profiles.filter((profile) =>
+    profile.enrolled_at && new Date(profile.enrolled_at).getTime() >= cutoff,
+  ).length;
 
   _setMetric("metricVisitors", sessions.size);
   _setMetric("metricPageViews", pageViews);
@@ -76,7 +97,31 @@ function _renderAnalytics(events, days) {
   _renderDailyChart(events, days);
   _renderTopPages(events);
   _renderSources(events);
+  _renderAccounts(profiles, progress);
   _renderLessonAnalytics(events);
+}
+
+function _renderAccounts(profiles, progress) {
+  const tbody = document.getElementById("analyticsAccounts");
+  const count = document.getElementById("analyticsAccountCount");
+  if (count) count.textContent = profiles.length.toLocaleString();
+
+  const completedByUser = new Map();
+  progress.forEach((row) => {
+    if (!row.completed_at) return;
+    completedByUser.set(row.user_id, (completedByUser.get(row.user_id) || 0) + 1);
+  });
+
+  tbody.innerHTML = profiles.length
+    ? profiles.slice(0, 25).map((profile) =>
+        `<tr><td data-label="Email">${_escapeHtml(profile.email || "—")}` +
+        `${profile.is_admin ? ' <span class="admin-badge">admin</span>' : ""}</td>` +
+        `<td data-label="Name">${_escapeHtml(profile.first_name || "—")}</td>` +
+        `<td data-label="Signed up">${_formatDate(profile.enrolled_at)}</td>` +
+        `<td data-label="Last active">${_formatDate(profile.last_active_at)}</td>` +
+        `<td data-label="Lessons complete"><strong>${completedByUser.get(profile.id) || 0}</strong> / ${PUBLISHED_LESSON_SLUGS.length}</td></tr>`,
+      ).join("")
+    : '<tr><td colspan="5" class="admin-empty">No accounts yet.</td></tr>';
 }
 
 function _renderDailyChart(events, days) {
