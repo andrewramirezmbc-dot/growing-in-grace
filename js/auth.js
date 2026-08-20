@@ -924,14 +924,63 @@ async function initDashboard() {
 
   _addDashboardHandoutLinks();
 
-  // Continue where you left off
+  // Keep the progress card and CTA aligned with the learner's actual state.
+  const lessonItems = Array.from(document.querySelectorAll(".lesson-item"));
+  const lastLessonItem =
+    profile && profile.last_lesson
+      ? lessonItems.find(
+          (item) =>
+            _slugFromHref(item.getAttribute("href") || "") ===
+            profile.last_lesson,
+        )
+      : null;
+  const nextIncompleteItem = lessonItems.find(
+    (item) =>
+      !completedSlugs.has(_slugFromHref(item.getAttribute("href") || "")),
+  );
+  const targetItem =
+    lastLessonItem &&
+    !completedSlugs.has(
+      _slugFromHref(lastLessonItem.getAttribute("href") || ""),
+    )
+      ? lastLessonItem
+      : nextIncompleteItem;
+
+  const upNextLabel = document.getElementById("upNextLabel");
+  const upNextTitle = document.getElementById("upNextTitle");
+  const upNextDescription = document.getElementById("upNextDescription");
+
+  if (targetItem) {
+    const lessonLabel = targetItem.querySelector(".lesson-item__week");
+    const lessonTitle = targetItem.querySelector(".lesson-item__title");
+    if (upNextLabel) {
+      upNextLabel.textContent =
+        "Up Next · " + (lessonLabel ? lessonLabel.textContent.trim() : "Lesson");
+    }
+    if (upNextTitle && lessonTitle) {
+      upNextTitle.textContent = lessonTitle.textContent.trim();
+    }
+    if (upNextDescription) {
+      upNextDescription.textContent =
+        "Continue with the next lesson in your discipleship path.";
+    }
+  } else {
+    if (upNextLabel) upNextLabel.textContent = "Curriculum Complete";
+    if (upNextTitle) upNextTitle.textContent = "You completed all 28 lessons.";
+    if (upNextDescription) {
+      upNextDescription.textContent =
+        "Return anytime to review a lesson or download its handout.";
+    }
+  }
+
   const continueBtn = document.getElementById("continueBtn");
   if (continueBtn) {
-    const href =
-      profile && profile.last_lesson
-        ? _hrefFromSlug(profile.last_lesson)
-        : "lessons/lesson-01.html";
-    continueBtn.href = href;
+    continueBtn.href = targetItem
+      ? targetItem.getAttribute("href")
+      : "lessons/lesson-01.html";
+    continueBtn.textContent = targetItem
+      ? "Continue Learning →"
+      : "Review the Curriculum →";
     continueBtn.style.display = "inline-flex";
   }
 
@@ -947,7 +996,7 @@ async function initDashboard() {
 
 function _addDashboardHandoutLinks() {
   document.querySelectorAll(".lesson-item").forEach((item) => {
-    if (item.nextElementSibling && item.nextElementSibling.classList.contains("lesson-handout-link")) {
+    if (item.parentElement.classList.contains("lesson-item-row")) {
       return;
     }
 
@@ -955,13 +1004,23 @@ function _addDashboardHandoutLinks() {
     const match = slug.match(/^lesson-(\d{2})$/);
     if (!match) return;
 
+    const row = document.createElement("div");
+    row.className = "lesson-item-row";
+    item.parentNode.insertBefore(row, item);
+    row.appendChild(item);
+
     const link = document.createElement("a");
     link.className = "lesson-handout-link";
     link.href = "/handouts/growing-in-grace/" + slug + "-handout.pdf";
     link.target = "_blank";
     link.rel = "noopener";
-    link.textContent = "Handout PDF";
-    item.insertAdjacentElement("afterend", link);
+    link.setAttribute(
+      "aria-label",
+      "Download Lesson " + Number(match[1]) + " handout PDF",
+    );
+    link.title = "Download handout PDF";
+    link.textContent = "↓";
+    row.appendChild(link);
   });
 }
 

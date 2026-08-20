@@ -5179,3 +5179,173 @@ main {
     gap: 0.25rem;
   }
 }
+
+/* =============================================
+   PUBLIC LAUNCH VISUAL POLISH
+   ============================================= */
+.curriculum-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vw, 7rem) 0 clamp(4rem, 8vw, 6rem);
+  border-bottom: 3px solid var(--brand-gold);
+  background:
+    linear-gradient(90deg, rgba(3, 43, 45, 0.97) 0%, rgba(7, 63, 65, 0.9) 54%, rgba(7, 63, 65, 0.66) 100%),
+    url("/public/images/growing-in-grace/lesson/lesson-hero-road-to-cross-wide.webp") center 48% / cover;
+  color: var(--brand-cream);
+}
+.curriculum-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 0;
+  height: 48%;
+  background: linear-gradient(180deg, transparent, rgba(3, 43, 45, 0.34));
+}
+.curriculum-hero .section__header {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.curriculum-hero .section__label {
+  color: var(--brand-sky);
+  opacity: 1;
+}
+.curriculum-hero .section__title {
+  color: var(--brand-cream);
+  font-size: clamp(2.5rem, 6vw, 4.85rem);
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+.curriculum-hero .section__title em {
+  color: var(--brand-blue-light);
+}
+.curriculum-hero .divider {
+  background: var(--brand-sky);
+}
+.curriculum-hero .section__desc {
+  max-width: 680px;
+  color: rgba(250, 252, 252, 0.84);
+  font-size: 1.04rem;
+}
+.curriculum-intro {
+  padding-top: clamp(3rem, 6vw, 4.5rem) !important;
+}
+.curriculum-cta {
+  padding: 3.5rem 2rem;
+  background: linear-gradient(135deg, var(--brand-teal-ink), var(--brand-teal-deep));
+  text-align: center;
+}
+.curriculum-cta h2 {
+  color: var(--brand-cream) !important;
+}
+.curriculum-cta .btn--dark {
+  border-color: var(--brand-mint);
+  background: var(--brand-mint);
+  color: var(--brand-teal-ink);
+}
+.curriculum-cta .btn--dark:hover {
+  border-color: var(--brand-sky);
+  background: var(--brand-sky);
+}
+
+.dash-header--v2 .dash-header__title {
+  max-width: 900px;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  line-height: 1.08;
+}
+.dashboard-curriculum .section-heading {
+  display: block;
+}
+.dashboard-curriculum .section-heading__eyebrow {
+  margin-bottom: 0.6rem;
+}
+.dashboard-curriculum .section-heading h2 {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+}
+.lesson-item-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 0.55rem;
+  align-items: stretch;
+  margin-bottom: 0.7rem;
+}
+.dashboard-curriculum .lesson-item-row .lesson-item {
+  min-width: 0;
+  margin-bottom: 0;
+}
+.lesson-handout-link {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #cfe4e0;
+  border-radius: 8px;
+  background: #fbfefd;
+  color: var(--brand-teal-deep);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.lesson-handout-link:hover,
+.lesson-handout-link:focus-visible {
+  border-color: var(--brand-sky);
+  background: var(--brand-mint);
+  color: var(--brand-teal-ink);
+}
+
+.teacher-portrait__ring {
+  overflow: hidden;
+}
+.teacher-portrait__ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+.about__photo {
+  object-fit: cover;
+  object-position: 50% 38%;
+  background: var(--brand-teal-deep);
+}
+.teacher-hero__actions .btn--sky {
+  border-color: var(--brand-sky);
+  background: var(--brand-sky);
+  color: var(--brand-teal-ink);
+}
+.teacher-hero__actions .btn--sky:hover {
+  border-color: var(--brand-mint);
+  background: var(--brand-mint);
+}
+.lesson-progress-nav a:not(:first-child) {
+  background: rgba(250, 252, 252, 0.05);
+  color: rgba(250, 252, 252, 0.94);
+}
+.lesson-progress-nav a[href="#complete"] {
+  color: var(--brand-gold);
+}
+
+@media (max-width: 640px) {
+  .curriculum-hero {
+    padding: 3.75rem 0 3.5rem;
+    background-position: 64% center;
+  }
+  .curriculum-hero .section__title {
+    font-size: clamp(2.35rem, 12vw, 3.2rem);
+  }
+  .curriculum-hero .section__desc,
+  .teacher-hero p,
+  .lesson-hero__intro {
+    font-size: 1rem !important;
+    line-height: 1.68 !important;
+  }
+  .dash-header--v2 .dash-header__title {
+    font-size: clamp(2rem, 10vw, 2.55rem);
+  }
+  .lesson-item-row {
+    grid-template-columns: minmax(0, 1fr) 44px;
+  }
+}
