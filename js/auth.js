@@ -72,19 +72,112 @@ async function signIn(email, password) {
 }
 
 /**
- * Start Google OAuth and return to the authenticated dashboard.
+ * Complete Google Identity Services sign-in with Supabase.
  */
-async function signInWithGoogle() {
+async function signInWithGoogleIdToken(token, nonce) {
   const sb = getSupabase();
   if (!sb) return { error: { message: "Supabase not configured." } };
 
-  const { data, error } = await sb.auth.signInWithOAuth({
+  const { data, error } = await sb.auth.signInWithIdToken({
     provider: "google",
-    options: {
-      redirectTo: window.location.origin + "/growing-in-grace-dashboard.html",
-    },
+    token,
+    nonce,
   });
   return { data, error };
+}
+
+let _googleNonce = null;
+
+function _waitForGoogleIdentity() {
+  return new Promise((resolve, reject) => {
+    const startedAt = Date.now();
+    const check = () => {
+      if (window.google?.accounts?.id) {
+        resolve(window.google.accounts.id);
+        return;
+      }
+      if (Date.now() - startedAt > 10000) {
+        reject(new Error("Google sign-in could not be loaded. Please try again."));
+        return;
+      }
+      window.setTimeout(check, 100);
+    };
+    check();
+  });
+}
+
+async function _createGoogleNonce() {
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  const nonce = btoa(String.fromCharCode(...bytes));
+  const hash = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(nonce),
+  );
+  const hashedNonce = Array.from(new Uint8Array(hash))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+  return { nonce, hashedNonce };
+}
+
+async function _initGoogleSignIn() {
+  const hosts = Array.from(document.querySelectorAll("[data-google-signin]"));
+  if (!hosts.length) return;
+
+  try {
+    if (typeof GOOGLE_CLIENT_ID === "undefined" || !GOOGLE_CLIENT_ID) {
+      throw new Error("Google sign-in is not configured.");
+    }
+
+    const googleIdentity = await _waitForGoogleIdentity();
+    const noncePair = await _createGoogleNonce();
+    _googleNonce = noncePair.nonce;
+
+    googleIdentity.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      nonce: noncePair.hashedNonce,
+      ux_mode: "popup",
+      callback: async (response) => {
+        hosts.forEach((host) => host.setAttribute("aria-busy", "true"));
+        const { error } = await signInWithGoogleIdToken(
+          response.credential,
+          _googleNonce,
+        );
+
+        if (error) {
+          hosts.forEach((host) => host.removeAttribute("aria-busy"));
+          _showAuthError(error.message);
+          return;
+        }
+
+        window.location.href =
+          window.location.origin + "/growing-in-grace-dashboard.html";
+      },
+    });
+
+    const visibleHost = hosts.find((host) => host.getBoundingClientRect().width);
+    const buttonWidth = Math.min(
+      400,
+      Math.floor(visibleHost?.getBoundingClientRect().width || 400),
+    );
+
+    hosts.forEach((host) => {
+      googleIdentity.renderButton(host, {
+        type: "standard",
+        theme: "outline",
+        size: "large",
+        text: "continue_with",
+        shape: "rectangular",
+        logo_alignment: "left",
+        width: buttonWidth,
+      });
+    });
+  } catch (error) {
+    hosts.forEach((host) => {
+      host.innerHTML =
+        '<p class="google-signin-error">Google sign-in is temporarily unavailable.</p>';
+    });
+    console.error("Growing in Grace Google sign-in:", error);
+  }
 }
 
 /**
@@ -645,27 +738,7 @@ function initAuthForm() {
   // Initialize password visibility toggles
   _initPasswordToggles();
 
-  document.querySelectorAll(".oauth-google-button").forEach((button) => {
-    button.addEventListener("click", async () => {
-      document.querySelectorAll(".oauth-google-button").forEach((item) => {
-        item.disabled = true;
-      });
-      button.classList.add("is-loading");
-      const buttonLabel = button.querySelector(".oauth-google-button__label");
-      if (buttonLabel) buttonLabel.textContent = "Connecting...";
-
-      const { error } = await signInWithGoogle();
-      if (error) {
-        document.querySelectorAll(".oauth-google-button").forEach((item) => {
-          item.disabled = false;
-          item.classList.remove("is-loading");
-          const itemLabel = item.querySelector(".oauth-google-button__label");
-          if (itemLabel) itemLabel.textContent = "Continue with Google";
-        });
-        _showAuthError(error.message);
-      }
-    });
-  });
+  _initGoogleSignIn();
 
   // Toggle between sign-up and sign-in
   if (toggleToSignin) {

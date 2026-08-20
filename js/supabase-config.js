@@ -12,3 +12,5 @@
 
 const SUPABASE_URL = "https://knxiaqztwpcyatlzwdon.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WsevxRjwDXTan9QkjtPSQg_gDTOi81B";
+const GOOGLE_CLIENT_ID =
+  "131327531795-itp9uk0h7nage37sslvn9mh97soci03d.apps.googleusercontent.com";

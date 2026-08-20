@@ -235,10 +235,7 @@
                 curriculum, tools, and resources.
               </p>
 
-              <button type="button" class="oauth-google-button">
-                <span class="oauth-google-button__mark" aria-hidden="true">G</span>
-                <span class="oauth-google-button__label">Continue with Google</span>
-              </button>
+              <div class="google-signin-host" data-google-signin></div>
               <div class="auth-divider"><span>or continue with email</span></div>
 
               <div class="signup-form__group">
@@ -288,10 +285,7 @@
                 Sign in to pick up where you left off.
               </p>
 
-              <button type="button" class="oauth-google-button">
-                <span class="oauth-google-button__mark" aria-hidden="true">G</span>
-                <span class="oauth-google-button__label">Continue with Google</span>
-              </button>
+              <div class="google-signin-host" data-google-signin></div>
               <div class="auth-divider"><span>or continue with email</span></div>
 
               <div class="signup-form__group">
@@ -355,8 +349,9 @@
 
     <!-- Supabase JS SDK (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="js/supabase-config.js?v=20260807-launch"></script>
-    <script src="js/auth.js?v=20260820-google-oauth"></script>
+    <script src="js/supabase-config.js?v=20260820-google-identity"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="js/auth.js?v=20260820-google-identity"></script>
     <script>
       (async () => {
         initMobileNav();
