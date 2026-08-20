@@ -235,6 +235,12 @@
                 curriculum, tools, and resources.
               </p>
 
+              <button type="button" class="oauth-google-button">
+                <span class="oauth-google-button__mark" aria-hidden="true">G</span>
+                <span class="oauth-google-button__label">Continue with Google</span>
+              </button>
+              <div class="auth-divider"><span>or continue with email</span></div>
+
               <div class="signup-form__group">
                 <label for="signupName">Full Name</label>
                 <input
@@ -281,6 +287,12 @@
               <p class="signup-form__intro">
                 Sign in to pick up where you left off.
               </p>
+
+              <button type="button" class="oauth-google-button">
+                <span class="oauth-google-button__mark" aria-hidden="true">G</span>
+                <span class="oauth-google-button__label">Continue with Google</span>
+              </button>
+              <div class="auth-divider"><span>or continue with email</span></div>
 
               <div class="signup-form__group">
                 <label for="signinEmail">Email Address</label>
@@ -334,6 +346,7 @@
       <div class="footer__links">
         <a href="/">Home</a>
         <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy</a>
       </div>
       <div class="footer__copy">
         &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
@@ -343,7 +356,7 @@
     <!-- Supabase JS SDK (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/supabase-config.js?v=20260807-launch"></script>
-    <script src="js/auth.js?v=20260429-elegant-complete"></script>
+    <script src="js/auth.js?v=20260820-google-oauth"></script>
     <script>
       (async () => {
         initMobileNav();

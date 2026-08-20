@@ -5349,3 +5349,97 @@ main {
     grid-template-columns: minmax(0, 1fr) 44px;
   }
 }
+
+.oauth-google-button {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #b8d8d5;
+  border-radius: 10px;
+  background: var(--brand-white);
+  color: var(--brand-teal-ink);
+  font: 700 0.94rem var(--font-body);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.oauth-google-button:hover,
+.oauth-google-button:focus-visible {
+  border-color: var(--brand-teal);
+  background: var(--brand-mint-soft);
+  box-shadow: 0 0 0 4px rgba(25, 159, 162, 0.1);
+  outline: none;
+}
+.oauth-google-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+.oauth-google-button__mark {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid #d9e4e2;
+  border-radius: 50%;
+  background: var(--brand-white);
+  color: #4285f4;
+  font-size: 1rem;
+  font-weight: 800;
+}
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.15rem 0;
+  color: #718182;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #dceae7;
+}
+.auth-divider span {
+  white-space: nowrap;
+}
+
+.legal-page {
+  background: linear-gradient(180deg, #fffdf9, var(--brand-mint-soft));
+}
+.legal-page__header {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0 2.5rem;
+  background: var(--brand-teal-ink);
+  color: var(--brand-cream);
+}
+.legal-page__header h1 {
+  margin: 0.35rem 0 0.5rem;
+  color: var(--brand-cream);
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  letter-spacing: 0;
+}
+.legal-page__header p:last-child {
+  margin: 0;
+  color: rgba(250, 252, 252, 0.72);
+}
+.legal-page__content {
+  padding: clamp(3rem, 7vw, 5rem) 0;
+}
+.legal-page__content h2 {
+  margin: 2.25rem 0 0.65rem;
+  color: var(--brand-teal-ink);
+  font-size: 1.45rem;
+}
+.legal-page__content h2:first-of-type {
+  margin-top: 2rem;
+}
+.legal-page__content p {
+  color: #526869;
+  line-height: 1.8;
+}

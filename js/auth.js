@@ -72,6 +72,22 @@ async function signIn(email, password) {
 }
 
 /**
+ * Start Google OAuth and return to the authenticated dashboard.
+ */
+async function signInWithGoogle() {
+  const sb = getSupabase();
+  if (!sb) return { error: { message: "Supabase not configured." } };
+
+  const { data, error } = await sb.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin + "/growing-in-grace-dashboard.html",
+    },
+  });
+  return { data, error };
+}
+
+/**
  * Send a password reset email.
  */
 async function resetPassword(email) {
@@ -414,7 +430,29 @@ async function getProfile() {
     .eq("id", user.id)
     .single();
 
-  return error ? null : data;
+  if (error) return null;
+
+  if (data && !data.first_name) {
+    const firstName = _firstNameFromUser(user);
+    if (firstName !== "Friend") {
+      const { error: updateError } = await sb
+        .from("profiles")
+        .update({ first_name: firstName })
+        .eq("id", user.id);
+      if (!updateError) data.first_name = firstName;
+    }
+  }
+
+  return data;
+}
+
+function _firstNameFromUser(user) {
+  const metadata = (user && user.user_metadata) || {};
+  const explicitName = metadata.first_name || metadata.given_name;
+  if (explicitName && explicitName.trim()) return explicitName.trim();
+
+  const fullName = metadata.full_name || metadata.name || "";
+  return fullName.trim().split(/\s+/)[0] || "Friend";
 }
 
 async function _ensureProfile(user) {
@@ -430,8 +468,7 @@ async function _ensureProfile(user) {
   _throwSupabaseError("Profile lookup failed", selectError);
   if (existing) return;
 
-  const firstName =
-    (user.user_metadata && user.user_metadata.first_name) || "Friend";
+  const firstName = _firstNameFromUser(user);
   const { error: insertError } = await sb.from("profiles").insert({
     id: user.id,
     email: user.email || "",
@@ -607,6 +644,28 @@ function initAuthForm() {
 
   // Initialize password visibility toggles
   _initPasswordToggles();
+
+  document.querySelectorAll(".oauth-google-button").forEach((button) => {
+    button.addEventListener("click", async () => {
+      document.querySelectorAll(".oauth-google-button").forEach((item) => {
+        item.disabled = true;
+      });
+      button.classList.add("is-loading");
+      const buttonLabel = button.querySelector(".oauth-google-button__label");
+      if (buttonLabel) buttonLabel.textContent = "Connecting...";
+
+      const { error } = await signInWithGoogle();
+      if (error) {
+        document.querySelectorAll(".oauth-google-button").forEach((item) => {
+          item.disabled = false;
+          item.classList.remove("is-loading");
+          const itemLabel = item.querySelector(".oauth-google-button__label");
+          if (itemLabel) itemLabel.textContent = "Continue with Google";
+        });
+        _showAuthError(error.message);
+      }
+    });
+  });
 
   // Toggle between sign-up and sign-in
   if (toggleToSignin) {
