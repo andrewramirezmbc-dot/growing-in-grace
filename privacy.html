@@ -10,7 +10,7 @@
     />
     <link rel="canonical" href="https://growing-in-grace.netlify.app/privacy.html" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=20260820-analytics" />
   </head>
   <body>
     <nav class="nav">
@@ -48,6 +48,12 @@
             If you sign in with Google, Google provides basic account identity
             information such as your name and email address. We also store your
             lesson activity, completion status, and most recently visited lesson.
+          </p>
+          <p>
+            We also collect basic website activity such as page views, lesson
+            views, handout downloads, video clicks, referring website domains,
+            and anonymous session identifiers. We do not intentionally store raw
+            IP addresses or full referring URLs in the analytics dashboard.
           </p>
 
           <h2>How We Use Information</h2>
@@ -109,7 +115,9 @@
       </div>
     </footer>
 
-    <script src="js/auth.js?v=20260820-google-oauth"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js?v=20260807-launch"></script>
+    <script src="js/auth.js?v=20260820-analytics"></script>
     <script>initMobileNav();</script>
   </body>
 </html>

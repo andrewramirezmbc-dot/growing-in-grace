@@ -5199,6 +5199,180 @@ a.esv-crossref-link:focus-visible {
   }
 }
 
+/* Private analytics dashboard */
+.analytics-container {
+  max-width: 1080px;
+}
+.analytics-header {
+  text-align: left;
+}
+.analytics-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-light);
+}
+.analytics-toolbar label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--brand-teal-deep);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.analytics-toolbar select,
+.analytics-refresh {
+  min-height: 42px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--brand-white);
+  color: var(--brand-charcoal);
+  padding: 0.55rem 0.8rem;
+  font: inherit;
+}
+.analytics-refresh {
+  border-color: var(--brand-teal-deep);
+  background: var(--brand-teal-deep);
+  color: var(--brand-white);
+  cursor: pointer;
+  font-weight: 700;
+}
+.analytics-refresh:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.analytics-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  background: var(--brand-white);
+  overflow: hidden;
+}
+.analytics-kpi {
+  min-height: 118px;
+  padding: 1.2rem 1.35rem;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+.analytics-kpi:nth-child(3n) {
+  border-right: 0;
+}
+.analytics-kpi:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+.analytics-kpi span {
+  display: block;
+  color: var(--brand-gray);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.analytics-kpi strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--brand-teal-deep);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  line-height: 1;
+}
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl);
+}
+.analytics-grid .admin-section {
+  margin-top: 0;
+}
+.analytics-chart {
+  display: grid;
+  grid-template-columns: repeat(30, minmax(8px, 1fr));
+  align-items: end;
+  min-height: 250px;
+  padding: 1.5rem 1rem 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  background: var(--brand-white);
+  overflow-x: auto;
+}
+.analytics-chart__day {
+  display: grid;
+  grid-template-rows: 1rem 170px 2.2rem;
+  align-items: end;
+  justify-items: center;
+  min-width: 18px;
+  height: 100%;
+}
+.analytics-chart__value {
+  color: var(--brand-gray);
+  font-size: 0.62rem;
+}
+.analytics-chart__bar {
+  width: min(72%, 18px);
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--brand-teal);
+}
+.analytics-chart__label {
+  display: block;
+  width: 2.5rem;
+  overflow: hidden;
+  color: var(--brand-gray);
+  font-size: 0.58rem;
+  line-height: 1.1;
+  text-align: center;
+}
+.analytics-privacy {
+  margin: 0 0 var(--space-3xl);
+  color: var(--brand-gray);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .analytics-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .analytics-kpi,
+  .analytics-kpi:nth-child(3n) {
+    border-right: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .analytics-kpi:nth-child(2n) {
+    border-right: 0;
+  }
+  .analytics-kpi:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .analytics-toolbar select,
+  .analytics-refresh {
+    width: 100%;
+  }
+  .analytics-kpi {
+    min-height: 100px;
+    padding: 1rem;
+  }
+  .analytics-kpi strong {
+    font-size: 1.65rem;
+  }
+}
+
 /* =============================================
    PUBLIC LAUNCH VISUAL POLISH
    ============================================= */

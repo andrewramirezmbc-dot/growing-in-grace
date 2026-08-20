@@ -23,6 +23,63 @@ function getSupabase() {
 }
 
 // =============================================
+// PRIVACY-CONSCIOUS ANALYTICS
+// =============================================
+
+function _analyticsSessionId() {
+  const key = "gig_analytics_session";
+  try {
+    let value = sessionStorage.getItem(key);
+    if (!value) {
+      value = crypto.randomUUID();
+      sessionStorage.setItem(key, value);
+    }
+    return value;
+  } catch (_) {
+    return crypto.randomUUID();
+  }
+}
+
+function _analyticsLessonSlug() {
+  const match = window.location.pathname.match(/\/(lesson-\d{2})(?:\.html)?$/);
+  return match ? match[1] : null;
+}
+
+function _analyticsReferrerHost() {
+  if (!document.referrer) return null;
+  try {
+    const host = new URL(document.referrer).hostname;
+    return host === window.location.hostname ? null : host;
+  } catch (_) {
+    return null;
+  }
+}
+
+async function trackAnalyticsEvent(eventName, overrides = {}) {
+  if (
+    window.location.protocol !== "https:" ||
+    ["/admin.html", "/analytics.html"].includes(window.location.pathname)
+  ) {
+    return;
+  }
+
+  const sb = getSupabase();
+  if (!sb) return;
+
+  try {
+    await sb.rpc("track_analytics_event", {
+      p_event_name: eventName,
+      p_page_path: window.location.pathname.slice(0, 300) || "/",
+      p_lesson_slug: overrides.lessonSlug ?? _analyticsLessonSlug(),
+      p_session_id: _analyticsSessionId(),
+      p_referrer_host: _analyticsReferrerHost(),
+    });
+  } catch (_) {
+    // Analytics must never interrupt navigation, authentication, or lessons.
+  }
+}
+
+// =============================================
 // AUTH FUNCTIONS
 // =============================================
 
@@ -57,6 +114,7 @@ async function signUp(email, password, firstName) {
       data: { first_name: firstName },
     },
   });
+  if (!error) trackAnalyticsEvent("signup_complete");
   return { data, error };
 }
 
@@ -68,6 +126,7 @@ async function signIn(email, password) {
   if (!sb) return { error: { message: "Supabase not configured." } };
 
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (!error) trackAnalyticsEvent("signin_complete");
   return { data, error };
 }
 
@@ -83,6 +142,7 @@ async function signInWithGoogleIdToken(token, nonce) {
     token,
     nonce,
   });
+  if (!error) trackAnalyticsEvent("signin_complete");
   return { data, error };
 }
 
@@ -1593,9 +1653,39 @@ function initEsvCrossReferences() {
   document.body.appendChild(script);
 }
 
+function initAnalyticsTracking() {
+  if (window.location.protocol !== "https:") return;
+
+  trackAnalyticsEvent("page_view");
+  const lessonSlug = _analyticsLessonSlug();
+  if (lessonSlug) trackAnalyticsEvent("lesson_view", { lessonSlug });
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    const text = (link.textContent || "").trim().toLowerCase();
+    if (/\/handouts\/growing-in-grace\/lesson-\d{2}-handout\.pdf/i.test(href)) {
+      const match = href.match(/(lesson-\d{2})-handout/i);
+      trackAnalyticsEvent("handout_download", {
+        lessonSlug: match ? match[1].toLowerCase() : lessonSlug,
+      });
+    } else if (/youtu(?:\.be|be\.com)/i.test(href)) {
+      trackAnalyticsEvent("video_click", { lessonSlug });
+    } else if (
+      text.includes("start the curriculum") ||
+      text.includes("start learning")
+    ) {
+      trackAnalyticsEvent("curriculum_start");
+    }
+  });
+}
+
 // Auto-init common features when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initModuleAccordions();
   initEsvCrossReferences();
+  initAnalyticsTracking();
 });

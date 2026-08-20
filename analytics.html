@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Analytics - Growing in Grace</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css?v=20260820-analytics" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="/">Growing <i>in</i> Grace</a>
+        <button class="nav__hamburger" aria-label="Menu">&#9776;</button>
+        <ul class="nav__links">
+          <li><a href="/admin.html">Users</a></li>
+          <li><a href="/analytics.html" aria-current="page">Analytics</a></li>
+          <li><a href="/growing-in-grace-dashboard.html">Dashboard</a></li>
+          <li>
+            <a href="#" onclick="signOut(); return false;" class="nav__cta"
+              >Sign Out</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="admin-header analytics-header">
+      <div class="container analytics-container">
+        <p class="admin-header__eyebrow">Admin Analytics</p>
+        <h1 class="admin-header__title">Audience and engagement</h1>
+        <p class="admin-header__sub">
+          Private launch metrics for Growing in Grace
+        </p>
+      </div>
+    </section>
+
+    <main>
+      <div class="container analytics-container">
+        <div id="analyticsNotice" class="admin-demo-banner" hidden></div>
+
+        <div class="analytics-toolbar" aria-label="Analytics controls">
+          <div>
+            <label for="analyticsRange">Reporting period</label>
+            <select id="analyticsRange">
+              <option value="7">Last 7 days</option>
+              <option value="30" selected>Last 30 days</option>
+              <option value="90">Last 90 days</option>
+            </select>
+          </div>
+          <button id="analyticsRefresh" class="analytics-refresh" type="button">
+            Refresh
+          </button>
+        </div>
+
+        <section class="analytics-kpis" aria-label="Key metrics">
+          <article class="analytics-kpi">
+            <span>Unique sessions</span>
+            <strong id="metricVisitors">&mdash;</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>Page views</span>
+            <strong id="metricPageViews">&mdash;</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>Lesson views</span>
+            <strong id="metricLessonViews">&mdash;</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>Handout downloads</span>
+            <strong id="metricDownloads">&mdash;</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>New accounts</span>
+            <strong id="metricSignups">&mdash;</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>Visitor conversion</span>
+            <strong id="metricConversion">&mdash;</strong>
+          </article>
+        </section>
+
+        <section class="admin-section">
+          <div class="admin-section__header">
+            <h2 class="admin-section__title">Daily activity</h2>
+            <p class="admin-section__meta">Page and lesson views</p>
+          </div>
+          <div id="analyticsChart" class="analytics-chart" aria-label="Daily activity chart">
+            <p class="admin-empty">Loading activity&hellip;</p>
+          </div>
+        </section>
+
+        <div class="analytics-grid">
+          <section class="admin-section">
+            <div class="admin-section__header">
+              <h2 class="admin-section__title">Top pages</h2>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead><tr><th>Page</th><th>Views</th></tr></thead>
+                <tbody id="analyticsPages"><tr><td colspan="2" class="admin-empty">Loading&hellip;</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="admin-section">
+            <div class="admin-section__header">
+              <h2 class="admin-section__title">Acquisition</h2>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead><tr><th>Source</th><th>Sessions</th></tr></thead>
+                <tbody id="analyticsSources"><tr><td colspan="2" class="admin-empty">Loading&hellip;</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="admin-section">
+          <div class="admin-section__header">
+            <h2 class="admin-section__title">Lesson engagement</h2>
+            <p class="admin-section__meta">Views and handout downloads</p>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr><th>Lesson</th><th>Title</th><th>Views</th><th>Downloads</th></tr>
+              </thead>
+              <tbody id="analyticsLessons">
+                <tr><td colspan="4" class="admin-empty">Loading lesson activity&hellip;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <p class="analytics-privacy">
+          Privacy note: this dashboard uses anonymous session identifiers and does not
+          intentionally store raw IP addresses or full referring URLs.
+        </p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__brand">Growing in Grace</div>
+      <div class="footer__links">
+        <a href="/admin.html">Admin</a>
+        <a href="/growing-in-grace-dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer__copy">
+        &copy; 2026 Dr. Andrew T. Burggraff &middot; Shepherds Press
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js?v=20260807-launch"></script>
+    <script src="js/auth.js?v=20260820-analytics"></script>
+    <script src="js/admin.js?v=20260820-analytics"></script>
+    <script src="js/analytics.js?v=20260820-analytics"></script>
+    <script>initAnalytics();</script>
+  </body>
+</html>
