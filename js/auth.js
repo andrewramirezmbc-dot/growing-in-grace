@@ -1355,7 +1355,7 @@ function _enhanceLessonPageV2(lessonSlug) {
         _lessonMediaMeta(lessonNumber, handoutHref),
       );
       embedLabel.innerHTML =
-        '<span class="lesson-watch-pill"><span aria-hidden="true">&#9654;</span> Watch</span>' +
+        '<span class="lesson-watch-pill"><span aria-hidden="true">&#9654;</span> Watch Lesson</span>' +
         '<div class="lesson-watch-copy"><span class="embed-block__subtitle">Clear, accessible teaching at your own pace</span></div>';
     }
   }
@@ -1505,16 +1505,30 @@ function _lessonMediaMeta(lessonNumber, handoutHref) {
 
   return (
     '<div class="lesson-media-meta" aria-label="Lesson details">' +
-    '<div class="lesson-media-meta__item"><span class="lesson-media-meta__icon" aria-hidden="true">&#9719;</span>' +
+    '<div class="lesson-media-meta__item">' + _lessonMetaIcon("clock") +
     '<span><strong>~' + minutes + ' min</strong><small>video lesson</small></span></div>' +
-    '<div class="lesson-media-meta__item"><span class="lesson-media-meta__icon" aria-hidden="true">&#9655;</span>' +
+    '<div class="lesson-media-meta__item">' + _lessonMetaIcon("play") +
     '<span><strong>Lesson video</strong><small>watch at your pace</small></span></div>' +
     '<a class="lesson-media-meta__item" href="' + _escapeInlineHtml(handoutHref) + '" target="_blank" rel="noopener">' +
-    '<span class="lesson-media-meta__icon" aria-hidden="true">PDF</span>' +
+    _lessonMetaIcon("file") +
     '<span><strong>Companion PDF</strong><small>included with lesson</small></span></a>' +
-    '<div class="lesson-media-meta__item lesson-media-meta__item--teacher"><span class="lesson-media-meta__icon" aria-hidden="true">&#9675;</span>' +
+    '<div class="lesson-media-meta__item lesson-media-meta__item--teacher">' + _lessonMetaIcon("user") +
     '<span><small>Taught by</small><strong>Dr. Andrew T. Burggraff</strong></span></div>' +
     '</div>'
+  );
+}
+
+function _lessonMetaIcon(name) {
+  const paths = {
+    clock: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+    play: '<path d="m7 4 12 8-12 8V4Z"></path>',
+    file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6"></path><path d="M8 15h8M8 18h6"></path>',
+    user: '<circle cx="12" cy="7" r="4"></circle><path d="M4 22v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"></path>',
+  };
+  return (
+    '<svg class="lesson-media-meta__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
+    (paths[name] || paths.file) +
+    '</svg>'
   );
 }
 
