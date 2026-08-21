@@ -1350,16 +1350,13 @@ function _enhanceLessonPageV2(lessonSlug) {
     embed.id = "watch";
     const embedLabel = embed.querySelector(".embed-block__label");
     if (embedLabel) {
-      const lessonTitle = title ? title.textContent.trim() : formattedLesson;
       embedLabel.insertAdjacentHTML(
         "beforebegin",
         _lessonMediaMeta(lessonNumber, handoutHref),
       );
       embedLabel.innerHTML =
         '<span class="lesson-watch-pill"><span aria-hidden="true">&#9654;</span> Watch</span>' +
-        '<div class="lesson-watch-copy"><span class="embed-block__title">' +
-        _escapeInlineHtml(lessonTitle) +
-        '</span><span class="embed-block__subtitle">Clear, accessible teaching at your own pace</span></div>';
+        '<div class="lesson-watch-copy"><span class="embed-block__subtitle">Clear, accessible teaching at your own pace</span></div>';
     }
   }
 

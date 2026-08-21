@@ -3081,13 +3081,12 @@ a.esv-crossref-link:focus-visible {
 /* Lesson media details and next-step card */
 .lesson-media-meta {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 0.82fr 1fr 1fr 1.35fr;
   gap: 0;
-  padding: 1.15rem 1.25rem 0;
-  border: 1px solid #ded8ca;
-  border-bottom: 0;
-  border-radius: 13px 13px 0 0;
-  background: #fffaf0;
+  padding: 0.85rem 0;
+  border-top: 1px solid #d5e1de;
+  border-bottom: 1px solid #d5e1de;
+  background: rgba(255, 255, 255, 0.78);
   color: var(--brand-teal-ink);
 }
 .lesson-media-meta__item {
@@ -3095,18 +3094,18 @@ a.esv-crossref-link:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  padding: 0 1rem 1rem;
-  border-right: 1px solid #e8dfcf;
+  padding: 0.15rem 1rem;
+  border-right: 1px solid #dbe6e3;
   color: inherit;
 }
 .lesson-media-meta__item:nth-child(3) {
+  border-right: 1px solid #dbe6e3;
+}
+.lesson-media-meta__item:last-child {
   border-right: 0;
 }
 .lesson-media-meta__item--teacher {
-  grid-column: 1 / -1;
-  padding-top: 1rem;
-  border-top: 1px solid #e8dfcf;
-  border-right: 0;
+  grid-column: auto;
 }
 .lesson-media-meta__icon {
   flex: 0 0 30px;
@@ -3138,33 +3137,35 @@ a.esv-crossref-link:focus-visible {
   line-height: 1.35;
 }
 .lesson-media-meta__item--teacher span:last-child {
-  gap: 0.3rem 0.55rem;
+  display: block;
 }
 .lesson-media-meta__item--teacher small {
+  display: block;
+  margin-bottom: 0.15rem;
   font-size: 0.85rem;
 }
 .lesson-page-v2 .embed-block__label {
-  min-height: 96px;
+  min-height: 72px;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1.15rem;
-  margin-bottom: 0.65rem;
-  padding: 1rem 1.25rem;
-  border-color: #ded8ca;
-  border-radius: 0 0 13px 13px;
-  background: #fffaf0;
-  box-shadow: 0 12px 28px rgba(7, 63, 65, 0.08);
+  gap: 1rem;
+  margin: 0.7rem 0;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-teal-deep);
+  box-shadow: none;
 }
 .lesson-watch-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  min-width: 138px;
-  padding: 0.78rem 1.15rem;
+  min-width: 126px;
+  padding: 0.68rem 1rem;
   border-radius: 999px;
-  background: var(--brand-teal-deep);
-  color: var(--brand-gold);
+  background: var(--brand-blue);
+  color: var(--brand-cream);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.13em;
@@ -3176,12 +3177,9 @@ a.esv-crossref-link:focus-visible {
 .lesson-watch-copy {
   min-width: 0;
 }
-.lesson-page-v2 .lesson-watch-copy .embed-block__title {
-  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
-  line-height: 1.15;
-}
 .lesson-page-v2 .lesson-watch-copy .embed-block__subtitle {
-  margin-top: 0.28rem;
+  margin: 0;
+  color: rgba(250, 252, 252, 0.82);
   font-size: 0.9rem;
 }
 .lesson-bottom-next {
@@ -3230,27 +3228,27 @@ a.esv-crossref-link:focus-visible {
 @media (max-width: 640px) {
   .lesson-media-meta {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 1rem 0.85rem 0;
+    padding: 0.75rem 0;
   }
   .lesson-media-meta__item {
     align-items: flex-start;
-    padding: 0 0.7rem 0.9rem;
+    padding: 0.55rem 0.7rem;
   }
   .lesson-media-meta__item:nth-child(2) {
     border-right: 0;
   }
   .lesson-media-meta__item:nth-child(3),
   .lesson-media-meta__item--teacher {
-    grid-column: 1 / -1;
-    padding-top: 0.9rem;
-    border-top: 1px solid #e8dfcf;
+    grid-column: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid #dbe6e3;
   }
   .lesson-media-meta__item:nth-child(3) {
-    border-right: 0;
+    border-right: 1px solid #dbe6e3;
   }
   .lesson-page-v2 .embed-block__label {
-    grid-template-columns: 1fr;
-    justify-items: start;
+    grid-template-columns: auto 1fr;
+    align-items: center;
     min-height: 0;
   }
   .lesson-watch-pill {
