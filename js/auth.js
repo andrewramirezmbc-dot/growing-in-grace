@@ -1323,6 +1323,9 @@ function _enhanceLessonPageV2(lessonSlug) {
   const intro = header ? header.querySelector("p") : null;
   const lessonNumber = (lessonSlug || "").replace("lesson-", "");
   const formattedLesson = lessonNumber ? "Lesson " + lessonNumber : "Lesson";
+  const handoutHref = lessonNumber
+    ? "/handouts/growing-in-grace/lesson-" + lessonNumber + "-handout.pdf"
+    : "/handouts/growing-in-grace/";
 
   if (intro) intro.classList.add("lesson-hero__intro");
   if (title && title.textContent.includes("Look Like?") && !title.querySelector("em")) {
@@ -1335,15 +1338,30 @@ function _enhanceLessonPageV2(lessonSlug) {
     progressNav.setAttribute("aria-label", "Lesson sections");
     progressNav.innerHTML =
       '<a href="#watch">Watch</a>' +
-      '<a href="#watch">Listen</a>' +
       '<a href="#scripture-focus">Read</a>' +
+      '<a href="#review">Review</a>' +
       '<a href="#complete">Complete</a>';
     const container = header.querySelector(".container");
     if (container) container.appendChild(progressNav);
   }
 
   const embed = document.querySelector(".embed-block");
-  if (embed) embed.id = "watch";
+  if (embed) {
+    embed.id = "watch";
+    const embedLabel = embed.querySelector(".embed-block__label");
+    if (embedLabel) {
+      const lessonTitle = title ? title.textContent.trim() : formattedLesson;
+      embedLabel.insertAdjacentHTML(
+        "beforebegin",
+        _lessonMediaMeta(lessonNumber, handoutHref),
+      );
+      embedLabel.innerHTML =
+        '<span class="lesson-watch-pill"><span aria-hidden="true">&#9654;</span> Watch</span>' +
+        '<div class="lesson-watch-copy"><span class="embed-block__title">' +
+        _escapeInlineHtml(lessonTitle) +
+        '</span><span class="embed-block__subtitle">Clear, accessible teaching at your own pace</span></div>';
+    }
+  }
 
   const scriptureSection = document.querySelector(".lesson-section");
   if (scriptureSection) scriptureSection.classList.add("lesson-section--source");
@@ -1362,17 +1380,20 @@ function _enhanceLessonPageV2(lessonSlug) {
     .filter(Boolean);
   const conceptSentences = _splitSentences(introText);
   const nextLink = document.querySelector(".lesson-nav__link--next");
-  const nextHref = nextLink ? nextLink.getAttribute("href") || "#" : "#";
+  const nextHref = nextLink
+    ? nextLink.getAttribute("href") || "#"
+    : "/growing-in-grace-dashboard.html";
   const nextTitleEl = nextLink ? nextLink.querySelector(".lesson-nav__title") : null;
   const nextTitle = nextTitleEl
     ? nextTitleEl.textContent.trim()
-    : "Continue to the next lesson";
+    : "You’ve reached the end of Growing in Grace";
+  const nextEyebrow = nextLink ? "Up Next" : "Curriculum Complete";
+  const nextDescription = nextLink
+    ? "Continue your curriculum with the next lesson."
+    : "Return to your dashboard to review your progress and revisit any lesson.";
+  const nextAction = nextLink ? "Start Lesson" : "Return to Dashboard";
   const lessonNavOverview = document.querySelector(".lesson-nav__overview");
   const lessonNav = document.querySelector(".lesson-nav");
-  const handoutHref = lessonNumber
-    ? "/handouts/growing-in-grace/lesson-" + lessonNumber + "-handout.pdf"
-    : "/handouts/growing-in-grace/";
-
   if (lessonNavOverview) lessonNavOverview.classList.add("lesson-nav__overview--source");
   if (lessonNav) lessonNav.classList.add("lesson-nav--source");
 
@@ -1393,7 +1414,7 @@ function _enhanceLessonPageV2(lessonSlug) {
     '<div class="scripture-list scripture-list--large">' +
     scriptureRefs.map((ref) => '<span class="scripture-tag">' + _escapeInlineHtml(ref) + "</span>").join("") +
     "</div></section>" +
-    '<section class="lesson-section lesson-section--outcomes" id="takeaways">' +
+    '<section class="lesson-section lesson-section--outcomes" id="review">' +
     _lessonEditorialHeading("Section 03", "By the End,", "You Will...") +
     '<div class="outcome-grid">' +
     _outcomeCard("A", "Understand", "Name the primary biblical truth taught in " + formattedLesson + ".") +
@@ -1412,15 +1433,21 @@ function _enhanceLessonPageV2(lessonSlug) {
     "</section>" +
     '<section class="lesson-bottom-complete" id="complete">' +
     '<h2>Complete this lesson<br><em>and continue growing.</em></h2>' +
-    "<p>You've watched, you've listened, you've read. Click complete and keep moving through the course.</p>" +
+    "<p>You've watched, read, and reviewed the lesson. Mark it complete and keep moving through the course.</p>" +
     '<button type="button" class="lesson-complete-proxy"><span class="lesson-complete-proxy__indicator" aria-hidden="true"></span><span>Mark Lesson Complete</span></button>' +
     "</section>" +
     '<a class="lesson-bottom-next" href="' +
     _escapeInlineHtml(nextHref) +
     '">' +
-    '<span>Up Next</span><h2>' +
+    '<div class="lesson-bottom-next__copy"><span>' +
+    _escapeInlineHtml(nextEyebrow) +
+    '</span><h2>' +
     _escapeInlineHtml(nextTitle) +
-    '</h2><strong>Start Lesson &rarr;</strong></a>';
+    '</h2><p>' +
+    _escapeInlineHtml(nextDescription) +
+    '</p></div><strong>' +
+    _escapeInlineHtml(nextAction) +
+    ' <span aria-hidden="true">&rarr;</span></strong></a>';
 
   if (lessonNav) {
     lessonNav.insertAdjacentElement("afterend", generated);
@@ -1468,6 +1495,29 @@ function _lessonEditorialHeading(section, first, accent) {
     " <em>" +
     _escapeInlineHtml(accent) +
     "</em></h2>"
+  );
+}
+
+function _lessonMediaMeta(lessonNumber, handoutHref) {
+  const runtimes = [
+    12, 10, 8, 8, 11, 8, 12, 15, 13, 13, 17, 14, 10, 15,
+    12, 12, 13, 15, 12, 18, 16, 20, 12, 16, 15, 17, 17, 21,
+  ];
+  const lessonIndex = Number(lessonNumber) - 1;
+  const minutes = runtimes[lessonIndex] || 15;
+
+  return (
+    '<div class="lesson-media-meta" aria-label="Lesson details">' +
+    '<div class="lesson-media-meta__item"><span class="lesson-media-meta__icon" aria-hidden="true">&#9719;</span>' +
+    '<span><strong>~' + minutes + ' min</strong><small>video lesson</small></span></div>' +
+    '<div class="lesson-media-meta__item"><span class="lesson-media-meta__icon" aria-hidden="true">&#9655;</span>' +
+    '<span><strong>Lesson video</strong><small>watch at your pace</small></span></div>' +
+    '<a class="lesson-media-meta__item" href="' + _escapeInlineHtml(handoutHref) + '" target="_blank" rel="noopener">' +
+    '<span class="lesson-media-meta__icon" aria-hidden="true">PDF</span>' +
+    '<span><strong>Companion PDF</strong><small>included with lesson</small></span></a>' +
+    '<div class="lesson-media-meta__item lesson-media-meta__item--teacher"><span class="lesson-media-meta__icon" aria-hidden="true">&#9675;</span>' +
+    '<span><small>Taught by</small><strong>Dr. Andrew T. Burggraff</strong></span></div>' +
+    '</div>'
   );
 }
 
