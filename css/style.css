@@ -4310,8 +4310,9 @@ a.esv-crossref-link:focus-visible {
 .book-slide__cover {
   width: 118px;
   aspect-ratio: 0.68;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 6px;
+  background: #f7f8f6;
   box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
 }
 .book-slide__cover {
