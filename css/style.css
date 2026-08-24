@@ -5634,8 +5634,97 @@ a.esv-crossref-link:focus-visible {
   color: rgba(250, 252, 252, 0.84);
   font-size: 1.04rem;
 }
+.curriculum-hero--flagship .section__header {
+  margin-left: 0;
+  text-align: left;
+}
+.curriculum-hero--flagship .divider {
+  margin-left: 0;
+}
+.curriculum-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.65rem;
+}
+.curriculum-hero__actions .btn--sky {
+  border-color: var(--brand-sky);
+  background: var(--brand-sky);
+  color: var(--brand-teal-ink);
+}
+.curriculum-hero__actions .btn--ghost {
+  border-color: rgba(250, 252, 252, 0.62);
+  color: var(--brand-cream);
+}
 .curriculum-intro {
   padding-top: clamp(3rem, 6vw, 4.5rem) !important;
+}
+.flagship-overview {
+  max-width: 1100px;
+}
+.flagship-overview__header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.7fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: end;
+  margin-bottom: 2rem;
+}
+.flagship-overview__header h2,
+.flagship-start h2 {
+  margin-top: 0.5rem;
+  color: var(--brand-teal-ink);
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  line-height: 1.08;
+}
+.flagship-overview__header p,
+.flagship-start p {
+  color: var(--brand-gray);
+  line-height: 1.72;
+}
+.flagship-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 2rem;
+  border-top: 1px solid rgba(14, 93, 95, 0.16);
+  border-bottom: 1px solid rgba(14, 93, 95, 0.16);
+}
+.flagship-facts > div {
+  min-width: 0;
+  padding: 1.35rem 1rem;
+  border-right: 1px solid rgba(14, 93, 95, 0.16);
+}
+.flagship-facts > div:last-child {
+  border-right: 0;
+}
+.flagship-facts strong,
+.flagship-facts span {
+  display: block;
+}
+.flagship-facts strong {
+  color: var(--brand-teal-ink);
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+}
+.flagship-facts span {
+  margin-top: 0.15rem;
+  color: var(--brand-gray);
+  font-size: 0.82rem;
+}
+.flagship-start {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.4rem 0 0;
+}
+.flagship-start h2 {
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+}
+.flagship-start p {
+  margin-top: 0.35rem;
+}
+.resource-final-cta {
+  background: linear-gradient(180deg, #f7fbf9, #eef8f5);
 }
 .curriculum-cta {
   padding: 3.5rem 2rem;
@@ -5748,6 +5837,29 @@ a.esv-crossref-link:focus-visible {
   .lesson-hero__intro {
     font-size: 1rem !important;
     line-height: 1.68 !important;
+  }
+  .curriculum-hero__actions,
+  .flagship-start {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .curriculum-hero__actions .btn,
+  .flagship-start .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .flagship-overview__header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .flagship-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .flagship-facts > div:nth-child(2) {
+    border-right: 0;
+  }
+  .flagship-facts > div:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(14, 93, 95, 0.16);
   }
   .dash-header--v2 .dash-header__title {
     font-size: clamp(2rem, 10vw, 2.55rem);
