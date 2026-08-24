@@ -1,6 +1,6 @@
-# Growing in Grace
+# The Growing Disciple
 
-A discipleship platform for Dr. Andrew T. Burggraff, built around his curriculum _Growing in Grace: A Discipleship Manual for New Believers_ (Shepherds Press, 2025).
+A biblical discipleship platform for Dr. Andrew T. Burggraff, built around his curriculum _Growing in Grace: A Discipleship Manual for New Believers_ (Shepherds Press, 2025).
 
 ## Stack
 

@@ -14,7 +14,7 @@ function getSupabase() {
     SUPABASE_URL.includes("YOUR-PROJECT")
   ) {
     console.warn(
-      "Growing in Grace: Supabase not configured. Running in demo mode.",
+      "The Growing Disciple: Supabase not configured. Running in demo mode.",
     );
     return null;
   }
@@ -236,7 +236,7 @@ async function _initGoogleSignIn() {
       host.innerHTML =
         '<p class="google-signin-error">Google sign-in is temporarily unavailable.</p>';
     });
-    console.error("Growing in Grace Google sign-in:", error);
+    console.error("The Growing Disciple Google sign-in:", error);
   }
 }
 
@@ -1233,8 +1233,8 @@ async function initLessonPage(lessonSlug) {
     } catch (e) {
       console.warn(
         e && e.message
-          ? "Growing in Grace: unable to record lesson start - " + e.message
-          : "Growing in Grace: unable to record lesson start",
+          ? "The Growing Disciple: unable to record lesson start - " + e.message
+          : "The Growing Disciple: unable to record lesson start",
       );
     }
   } else {
@@ -1279,8 +1279,8 @@ async function initLessonPage(lessonSlug) {
       setCompleteState(false);
       console.error(
         e && e.message
-          ? "Growing in Grace: unable to mark lesson complete - " + e.message
-          : "Growing in Grace: unable to mark lesson complete",
+          ? "The Growing Disciple: unable to mark lesson complete - " + e.message
+          : "The Growing Disciple: unable to mark lesson complete",
       );
     }
   };

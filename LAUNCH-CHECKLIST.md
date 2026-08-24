@@ -12,7 +12,7 @@ Track of every remaining TODO before public launch. Items are grouped by owner. 
 - [ ] **Restore or replace the Supabase project** — `knxiaqztwpcyatlzwdon.supabase.co` currently returns DNS `NXDOMAIN`. Auth and progress tracking cannot work until that project is reachable or the config is updated to a new project.
 - [ ] **Run migration** — paste `supabase/migrations/001_initial_schema.sql` into Supabase Studio SQL Editor and execute. Verify both `profiles` and `lesson_progress` tables exist with RLS enabled.
 - [ ] **Set yourself as admin** — after your first signup, open Supabase Studio → Table Editor → `profiles` → your row → set `is_admin = true`. This is how you access `/admin.html`.
-- [x] ~~**Netlify site setup** — connected to `main` and live at `https://growing-in-grace.netlify.app`.~~
+- [x] ~~**Netlify site setup** — connected to `main` and live at `https://thegrowingdisciple.org`.~~
 - [ ] **Netlify environment variables** — if you prefer to inject Supabase credentials via env instead of committing them, adjust `js/supabase-config.js` to read from `window.ENV` and add a Netlify build plugin or snippet injection. _(V2 improvement — for v1, committing the anon key is acceptable since RLS is the real security layer.)_
 - [ ] **Custom domain decision** — the Netlify URL is launch-ready; update canonical URLs, sitemap, and robots again if a custom domain is connected.
 - [x] ~~**Update sitemap.xml + robots.txt domain** — both now point to the live Netlify URL.~~
