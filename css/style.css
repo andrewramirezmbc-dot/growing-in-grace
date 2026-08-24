@@ -5890,18 +5890,12 @@ a.esv-crossref-link:focus-visible {
 }
 .resource-page .flagship-start {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 1.35rem;
   margin-top: 1.25rem;
   padding: 1.65rem 2rem;
   border-radius: 10px;
   background: linear-gradient(90deg, #f1f5f0, #f8f8f4);
-}
-.flagship-start__mark {
-  align-self: center;
-  color: #4c936f;
-  font-size: 3.2rem;
-  line-height: 1;
 }
 .flagship-start__action {
   display: grid;
@@ -5913,78 +5907,6 @@ a.esv-crossref-link:focus-visible {
   color: var(--brand-gray);
   font-size: 0.72rem;
 }
-.resource-directory {
-  padding-top: clamp(3rem, 6vw, 4.5rem);
-  text-align: center;
-}
-.resource-directory h2 {
-  margin-top: 0.45rem;
-  color: var(--brand-teal-ink);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.05;
-}
-.resource-directory > p {
-  margin-top: 0.5rem;
-  color: var(--brand-gray);
-}
-.resource-directory__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.6rem;
-}
-.resource-directory__card {
-  position: relative;
-  display: flex;
-  align-items: end;
-  min-height: 168px;
-  overflow: hidden;
-  border: 1px solid rgba(14, 93, 95, 0.16);
-  border-radius: 10px;
-  background-position: center;
-  background-size: cover;
-  color: var(--brand-teal-ink);
-  text-align: left;
-}
-.resource-directory__card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 25%, rgba(251, 252, 250, 0.98) 67%);
-}
-.resource-directory__card--video {
-  background-image: url("https://img.youtube.com/vi/8Sd0bRGISa8/hqdefault.jpg");
-}
-.resource-directory__card--books {
-  background-image: url("/assets/growing-in-grace-cover.png");
-  background-position: center 28%;
-}
-.resource-directory__card--author {
-  background-image: url("/assets/people/andy-burggraff.jpg");
-  background-position: center 28%;
-}
-.resource-directory__card > span,
-.resource-directory__card > b {
-  position: relative;
-  z-index: 1;
-}
-.resource-directory__card > span {
-  display: grid;
-  gap: 0.15rem;
-  padding: 1rem;
-}
-.resource-directory__card strong {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-}
-.resource-directory__card small {
-  color: var(--brand-gray);
-  font-size: 0.74rem;
-}
-.resource-directory__card > b {
-  margin: 0 1rem 1rem auto;
-  font-size: 1.55rem;
-}
 @media (max-width: 900px) {
   .resource-page .flagship-facts {
     grid-template-columns: 1fr 1fr;
@@ -5994,9 +5916,6 @@ a.esv-crossref-link:focus-visible {
   }
   .resource-page .flagship-facts > div:nth-child(-n + 2) {
     border-bottom: 1px solid rgba(14, 93, 95, 0.16);
-  }
-  .resource-directory__grid {
-    gap: 0.8rem;
   }
 }
 @media (max-width: 640px) {
@@ -6063,18 +5982,9 @@ a.esv-crossref-link:focus-visible {
     padding: 1.5rem;
     text-align: center;
   }
-  .flagship-start__mark {
-    display: none;
-  }
   .flagship-start__action,
   .flagship-start__action .btn {
     width: 100%;
-  }
-  .resource-directory__grid {
-    grid-template-columns: 1fr;
-  }
-  .resource-directory__card {
-    min-height: 155px;
   }
 }
 .curriculum-cta {
