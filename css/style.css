@@ -4143,6 +4143,61 @@ a.esv-crossref-link:focus-visible {
   color: var(--brand-teal-ink);
   font-family: var(--font-heading);
 }
+.teacher-intro__heading {
+  position: sticky;
+  top: 2rem;
+}
+.teacher-intro__summary {
+  max-width: 330px;
+  margin-top: 1rem;
+  color: #536c6d;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.teacher-intro__content {
+  display: grid;
+  gap: 2rem;
+}
+.teacher-credentials {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid rgba(14, 93, 95, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+}
+.teacher-credential {
+  min-width: 0;
+  padding: 1.15rem;
+  border-right: 1px solid rgba(14, 93, 95, 0.14);
+}
+.teacher-credential:nth-child(3) {
+  border-right: 0;
+}
+.teacher-credential--wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  align-items: center;
+  border-top: 1px solid rgba(14, 93, 95, 0.14);
+  border-right: 0;
+}
+.teacher-credential strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--brand-gold);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+}
+.teacher-credential--wide strong {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+.teacher-credential span {
+  color: var(--brand-teal-ink);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
 .teacher-teaching {
   background: linear-gradient(180deg, rgba(223, 243, 239, 0.6), rgba(250, 252, 252, 0.98));
 }
@@ -4397,6 +4452,9 @@ a.esv-crossref-link:focus-visible {
     justify-self: start;
     width: min(100%, 320px);
   }
+  .teacher-intro__heading {
+    position: static;
+  }
   .teaching-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -4426,6 +4484,27 @@ a.esv-crossref-link:focus-visible {
   }
   .teacher-portrait {
     display: none;
+  }
+  .teacher-credentials {
+    grid-template-columns: 1fr;
+  }
+  .teacher-credential,
+  .teacher-credential:nth-child(3) {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    align-items: start;
+    border-right: 0;
+    border-bottom: 1px solid rgba(14, 93, 95, 0.14);
+  }
+  .teacher-credential--wide {
+    grid-column: auto;
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .teacher-credential strong,
+  .teacher-credential--wide strong {
+    margin-bottom: 0;
+    font-size: 1.45rem;
   }
   .teaching-grid {
     grid-template-columns: 1fr;
