@@ -5748,6 +5748,335 @@ a.esv-crossref-link:focus-visible {
 .resource-final-cta {
   background: linear-gradient(180deg, #f7fbf9, #eef8f5);
 }
+
+/* Flagship resource composition */
+.resource-page .curriculum-intro {
+  padding: 0 0 clamp(3.5rem, 7vw, 5.5rem) !important;
+  background: #fbfcfa;
+}
+.resource-flagship-banner {
+  min-height: 380px;
+  padding: clamp(2.75rem, 6vw, 4.75rem) 0 4.25rem;
+  background:
+    linear-gradient(90deg, rgba(251, 252, 250, 0.84), rgba(251, 252, 250, 0.7)),
+    url("/public/images/growing-in-grace/resources/flagship-course-mountain-background.webp") center bottom / cover no-repeat;
+  border-bottom: 1px solid rgba(14, 93, 95, 0.1);
+}
+.resource-page-intro {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+.resource-page-intro h1 {
+  margin-top: 0.45rem;
+  font-size: clamp(3.5rem, 7vw, 5.85rem);
+  line-height: 0.88;
+}
+.resource-page-intro__rule {
+  display: block;
+  width: 38px;
+  height: 2px;
+  margin: 1.4rem 0 1.15rem;
+  background: var(--brand-gold);
+}
+.resource-page-intro__lead {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.4vw, 1.72rem);
+}
+.resource-page-intro__aside {
+  align-self: center;
+  gap: 1.35rem;
+  max-width: 420px;
+}
+.resource-page-intro__aside > p {
+  color: var(--brand-charcoal);
+  font-size: 1.02rem;
+  line-height: 1.68;
+}
+.resource-page-intro__trust {
+  color: #4f5b59;
+  font-size: 0.88rem;
+}
+.resource-page-intro__trust span {
+  margin-right: 0.35rem;
+  color: var(--brand-teal-deep);
+  font-size: 1.1rem;
+}
+.flagship-overview__content {
+  padding-top: 1.7rem;
+}
+.resource-page .embed-block {
+  margin-bottom: 1.5rem;
+}
+.resource-page .embed-block__label {
+  min-height: 76px;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1.35rem;
+  border-color: rgba(14, 93, 95, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(3, 43, 45, 0.035);
+}
+.resource-page .embed-block__icon {
+  width: 48px;
+  height: 48px;
+  color: #fff;
+}
+.resource-page .embed-block__title {
+  color: var(--brand-teal-ink);
+  font-size: 1.18rem;
+}
+.embed-block__desc {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--brand-gray);
+  font-size: 0.82rem;
+}
+.embed-block__arrow {
+  margin-left: auto;
+  color: var(--brand-teal-ink);
+  font-size: 2rem;
+  line-height: 1;
+}
+.resource-page .embed-container {
+  border-radius: 11px;
+  box-shadow: 0 18px 50px rgba(3, 43, 45, 0.14);
+}
+.resource-page .flagship-facts {
+  gap: 0;
+  margin-top: 1.65rem;
+  border: 1px solid rgba(14, 93, 95, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  overflow: hidden;
+}
+.resource-page .flagship-facts > div {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1.25rem 1rem;
+}
+.flagship-fact__icon {
+  display: grid !important;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: #e2f1ee;
+  color: var(--brand-teal-ink) !important;
+  font-family: var(--font-heading);
+  font-size: 1.4rem !important;
+}
+.flagship-fact__icon--pdf {
+  font-family: var(--font-body);
+  font-size: 0.68rem !important;
+  font-weight: 800;
+}
+.resource-page .flagship-facts strong {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.resource-page .flagship-facts b {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--brand-teal-ink);
+  font-size: 0.76rem;
+}
+.resource-page .flagship-facts span:not(.flagship-fact__icon) {
+  margin-top: 0.4rem;
+  color: var(--brand-gray);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+.resource-page .flagship-start {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
+  gap: 1.35rem;
+  margin-top: 1.25rem;
+  padding: 1.65rem 2rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f1f5f0, #f8f8f4);
+}
+.flagship-start__mark {
+  align-self: center;
+  color: #4c936f;
+  font-size: 3.2rem;
+  line-height: 1;
+}
+.flagship-start__action {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  align-self: center;
+}
+.flagship-start__action small {
+  color: var(--brand-gray);
+  font-size: 0.72rem;
+}
+.resource-directory {
+  padding-top: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+}
+.resource-directory h2 {
+  margin-top: 0.45rem;
+  color: var(--brand-teal-ink);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+.resource-directory > p {
+  margin-top: 0.5rem;
+  color: var(--brand-gray);
+}
+.resource-directory__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.6rem;
+}
+.resource-directory__card {
+  position: relative;
+  display: flex;
+  align-items: end;
+  min-height: 168px;
+  overflow: hidden;
+  border: 1px solid rgba(14, 93, 95, 0.16);
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  color: var(--brand-teal-ink);
+  text-align: left;
+}
+.resource-directory__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 25%, rgba(251, 252, 250, 0.98) 67%);
+}
+.resource-directory__card--video {
+  background-image: url("https://img.youtube.com/vi/8Sd0bRGISa8/hqdefault.jpg");
+}
+.resource-directory__card--books {
+  background-image: url("/assets/growing-in-grace-cover.png");
+  background-position: center 28%;
+}
+.resource-directory__card--author {
+  background-image: url("/assets/people/andy-burggraff.jpg");
+  background-position: center 28%;
+}
+.resource-directory__card > span,
+.resource-directory__card > b {
+  position: relative;
+  z-index: 1;
+}
+.resource-directory__card > span {
+  display: grid;
+  gap: 0.15rem;
+  padding: 1rem;
+}
+.resource-directory__card strong {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+}
+.resource-directory__card small {
+  color: var(--brand-gray);
+  font-size: 0.74rem;
+}
+.resource-directory__card > b {
+  margin: 0 1rem 1rem auto;
+  font-size: 1.55rem;
+}
+@media (max-width: 900px) {
+  .resource-page .flagship-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .resource-page .flagship-facts > div:nth-child(2) {
+    border-right: 0;
+  }
+  .resource-page .flagship-facts > div:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(14, 93, 95, 0.16);
+  }
+  .resource-directory__grid {
+    gap: 0.8rem;
+  }
+}
+@media (max-width: 640px) {
+  .resource-flagship-banner {
+    min-height: 0;
+    padding: 3rem 0 4.5rem;
+    background-position: 58% bottom;
+  }
+  .resource-page-intro h1 {
+    font-size: clamp(3.45rem, 17vw, 4.4rem);
+  }
+  .resource-page-intro__lead br {
+    display: none;
+  }
+  .resource-page-intro__aside {
+    max-width: none;
+  }
+  .resource-page-intro__aside .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .resource-page-intro__trust {
+    font-size: 0.78rem;
+  }
+  .flagship-overview__content {
+    padding-top: 1.1rem;
+  }
+  .resource-page .embed-block__label {
+    min-height: 70px;
+    padding: 0.7rem 0.85rem;
+  }
+  .resource-page .embed-block__icon {
+    width: 42px;
+    height: 42px;
+  }
+  .resource-page .embed-block__title {
+    font-size: 1rem;
+  }
+  .embed-block__desc {
+    font-size: 0.72rem;
+  }
+  .resource-page .flagship-facts > div {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 0.6rem;
+    padding: 1rem 0.75rem;
+  }
+  .flagship-fact__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem !important;
+  }
+  .resource-page .flagship-facts strong {
+    font-size: 1.25rem;
+  }
+  .resource-page .flagship-facts b {
+    font-size: 0.7rem;
+  }
+  .resource-page .flagship-facts span:not(.flagship-fact__icon) {
+    font-size: 0.66rem;
+  }
+  .resource-page .flagship-start {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .flagship-start__mark {
+    display: none;
+  }
+  .flagship-start__action,
+  .flagship-start__action .btn {
+    width: 100%;
+  }
+  .resource-directory__grid {
+    grid-template-columns: 1fr;
+  }
+  .resource-directory__card {
+    min-height: 155px;
+  }
+}
 .curriculum-cta {
   padding: 3.5rem 2rem;
   background: linear-gradient(135deg, var(--brand-teal-ink), var(--brand-teal-deep));
