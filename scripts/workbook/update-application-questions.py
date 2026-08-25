@@ -10,6 +10,17 @@ from docx import Document
 
 def replace_questions(source: Path, destination: Path, questions: list[str]) -> None:
     document = Document(source)
+
+    if source.name == "lesson-07-handout.docx":
+        for paragraph in document.paragraphs:
+            if paragraph.text.strip() == "Romans 6:1-2; Romans 6:1-14":
+                paragraph.runs[0].text = "Romans 6:1-14"
+                for extra_run in paragraph.runs[1:]:
+                    extra_run.text = ""
+                break
+        else:
+            raise ValueError(f"{source.name}: could not find the duplicated Romans 6 reference")
+
     question_paragraphs = [
         paragraph
         for paragraph in document.paragraphs
