@@ -18,8 +18,10 @@ def replace_questions(source: Path, destination: Path, questions: list[str]) -> 
                 for extra_run in paragraph.runs[1:]:
                     extra_run.text = ""
                 break
+            if paragraph.text.strip() == "Romans 6:1-14":
+                break
         else:
-            raise ValueError(f"{source.name}: could not find the duplicated Romans 6 reference")
+            raise ValueError(f"{source.name}: could not find the Romans 6 reference")
 
     question_paragraphs = [
         paragraph
